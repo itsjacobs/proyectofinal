@@ -7,14 +7,16 @@ public class Casilla {
     private int numero;
 
     public Casilla(int numero){
+       boolean a = false;
        this.numero = numero;
-       for (int i = 0; i < Constantes.ROJOS.length; i++) {
+       for (int i = 0; i < Constantes.ROJOS.length && !a; i++) {
            if (Constantes.ROJOS[i] == numero){
                color = true;
+               a = true;
            }
-           else {
-               color = false;
-           }
+       }
+       if(a==false){
+           color = false;
        }
 
     }
@@ -28,7 +30,7 @@ public class Casilla {
     }
 
     public int getNumero() {
-        return numero;
+                return numero;
     }
 
     public void setNumero(int numero) {
