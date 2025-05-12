@@ -7,6 +7,7 @@ import org.example.commons.Constantes;
 public class Casilla {
     private boolean color;
     private int numero;
+    private double valor;
 
     public Casilla(int numero){
        boolean a = false;
@@ -20,6 +21,7 @@ public class Casilla {
        if(!a){
            color = false;
        }
+       this.valor = 0;
     }
     public Casilla(String linea){
         String [] token = linea.split("-");

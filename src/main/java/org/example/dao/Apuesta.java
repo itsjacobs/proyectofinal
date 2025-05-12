@@ -10,8 +10,6 @@ import java.util.Scanner;
 @Data
 public class Apuesta implements daoApuesta {
     private ArrayList<Casilla> casillasApostadas;
-    private double ganancia;
-
 
     @Override
     public void repetirTirada() {
@@ -22,8 +20,8 @@ public class Apuesta implements daoApuesta {
         for (int i = 0; i < cantidad; i++) {
             Casilla casilla = new Casilla(numeros);
             casillasApostadas.add(casilla);
+            casilla.setValor((casilla.getValor() + 36) * apuesta);
         }
-        ganancia = apuesta * 36;
     }
     @Override
     public void apostarfila(int fila, int apuesta, Tablero tab) {
@@ -31,9 +29,10 @@ public class Apuesta implements daoApuesta {
             if (tab.queFila(new Casilla(i))==fila){
                 Casilla casilla = new Casilla(i);
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 3) * apuesta);
             }
         }
-        ganancia = apuesta * 3;
+
     }
     @Override
     public void apostarDocena(int docena, int apuesta, Tablero tab) {
@@ -41,9 +40,10 @@ public class Apuesta implements daoApuesta {
             if (tab.queDocena(new Casilla(i))==docena){
                 Casilla casilla = new Casilla(i);
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 3) * apuesta);
             }
         }
-        ganancia = apuesta * 3;
+
     }
 
     @Override
@@ -52,9 +52,10 @@ public class Apuesta implements daoApuesta {
             Casilla casilla = new Casilla(i);
             if (casilla.isColor()==color){
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 2) * apuesta);
             }
         }
-        ganancia = apuesta * 2;
+
     }
 
     @Override
@@ -63,9 +64,10 @@ public class Apuesta implements daoApuesta {
             if (tab.esMayor(new Casilla(i))==mayor){
                 Casilla casilla = new Casilla(i);
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 2) * apuesta);
             }
         }
-        ganancia = apuesta * 2;
+
     }
 
     @Override
@@ -74,9 +76,10 @@ public class Apuesta implements daoApuesta {
             if (tab.esPar(new Casilla(i))==par){
                 Casilla casilla = new Casilla(i);
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 2) * apuesta);
             }
         }
-        ganancia = apuesta * 2;
+
 
     }
 
@@ -86,9 +89,10 @@ public class Apuesta implements daoApuesta {
             if (tab.esHuerfano(new Casilla(i))==huerfanos){
                 Casilla casilla = new Casilla(i);
                 casillasApostadas.add(casilla);
+                casilla.setValor((casilla.getValor() + 10) * apuesta);
             }
         }
-        ganancia = apuesta * 10;
+
     }
 
     @Override
@@ -99,9 +103,7 @@ public class Apuesta implements daoApuesta {
     @Override
     public void cobrarGananciar() {
     }
-    public String toStringFicheroG(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(casillasApostadas).append("-");
-        return sb.toString();
-    }
+
+
+
 }

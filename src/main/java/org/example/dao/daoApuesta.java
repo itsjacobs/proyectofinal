@@ -14,5 +14,4 @@ public interface daoApuesta {
     public void apostarHuerfanos(boolean huerfanos, int apuesta,Tablero tab);
     public void recopilacionApuesta();
     public void cobrarGananciar();
-    public String toStringFicheroG();
 }

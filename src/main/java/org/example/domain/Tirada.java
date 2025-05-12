@@ -11,7 +11,6 @@ public class Tirada {
     }
 
     public void resultadoTirada(Casilla casilla){
-
         System.out.println("La casilla ganadora es " + casilla.getNumero());
     }
 
