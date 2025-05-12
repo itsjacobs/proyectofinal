@@ -1,7 +1,9 @@
 package org.example.domain;
 
+import lombok.Data;
 import org.example.commons.Constantes;
 
+@Data
 public class Casilla {
     private boolean color;
     private int numero;
@@ -15,32 +17,23 @@ public class Casilla {
                a = true;
            }
        }
-       if(a==false){
+       if(!a){
            color = false;
        }
-
     }
-
-    public boolean isColor() {
-        return color;
+    public Casilla(String linea){
+        String [] token = linea.split("-");
+        this.color = Boolean.parseBoolean(token[0]);
+        this.numero = Integer.parseInt(token[1]);
     }
-
-    public void setColor(boolean color) {
-        this.color = color;
-    }
-
-    public int getNumero() {
-                return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    @Override
-    public String toString() {
+    public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(numero);
-       return sb.toString();
+        return sb.toString();
+    }
+    public String toStringFicheroC(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(color).append("-").append(numero);
+        return sb.toString();
     }
 }

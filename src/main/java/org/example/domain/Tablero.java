@@ -4,6 +4,7 @@ public class Tablero {
     private Casilla Tablero [][] = new Casilla[12][3];
     private boolean par;
     private boolean mayor;
+    private boolean huerfano;
     private int fila;
     private int docena;
 
@@ -47,6 +48,18 @@ public class Tablero {
             mayor=false;
         }
         return mayor;
+    }
+
+    public boolean esHuerfano(Casilla casilla){
+        int numero = casilla.getNumero();
+        if (numero == 1 || numero == 6 || numero == 9 || numero == 14 ||
+                numero == 17 || numero == 20 || numero == 31 || numero == 34) {
+            huerfano =true;
+
+        }else {
+            huerfano = false;
+        }
+        return huerfano;
     }
 
     public int queFila(Casilla casilla) {
