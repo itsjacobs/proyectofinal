@@ -3,7 +3,6 @@ package org.example.dao;
 import lombok.Data;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,83 +15,110 @@ public class Apuesta implements daoApuesta {
 
     }
     @Override
-    public void apostarNumero(int cantidad, int numeros,double apuesta) {
-        for (int i = 0; i < cantidad; i++) {
-            Casilla casilla = new Casilla(numeros);
-            casillasApostadas.add(casilla);
-            casilla.setValor((casilla.getValor() + 36) * apuesta);
-        }
-    }
-    @Override
-    public void apostarfila(int fila, int apuesta, Tablero tab) {
-        for (int i = 1; i<=36;i++){
-            if (tab.queFila(new Casilla(i))==fila){
-                Casilla casilla = new Casilla(i);
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 3) * apuesta);
+    public ArrayList<Casilla> apostarNumero(int cantidad, int numeros, double apuesta, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        int contador = 0;
+        for (int i = 0; i < 12 && contador < cantidad; i++) {
+            for (int j = 0; j < 3 && contador < cantidad; j++) {
+                if (tab.getTablero()[i][j].getNumero() == numeros) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (36 * apuesta));
+                    casillasApostadas.add(casilla);
+                    contador++;
+                }
             }
         }
-
-    }
-    @Override
-    public void apostarDocena(int docena, int apuesta, Tablero tab) {
-        for (int i = 1; i<=36;i++){
-            if (tab.queDocena(new Casilla(i))==docena){
-                Casilla casilla = new Casilla(i);
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 3) * apuesta);
-            }
-        }
-
+        return casillasApostadas;
     }
 
     @Override
-    public void apostarColor(int apuesta, boolean color) {
-        for (int i = 1; i<=36;i++){
-            Casilla casilla = new Casilla(i);
-            if (casilla.isColor()==color){
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 2) * apuesta);
+    public ArrayList<Casilla> apostarfila(int fila, int apuesta, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.queFila(tab.getTablero()[i][j]) == fila) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (3 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
             }
         }
-
+        return casillasApostadas;
     }
 
     @Override
-    public void apostarMayor(int apuesta,Tablero tab, boolean mayor) {
-        for (int i = 1; i<=36;i++){
-            if (tab.esMayor(new Casilla(i))==mayor){
-                Casilla casilla = new Casilla(i);
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 2) * apuesta);
+    public ArrayList<Casilla> apostarDocena(int docena, int apuesta, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.queDocena(tab.getTablero()[i][j]) == docena) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (3 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
             }
         }
-
+        return casillasApostadas;
     }
 
     @Override
-    public void apostarPar(boolean par, int apuesta,Tablero tab) {
-        for (int i = 1; i<=36;i++){
-            if (tab.esPar(new Casilla(i))==par){
-                Casilla casilla = new Casilla(i);
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 2) * apuesta);
+    public ArrayList<Casilla> apostarColor(int apuesta, boolean color, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                Casilla casilla = tab.getTablero()[i][j];
+                if (casilla.isColor() == color) {
+                    casilla.setValor(casilla.getValor() + (2 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
             }
         }
-
-
+        return casillasApostadas;
     }
 
     @Override
-    public void apostarHuerfanos(boolean huerfanos, int apuesta,Tablero tab) {
-        for (int i = 1; i<=36;i++){
-            if (tab.esHuerfano(new Casilla(i))==huerfanos){
-                Casilla casilla = new Casilla(i);
-                casillasApostadas.add(casilla);
-                casilla.setValor((casilla.getValor() + 10) * apuesta);
+    public ArrayList<Casilla> apostarMayor(int apuesta, Tablero tab, boolean mayor) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.esMayor(tab.getTablero()[i][j]) == mayor) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (2 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
             }
         }
+        return casillasApostadas;
+    }
 
+    @Override
+    public ArrayList<Casilla> apostarPar(boolean par, int apuesta, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.esPar(tab.getTablero()[i][j]) == par) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (2 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
+            }
+        }
+        return casillasApostadas;
+    }
+
+    @Override
+    public ArrayList<Casilla> apostarHuerfanos(boolean huerfanos, int apuesta, Tablero tab) {
+        this.casillasApostadas = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
+                    Casilla casilla = tab.getTablero()[i][j];
+                    casilla.setValor(casilla.getValor() + (10 * apuesta));
+                    casillasApostadas.add(casilla);
+                }
+            }
+        }
+        return casillasApostadas;
     }
 
     @Override
@@ -103,7 +129,13 @@ public class Apuesta implements daoApuesta {
     @Override
     public void cobrarGananciar() {
     }
-
+    public String toStringFicheroApuesta(){
+        StringBuilder sb = new StringBuilder();
+        for (Casilla casilla: casillasApostadas){
+            sb.append(casilla.toStringFicheroCasilla()).append("-");
+        }
+        return sb.toString();
+    }
 
 
 }

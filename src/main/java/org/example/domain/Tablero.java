@@ -1,5 +1,9 @@
 package org.example.domain;
 
+import lombok.Data;
+
+import java.util.List;
+@Data
 public class Tablero {
     private Casilla Tablero [][] = new Casilla[12][3];
     private boolean par;
@@ -17,7 +21,6 @@ public class Tablero {
             }
         }
     }
-
     public void pintarTablero(){
         int fil = 1;
         for(int j = 2; j >= 0; j--){
@@ -83,5 +86,6 @@ public class Tablero {
         }
         return docena;
     }
+
 
 }

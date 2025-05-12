@@ -1,13 +1,14 @@
 package org.example.dao;
 
 import org.example.domain.Casilla;
+import org.example.domain.Usuario;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ficheros {
-    public static boolean escribirFicheroC(String fichero, List<Casilla> lista){
+    public static boolean escribirFicheroApuestas(String fichero, ArrayList<Apuesta> lista){
         PrintWriter escribir = null;
         boolean a = false;
         try{
@@ -17,13 +18,13 @@ public class Ficheros {
             System.out.println("No se pudo escribir el fichero, no se ha encontrado");
         }
         for(int i = 0; i< lista.size(); i++){
-            escribir.println(lista.get(i).toStringFicheroC());
+           escribir.println(lista.get(i).toStringFicheroApuesta());
             a = true;
         }
         escribir.close();
         return a;
     }
-    public static boolean escribirFicheroG(String fichero, ArrayList<Casilla> lista){
+    public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista){
         PrintWriter escribir = null;
         boolean a = false;
         try{
@@ -33,7 +34,7 @@ public class Ficheros {
             System.out.println("No se pudo escribir el fichero, no se ha encontrado");
         }
         for(int i = 0; i< lista.size(); i++){
-           escribir.println(lista.get(i).toString());
+            escribir.println(lista.get(i).toStringFicheroUsuario());
             a = true;
         }
         escribir.close();
