@@ -1,9 +1,8 @@
 package org.example.dao;
 
 import org.example.domain.Casilla;
-import org.example.domain.Tirada;
 
-public interface daoRuleta {
+public interface daoApuesta {
     public void repetirTirada();
     public void apostarNumero(Casilla casilla);
     public void apostarfila(int fila);

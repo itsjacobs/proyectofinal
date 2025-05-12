@@ -1,10 +1,11 @@
 package org.example.dao;
 
+import lombok.Data;
 import org.example.domain.Casilla;
-
 import java.util.Scanner;
 
-public class Ruleta implements daoRuleta{
+@Data
+public class Apuesta implements daoApuesta {
     private int [] numeros;
     private boolean apuestaColor;
     private boolean apostarPar;
@@ -13,72 +14,6 @@ public class Ruleta implements daoRuleta{
     private int apostarFila;
     private int apostarDocena;
 
-    public Ruleta(){
-        this.numeros = new int[36];
-        this.apuestaColor = false;
-        this.apostarPar = false;
-        this.apostarMayor = false;
-        this.apostarHuerfanos = false;
-        this.apostarFila = 0;
-        this.apostarDocena = 0;
-    }
-
-
-    public boolean isApuestaColor() {
-        return apuestaColor;
-    }
-
-    public void setApuestaColor(boolean apuestaColor) {
-        this.apuestaColor = apuestaColor;
-    }
-
-    public int[] getNumeros() {
-        return numeros;
-    }
-
-    public void setNumeros(int[] numeros) {
-        this.numeros = numeros;
-    }
-
-    public boolean isApostarPar() {
-        return apostarPar;
-    }
-
-    public void setApostarPar(boolean apostarPar) {
-        this.apostarPar = apostarPar;
-    }
-
-    public boolean isApostarMayor() {
-        return apostarMayor;
-    }
-
-    public void setApostarMayor(boolean apostarMayor) {
-        this.apostarMayor = apostarMayor;
-    }
-
-    public boolean isApostarHuerfanos() {
-        return apostarHuerfanos;
-    }
-
-    public void setApostarHuerfanos(boolean apostarHuerfanos) {
-        this.apostarHuerfanos = apostarHuerfanos;
-    }
-
-    public int getApostarFila() {
-        return apostarFila;
-    }
-
-    public void setApostarFila(int apostarFila) {
-        this.apostarFila = apostarFila;
-    }
-
-    public int getApostarDocena() {
-        return apostarDocena;
-    }
-
-    public void setApostarDocena(int apostarDocena) {
-        this.apostarDocena = apostarDocena;
-    }
 
     @Override
     public void repetirTirada() {
@@ -90,7 +25,6 @@ public class Ruleta implements daoRuleta{
             a = true;
         }
     }
-
     @Override
     public void apostarNumero(Casilla casilla) {
 
@@ -103,9 +37,7 @@ public class Ruleta implements daoRuleta{
         else {
             this.apostarFila = fila;
         }
-
     }
-
     @Override
     public void apostarDocena(int docena) {
         if (docena<1 || docena > 3){
