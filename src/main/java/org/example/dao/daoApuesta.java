@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface daoApuesta {
     public void repetirTirada();
-    public List<Casilla> apostarNumero(int cantidad, int numeros, double apuesta, Tablero tab);
+    public List<Casilla> apostarNumero(int cantidad,int numero, double apuesta, Tablero tab);
     public List<Casilla> apostarfila(int fila, int apuesta, Tablero tab);
     public List<Casilla> apostarDocena(int docena, int apuesta, Tablero tab);
     public List<Casilla> apostarColor(int apuesta, boolean color, Tablero tab);

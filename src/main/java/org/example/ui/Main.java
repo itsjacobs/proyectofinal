@@ -33,7 +33,7 @@ public class Main {
         Apuesta apuesta3 = new Apuesta();
         apuesta.apostarMayor(50, tab, true);
         apuesta2.apostarfila(3, 50, tab);
-        apuesta3.apostarNumero(1, 19, 2, tab);
+        apuesta3.apostarNumero(1,19, 2, tab);
         apuestas.add(apuesta);
         apuestas.add(apuesta2);
         apuestas.add(apuesta3);

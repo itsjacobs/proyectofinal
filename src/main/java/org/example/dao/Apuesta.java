@@ -5,19 +5,24 @@ import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Random;
 
 @Data
 public class Apuesta implements daoApuesta {
     private String id;
-    private ArrayList<Casilla> casillasApostadas;
+    private List<Casilla> casillasApostadas;
 
+    public Apuesta() {
+        Random rnd = new Random();
+        this.id = String.valueOf(rnd.nextInt(0,10));
+    }
     @Override
     public void repetirTirada() {
 
     }
     @Override
     public List<Casilla> apostarNumero(int cantidad, int numeros, double apuesta, Tablero tab) {
+
         this.casillasApostadas = new ArrayList<>();
         int contador = 0;
         for (int i = 0; i < 12 && contador < cantidad; i++) {
@@ -133,11 +138,20 @@ public class Apuesta implements daoApuesta {
     }
     public String toStringFicheroApuesta(){
         StringBuilder sb = new StringBuilder();
+        sb.append("Apuesta: ").append(id).append("\n");
         for (Casilla casilla: casillasApostadas){
             sb.append(casilla.toStringFicheroCasilla()).append("\n");
         }
         return sb.toString();
     }
+    /*public String toStringGanancias(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Apuesta: ").append(id).append("\n");
+        for (Casilla casilla: casillasApostadas){
+            sb.append(casilla.getValor()).append("\n");
+        }
+        return sb.toString();
+    }*/
 
 
 }

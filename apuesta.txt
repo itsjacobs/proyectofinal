@@ -1,0 +1,37 @@
+Apuesta: 0
+true-19-322.0
+false-20-100.0
+true-21-100.0
+false-22-250.0
+true-23-100.0
+false-24-100.0
+true-25-250.0
+false-26-100.0
+true-27-100.0
+false-28-250.0
+false-29-100.0
+true-30-100.0
+false-31-250.0
+true-32-100.0
+false-33-100.0
+true-34-250.0
+false-35-100.0
+true-36-100.0
+
+Apuesta: 5
+true-1-150.0
+false-4-150.0
+true-7-150.0
+false-10-150.0
+false-13-150.0
+true-16-150.0
+true-19-322.0
+false-22-250.0
+true-25-250.0
+false-28-250.0
+false-31-250.0
+true-34-250.0
+
+Apuesta: 1
+true-19-322.0
+

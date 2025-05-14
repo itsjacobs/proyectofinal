@@ -2,10 +2,12 @@ package org.example.domain;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class ApuestasUsuario {
-    //id propio
+    private String id;
     //ganancias de las apuestas
     //user id
-    //LocalDate
+    LocalDate fecha = LocalDate.now();
 }

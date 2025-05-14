@@ -25,7 +25,6 @@ public class Usuario {
             System.out.println("Usuario o contraseña incorrectos");
         }
     }
-
     public String toStringFicheroUsuario() {
         StringBuilder SB = new StringBuilder();
         SB.append(id).append("-").append(nombre).append("-").append(contraseña);
