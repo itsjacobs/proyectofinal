@@ -30,10 +30,13 @@ public class Main {
         ArrayList<Apuesta> apuestas = new java.util.ArrayList<>();
         Apuesta apuesta = new Apuesta();
         Apuesta apuesta2 = new Apuesta();
+        Apuesta apuesta3 = new Apuesta();
         apuesta.apostarMayor(50, tab, true);
         apuesta2.apostarfila(3, 50, tab);
+        apuesta3.apostarNumero(1, 19, 2, tab);
         apuestas.add(apuesta);
         apuestas.add(apuesta2);
+        apuestas.add(apuesta3);
         ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestas);
         tirada.resultadoTirada(casilla);
         System.out.println("el color de la casilla es: "+ casilla.isColor());
