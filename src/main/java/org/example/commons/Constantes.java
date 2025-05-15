@@ -6,4 +6,20 @@ public class Constantes {
     public static final String RULETA_FILE = "ruleta.txt";
     public static final String USUARIO_FILE = "usuario.txt";
     public static final String APUESTA_FILE = "apuesta.txt";
+    public static final String TIRADA_FILE = "tirada.txt";
+    public static final String MENU_IS = "---------------Bienvenido al menu de Inicio de sesion---------------\n" +
+            "1.Iniciar sesión\n" +
+            "2.Registrarse\n";
+    public static final String MENU_USUARIO = "---------------Bienvenido al menu de Usuario---------------\n" +
+            "1.Apostar\n" +
+            "2.Salir\n";
+    public static final String MENU_Apuestas = "---------------Bienvenido al menu de Apuestas---------------\n" +
+            "1.Apostar a numero\n" +
+            "2.Apostar a color\n" +
+            "3. Apostar a par/impar" +
+            "4.Apostar a mayor/menor\n" +
+            "5.Apostar a fila\n" +
+            "6.Apostar a docena\n" +
+            "7. Tirar\n";
+    public static final String MENSAJE_OPCION_INVALIDA = "Opcion invalida, por favor elija una opcion valida\n";
 }

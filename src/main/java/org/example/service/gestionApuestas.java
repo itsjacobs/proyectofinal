@@ -1,4 +1,4 @@
-package org.example.dao;
+package org.example.service;
 
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
@@ -6,9 +6,9 @@ import org.example.domain.Usuario;
 
 import java.util.List;
 
-public interface daoApuesta {
+public interface gestionApuestas {
     public void repetirTirada();
-    public List<Casilla> apostarNumero(int cantidad,int numero, double apuesta, Tablero tab);
+    public List<Casilla> apostarNumero(int cantidad, int numero, double apuesta, Tablero tab);
     public List<Casilla> apostarFila(int fila, int apuesta, Tablero tab);
     public List<Casilla> apostarDocena(int docena, int apuesta, Tablero tab);
     public List<Casilla> apostarColor(int apuesta, boolean color, Tablero tab);
@@ -17,5 +17,5 @@ public interface daoApuesta {
     public List<Casilla> apostarHuerfanos(boolean huerfanos, int apuesta,Tablero tab);
     public void recopilacionApuesta();
     public void cobrarGananciar();
-    public Usuario iniciarSesion(String nombre, String contrasena);
+    public Usuario iniciarSesion(String id, String contrasena);
 }

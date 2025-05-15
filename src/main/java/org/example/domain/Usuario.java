@@ -1,6 +1,8 @@
 package org.example.domain;
 
 import lombok.Data;
+import org.example.commons.Constantes;
+import org.example.dao.Ficheros;
 
 import java.util.List;
 
@@ -10,19 +12,23 @@ public class Usuario {
     private String nombre;
     private String contraseña;
 
-    public void Registrarse(String id, String nombre, String contraseña) {
+    public Usuario(String id, String nombre, String contraseña) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
     }
-    public void inicioSesion(String linea,String ide, String contraseñas) {
-        String[] token = linea.split("-");
-        if (token[0].equals(ide) && token[2].equals(contraseñas)) {
-            this.id = token[0];
-            this.nombre = token[1];
-            this.contraseña = token[2];
-        } else {
-            System.out.println("Usuario o contraseña incorrectos");
+    public Usuario() {
+        this.id = "";
+        this.nombre ="";
+        this.contraseña = "";
+         }
+
+    public void inicioSesion(String id, String contraseña) {
+        List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
+        for (Usuario usuario : lista) {
+            if (usuario.getId().equals(this.id) && usuario.getContraseña().equals(this.contraseña)) {
+                System.out.println("Inicio de sesión exitoso");
+            }
         }
     }
     public String toStringFicheroUsuario() {

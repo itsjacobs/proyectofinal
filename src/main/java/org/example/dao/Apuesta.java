@@ -3,9 +3,13 @@ package org.example.dao;
 import lombok.Data;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Data
 public class Apuesta implements daoApuesta {
@@ -22,7 +26,6 @@ public class Apuesta implements daoApuesta {
     }
     @Override
     public List<Casilla> apostarNumero(int cantidad, int numeros, double apuesta, Tablero tab) {
-
         this.casillasApostadas = new ArrayList<>();
         int contador = 0;
         for (int i = 0; i < 12 && contador < cantidad; i++) {
@@ -39,7 +42,7 @@ public class Apuesta implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarfila(int fila, int apuesta, Tablero tab) {
+    public List<Casilla> apostarFila(int fila, int apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
@@ -136,7 +139,17 @@ public class Apuesta implements daoApuesta {
     @Override
     public void cobrarGananciar() {
     }
+
+    @Override
+    public Usuario iniciarSesion(String id, String contraseña) {
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setContraseña(contraseña);
+        return usuario;
+    }
+
     public String toStringFicheroApuesta(){
+
         StringBuilder sb = new StringBuilder();
         sb.append("Apuesta: ").append(id).append("\n");
         for (Casilla casilla: casillasApostadas){
@@ -144,6 +157,12 @@ public class Apuesta implements daoApuesta {
         }
         return sb.toString();
     }
+
+
+    /* public List<Integer> quitarRepetidos(Casilla casilla){
+        List<Integer> casillasSinRepetir = casillasApostadas.stream().map(Tablero :: getCasilla[][]).distinct().toList();
+        return casillasSinRepetir;
+    }*/
     /*public String toStringGanancias(){
         StringBuilder sb = new StringBuilder();
         sb.append("Apuesta: ").append(id).append("\n");

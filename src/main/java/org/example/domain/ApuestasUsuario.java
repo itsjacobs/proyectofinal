@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Data
 public class ApuestasUsuario {
     private String id;
-    //ganancias de las apuestas
-    //user id
-    LocalDate fecha = LocalDate.now();
+    private double ganancia;
+    private String user_id;
+    private LocalDate fecha = LocalDate.now();
 }

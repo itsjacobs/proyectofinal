@@ -1,12 +1,14 @@
 package org.example.domain;
 
 import lombok.Data;
+import lombok.Getter;
 import org.example.commons.Constantes;
 import org.example.dao.Apuesta;
 
 @Data
 public class Casilla {
     private boolean color;
+    @Getter
     private int numero;
     private double valor;
 
@@ -24,12 +26,13 @@ public class Casilla {
        }
        this.valor = 0;
     }
-    public Casilla(String linea){
-        String [] token = linea.split("-");
+    public Casilla(String linea) {
+        String[] token = linea.split("-");
         this.color = Boolean.parseBoolean(token[0]);
         this.numero = Integer.parseInt(token[1]);
         this.valor = Integer.parseInt(token[2]);
     }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(numero);
@@ -40,5 +43,7 @@ public class Casilla {
         SB.append(color).append("-").append(numero).append("-").append(valor);
         return SB.toString();
     }
+
+
 
 }

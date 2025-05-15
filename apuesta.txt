@@ -1,4 +1,4 @@
-Apuesta: 0
+Apuesta: 9
 true-19-322.0
 false-20-100.0
 true-21-100.0
@@ -18,7 +18,7 @@ true-34-250.0
 false-35-100.0
 true-36-100.0
 
-Apuesta: 5
+Apuesta: 8
 true-1-150.0
 false-4-150.0
 true-7-150.0
@@ -32,6 +32,6 @@ false-28-250.0
 false-31-250.0
 true-34-250.0
 
-Apuesta: 1
+Apuesta: 8
 true-19-322.0
 
