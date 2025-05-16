@@ -22,4 +22,6 @@ public class Constantes {
             "6.Apostar a docena\n" +
             "7. Tirar\n";
     public static final String MENSAJE_OPCION_INVALIDA = "Opcion invalida, por favor elija una opcion valida\n";
+    public static final String MENSAJE_ERROR_ESCRITURA = "No se pudo escribir el fichero, no se ha encontrado";
+    public static final String MENSAJE_ERROR_LECTURA = "No se pudo leer el fichero";
 }

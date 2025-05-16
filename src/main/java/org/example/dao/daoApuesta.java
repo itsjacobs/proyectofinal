@@ -17,5 +17,6 @@ public interface daoApuesta {
     public List<Casilla> apostarHuerfanos(boolean huerfanos, int apuesta,Tablero tab);
     public void recopilacionApuesta();
     public void cobrarGananciar();
-    public Usuario iniciarSesion(String nombre, String contrasena);
+    public boolean iniciarSesion(String nombre, String contrasena);
+    public boolean registrarse(String id, String nombre, String contrasena);
 }

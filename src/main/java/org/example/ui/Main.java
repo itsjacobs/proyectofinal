@@ -13,7 +13,7 @@ import org.example.service.gestionApuestasImplementacion;
 import java.util.ArrayList;
 import java.util.List;
 
-//List<Casilla> casillasApostadas2 = casillasApostadas.stream().map(casilla :: getNumero).distinct().toList();
+
 
 public class Main {
     public static void main(String[] args) {
@@ -35,15 +35,16 @@ public class Main {
         ArrayList<Apuesta> apuestas = new ArrayList<Apuesta>();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
         listaTiradas.add(tirada);
-        Apuesta apuesta = new Apuesta();
-        Apuesta apuesta2 = new Apuesta();
-        Apuesta apuesta3 = new Apuesta();
-        apuesta.apostarMayor(50, tab, true);
-        apuesta2.apostarFila(3, 50, tab);
-        apuesta3.apostarNumero(1,19, 2, tab);
-        apuestas.add(apuesta);
-        apuestas.add(apuesta2);
-        apuestas.add(apuesta3);
+        Apuesta one = new Apuesta();
+        Apuesta two = new Apuesta();
+        Apuesta three = new Apuesta();
+        one.apostarNumero(1, 1, 50, tab);
+        two.apostarMayor(50, tab, true);
+        three.apostarFila(3, 50, tab);
+        apuestas.add(one);
+        apuestas.add(two);
+        apuestas.add(three);
+        //apuesta.borrarDuplicados(apuesta.getCasillasApostadas());
         ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestas);
         ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
         tirada.resultadoTirada(casilla);

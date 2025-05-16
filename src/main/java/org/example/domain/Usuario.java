@@ -17,19 +17,33 @@ public class Usuario {
         this.nombre = nombre;
         this.contraseña = contraseña;
     }
-    public Usuario() {
-        this.id = "";
+    public Usuario(String id,String contraseña) {
+        this.id = id;
         this.nombre ="";
-        this.contraseña = "";
+        this.contraseña = contraseña;
          }
-
-    public void inicioSesion(String id, String contraseña) {
+    public boolean registrarse(Usuario usuario) {
+        boolean a = false;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
-        for (Usuario usuario : lista) {
-            if (usuario.getId().equals(this.id) && usuario.getContraseña().equals(this.contraseña)) {
-                System.out.println("Inicio de sesión exitoso");
-            }
+        if (!lista.contains(usuario)) {
+            lista.add(usuario);
+            a = true;
+        } else {
+            System.out.println("El usuario ya existe");
         }
+        return a;
+    }
+
+    public boolean inicioSesion(Usuario usuario) {
+        boolean a = false;
+        List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
+        System.out.println(lista);
+        System.out.println(usuario);
+        List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).filter(u -> u.contraseña.equals(usuario.contraseña)).toList();
+        if (!comprobacion.isEmpty()) {
+            a =  true;
+        }
+        return a;
     }
     public String toStringFicheroUsuario() {
         StringBuilder SB = new StringBuilder();

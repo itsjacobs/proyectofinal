@@ -8,18 +8,21 @@ import org.example.domain.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Data
 public class Apuesta implements daoApuesta {
     private String id;
     private List<Casilla> casillasApostadas;
+    private List<Usuario> usuarios;
 
     public Apuesta() {
         Random rnd = new Random();
         this.id = String.valueOf(rnd.nextInt(0,10));
     }
+
+    //Metodos Apuestas
+
+
     @Override
     public void repetirTirada() {
 
@@ -38,6 +41,7 @@ public class Apuesta implements daoApuesta {
                 }
             }
         }
+
         return casillasApostadas;
     }
 
@@ -53,6 +57,7 @@ public class Apuesta implements daoApuesta {
                 }
             }
         }
+
         return casillasApostadas;
     }
 
@@ -68,6 +73,7 @@ public class Apuesta implements daoApuesta {
                 }
             }
         }
+
         return casillasApostadas;
     }
 
@@ -80,6 +86,7 @@ public class Apuesta implements daoApuesta {
                 if (casilla.isColor() == color) {
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
         }
@@ -98,6 +105,7 @@ public class Apuesta implements daoApuesta {
                 }
             }
         }
+
         return casillasApostadas;
     }
 
@@ -128,7 +136,14 @@ public class Apuesta implements daoApuesta {
                 }
             }
         }
+
         return casillasApostadas;
+    }
+
+    public List<Casilla> borrarDuplicados(List<Casilla> lista) {
+        List<Casilla> listaSinDuplicados = new ArrayList<>();
+        listaSinDuplicados = casillasApostadas.stream().distinct().toList();
+        return listaSinDuplicados;
     }
 
     @Override
@@ -140,16 +155,23 @@ public class Apuesta implements daoApuesta {
     public void cobrarGananciar() {
     }
 
+    //Metodos Usuario
+
+
     @Override
-    public Usuario iniciarSesion(String id, String contraseña) {
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setContraseña(contraseña);
-        return usuario;
+    public boolean iniciarSesion(String id, String contraseña) {
+        Usuario usuario = new Usuario(id,contraseña);
+        return usuario.inicioSesion(usuario);
+    }
+
+    @Override
+    public boolean registrarse(String id, String nombre, String contrasena) {
+        Usuario usuario = new Usuario(id, nombre, contrasena);
+        return usuario.registrarse(usuario);
+
     }
 
     public String toStringFicheroApuesta(){
-
         StringBuilder sb = new StringBuilder();
         sb.append("Apuesta: ").append(id).append("\n");
         for (Casilla casilla: casillasApostadas){
@@ -158,11 +180,6 @@ public class Apuesta implements daoApuesta {
         return sb.toString();
     }
 
-
-    /* public List<Integer> quitarRepetidos(Casilla casilla){
-        List<Integer> casillasSinRepetir = casillasApostadas.stream().map(Tablero :: getCasilla[][]).distinct().toList();
-        return casillasSinRepetir;
-    }*/
     /*public String toStringGanancias(){
         StringBuilder sb = new StringBuilder();
         sb.append("Apuesta: ").append(id).append("\n");

@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.commons.Constantes;
 import org.example.domain.Casilla;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
@@ -17,9 +18,11 @@ public class Ficheros {
             escribir = new PrintWriter(fichero);
         }
         catch(FileNotFoundException e){
-            System.out.println("No se pudo escribir el fichero, no se ha encontrado");
+            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
         }
+        System.out.println(lista.size());
         for(int i = 0; i< lista.size(); i++){
+            System.out.println(lista.get(i).toStringFicheroApuesta());
            escribir.println(lista.get(i).toStringFicheroApuesta());
             a = true;
         }
@@ -34,7 +37,8 @@ public class Ficheros {
             escribir = new PrintWriter(fichero);
         }
         catch(FileNotFoundException e){
-            System.out.println("No se pudo escribir el fichero, no se ha encontrado");
+            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
+
         }
         for(int i = 0; i< lista.size(); i++){
             escribir.println(lista.get(i).toStringFicheroUsuario());
@@ -59,7 +63,7 @@ public class Ficheros {
             }
         }
         catch (FileNotFoundException e){
-            System.out.println("No se ha podido leer el fichero");
+            System.out.println(Constantes.MENSAJE_ERROR_LECTURA);
         }
         return lista;
     }
@@ -67,10 +71,11 @@ public class Ficheros {
         PrintWriter escribir = null;
         boolean a = false;
         try{
-            escribir = new PrintWriter(fichero);
-        }
-        catch(FileNotFoundException e){
-            System.out.println("No se pudo escribir el fichero, no se ha encontrado");
+            escribir = new PrintWriter(new FileWriter(fichero,true));
+        }catch(FileNotFoundException e){
+            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         for(int i = 0; i< lista.size(); i++){
             escribir.println(lista.get(i).toStringFicheroTirada());

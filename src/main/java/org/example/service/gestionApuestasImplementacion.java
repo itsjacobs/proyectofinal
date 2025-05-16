@@ -1,20 +1,22 @@
 package org.example.service;
 
+import org.example.dao.Apuesta;
+import org.example.dao.daoApuesta;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
-import org.example.dao.daoApuesta;
 import org.example.domain.Usuario;
-
 
 import java.util.List;
 
-public class gestionApuestasImplementacion implements gestionApuestas{
+public class gestionApuestasImplementacion implements gestionApuestas {
     private daoApuesta daoApuesta;
 
-    public gestionApuestasImplementacion(daoApuesta daoApuesta) {
+    public gestionApuestasImplementacion(Apuesta daoApuesta) {
         this.daoApuesta = daoApuesta;
     }
+
     public gestionApuestasImplementacion() {
+        this.daoApuesta = new Apuesta();
     }
 
     @Override
@@ -68,7 +70,13 @@ public class gestionApuestasImplementacion implements gestionApuestas{
     }
 
     @Override
-    public Usuario iniciarSesion(String id, String contrasena) {
-        return daoApuesta.iniciarSesion(id, contrasena);
+    public boolean iniciarSesion(String id, String contraseña) {
+        return daoApuesta.iniciarSesion(id, contraseña);
+    }
+
+    @Override
+    public boolean registrarse(String id, String nombre, String contraseña) {
+        return daoApuesta.registrarse(id, nombre, contraseña);
     }
 }
+

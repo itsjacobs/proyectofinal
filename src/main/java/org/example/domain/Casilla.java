@@ -5,10 +5,11 @@ import lombok.Getter;
 import org.example.commons.Constantes;
 import org.example.dao.Apuesta;
 
+import java.util.Objects;
+
 @Data
 public class Casilla {
     private boolean color;
-    @Getter
     private int numero;
     private double valor;
 
@@ -44,6 +45,15 @@ public class Casilla {
         return SB.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Casilla casilla = (Casilla) o;
+        return numero == casilla.numero;
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numero);
+    }
 }
