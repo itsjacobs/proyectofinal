@@ -29,7 +29,6 @@ public class Usuario {
         if (comprobacion.isEmpty()) {
             lista.add(usuario);
             a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, lista);
-
         }
         System.out.println(a);
         return a;

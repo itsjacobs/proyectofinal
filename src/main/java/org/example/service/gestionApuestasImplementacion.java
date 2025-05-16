@@ -24,37 +24,38 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
     @Override
-    public List<Casilla> apostarNumero(int cantidad, int numero, double apuesta, Tablero tab) {
-        return daoApuesta.apostarNumero(cantidad, numero, apuesta, tab);
+    public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab) {
+        return daoApuesta.apostarNumero(numero, apuesta, tab);
     }
 
     @Override
-    public List<Casilla> apostarFila(int fila, int apuesta, Tablero tab) {
+    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
         return daoApuesta.apostarFila(fila, apuesta, tab);
     }
 
     @Override
-    public List<Casilla> apostarDocena(int docena, int apuesta, Tablero tab) {
+    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab) {
         return daoApuesta.apostarDocena(docena, apuesta, tab);
     }
 
+
     @Override
-    public List<Casilla> apostarColor(int apuesta, boolean color, Tablero tab) {
-        return daoApuesta.apostarColor(apuesta, color, tab);
+    public List<Casilla> apostarColor( boolean color,double apuesta, Tablero tab) {
+        return daoApuesta.apostarColor( color, apuesta,tab);
     }
 
     @Override
-    public List<Casilla> apostarMayor(int apuesta, Tablero tab, boolean mayor) {
-        return daoApuesta.apostarMayor(apuesta, tab, mayor);
+    public List<Casilla> apostarMayor( boolean mayor,double apuesta, Tablero tab) {
+        return daoApuesta.apostarMayor( mayor,apuesta,tab);
     }
 
     @Override
-    public List<Casilla> apostarPar(boolean par, int apuesta, Tablero tab) {
+    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab) {
         return daoApuesta.apostarPar(par, apuesta, tab);
     }
 
     @Override
-    public List<Casilla> apostarHuerfanos(boolean huerfanos, int apuesta, Tablero tab) {
+    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab) {
         return daoApuesta.apostarHuerfanos(huerfanos, apuesta, tab);
     }
 

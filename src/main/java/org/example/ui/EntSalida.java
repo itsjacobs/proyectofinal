@@ -1,10 +1,14 @@
 package org.example.ui;
 
 import org.example.commons.*;
+import org.example.dao.Ficheros;
 import org.example.domain.Tablero;
+import org.example.domain.Usuario;
 import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class EntSalida {
@@ -23,6 +27,8 @@ public class EntSalida {
         String id = "";
         String contraseña = "";
         String nombre = "";
+        Ficheros ficheros = new Ficheros();
+        List<Usuario> listaUsuarios = new ArrayList<>();
         boolean a = false;
         while (!a){
             System.out.println(Constantes.MENU_IS);
@@ -51,9 +57,12 @@ public class EntSalida {
                     contraseña = sc.nextLine();
                     if(servicio.registrarse(id, nombre, contraseña)){
                         System.out.println("Te has registrado correctamente");
+                        ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
+                        a = true;
                     }else{
                         System.out.println("El usuario ya existe");
                     }
+
                     break;
                 default:
                     System.out.println(Constantes.MENSAJE_OPCION_INVALIDA);
@@ -64,140 +73,162 @@ public class EntSalida {
     public void repetirTirada(){
 
     }
-    public void apostarNumero(int cantidad, int numero, double apuesta,Tablero tab){
+
+    public void apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
+        System.out.println("¿Cuánto quieres apostar?");
+        double apuesta = sc.nextDouble();
+        sc.nextLine();
+        int numero = 0;
         boolean a = false;
-        System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextDouble();
-        System.out.println("Que numero quieres apostar?");
-        numero = sc.nextInt();
-        do{
-            try{
+        do {
+            System.out.println("¿Qué número quieres apostar?");
+            numero = sc.nextInt();
+            try {
                 Comprobaciones.comprobarRuleta(numero);
-            } catch(Ruleta e){
-                System.out.println(e.getMessage());
                 a = true;
+            } catch (Ruleta e) {
+                System.out.println(e.getMessage());
             }
-            if (!a){
-                numero = sc.nextInt();
-            }
-        }while(!a);
-        servicio.apostarNumero(cantidad, numero, apuesta, tab);
+        } while (!a);
+
+        servicio.apostarNumero(numero, apuesta, tab);
     }
-    public void apostarFila(int fila, int apuesta, Tablero tab){
+
+
+    public void apostarFila(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextInt();
-        System.out.println("Que fila quieres apostar?");
-        fila = sc.nextInt();
+        Double apuesta = sc.nextDouble();
+        sc.nextLine();
+        int fila = 0;
         do{
+            System.out.println("Que fila quieres apostar?");
+            fila = sc.nextInt();
             try{
                 Comprobaciones.comprobarNumero(fila);
+                a = true;
             } catch (Numeros e){
                 System.out.println(e.getMessage());
-                a = true;
             }
-            if(!a){
-                fila = sc.nextInt();
-            }
+
         }while (!a);
+        if(!a){
+            fila = sc.nextInt();
+        }
         servicio.apostarFila(fila, apuesta, tab);
     }
-    public void apostarDocena(int docena, int apuesta, Tablero tab){
+    public void apostarDocena(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        int docena = 0;
         System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextInt();
-        System.out.println("Que docena quieres apostar?");
-        docena = sc.nextInt();
+        int apuesta = sc.nextInt();
+        sc.nextLine();
         do{
+            System.out.println("Que docena quieres apostar?");
+            docena = sc.nextInt();
             try{
                 Comprobaciones.comprobarNumero(docena);
+                a = true;
             } catch (Numeros e){
                 System.out.println(e.getMessage());
-                a = true;
-            }
-            if(!a){
-                docena = sc.nextInt();
             }
         }while (!a);
+        if(!a){
+            docena = sc.nextInt();
+        }
         servicio.apostarDocena(docena, apuesta, tab);
     }
-    public void apostarColor(int apuesta, boolean color, Tablero tab) {
+    public void apostarColor(Tablero tab) {
         Scanner sc = new Scanner(System.in);
-        boolean a = true;
+        boolean a = false;
+        boolean color = false;
+        String colorElegido = "";
         System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextInt();
-        System.out.println("Que color quieres apostar?");
-        String colorElegido = sc.nextLine();
+        int apuesta = sc.nextInt();
+        sc.nextLine();
         do{
-            a = false;
+            System.out.println("Que color quieres apostar?");
+            colorElegido = sc.nextLine();
             try{
                 Comprobaciones.comprobarColor(colorElegido);
+                a = true;
             } catch (Color e){
                 System.out.println(e.getMessage());
-                a = true;
             }
-            if (a){
-                if(colorElegido.equalsIgnoreCase("rojo")){
-                    color = true;
-                }
-                else if(colorElegido.equalsIgnoreCase("negro")){
-                    color = false;
-                }
+
+        } while (!a);
+        if (!a){
+            if(colorElegido.equalsIgnoreCase("rojo")){
+                color = true;
             }
-        } while (a);
-        servicio.apostarColor(apuesta, color, tab);
+            else if(colorElegido.equalsIgnoreCase("negro")){
+                color = false;
+            }
+        }
+        servicio.apostarColor(color, apuesta, tab);
     }
-    public void apostarMayor(int apuesta, boolean mayor, Tablero tab){
+    public void apostarMayor(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        boolean mayor = false;
+        String mayorElegido = "";
         System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextInt();
-        System.out.println("Quieres apostar a mayor o menor?");
-        String mayorElegido = sc.nextLine();
+        Double apuesta = sc.nextDouble();
+        sc.nextLine();
         do{
+            System.out.println("Quieres apostar a mayor o menor?");
+            mayorElegido = sc.nextLine();
             try{
                 Comprobaciones.comprobarMayor(mayorElegido);
+                a = true;
             } catch (Mayor e){
                 System.out.println(e.getMessage());
-                a = true;
-            }
-            if (!a){
-                if(mayorElegido.equalsIgnoreCase("mayor")){
-                    mayor = true;
-                }
-                else if(mayorElegido.equalsIgnoreCase("menor")){
-                    mayor = false;
-                }
             }
         } while (!a);
-        servicio.apostarMayor(apuesta, tab, mayor);
+        if (!a){
+            if(mayorElegido.equalsIgnoreCase("mayor")){
+                mayor = true;
+            }
+            else if(mayorElegido.equalsIgnoreCase("menor")){
+                mayor = false;
+            }
+        }
+        servicio.apostarMayor(mayor, apuesta, tab);
     }
-    public void apostarPar(boolean par,int apuesta, Tablero tab){
+    public void apostarPar(Tablero tab) {
+        Scanner sc = new Scanner(System.in);
+        boolean a = false;
+        boolean par = false;
+        String parElegido = "";
+        System.out.println("Cuánto quieres apostar?");
+        double apuesta = sc.nextDouble();
+        sc.nextLine(); // Limpiar buffer
+        do {
+            System.out.println("¿Quieres apostar a par o impar?");
+            parElegido = sc.nextLine();
+            try {
+                Comprobaciones.comprobarPar(parElegido);
+                a = true;
+            } catch (Par e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!a);
+
+        if (parElegido.equalsIgnoreCase("par")) {
+            par = true;
+        } else if (parElegido.equalsIgnoreCase("impar")) {
+            par = false;
+        }
+        servicio.apostarPar(par, apuesta, tab);
+    }
+    public void apostarHuerfano(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         System.out.println("Cuanto quieres apostar?");
-        apuesta = sc.nextInt();
-        System.out.println("Quieres apostar a par o impar?");
-        String parElegido = sc.nextLine();
-        do{
-            try{
-                Comprobaciones.comprobarPar(parElegido);
-            } catch (Par e){
-                System.out.println(e.getMessage());
-                a = true;
-            }
-            if (!a){
-                if(parElegido.equalsIgnoreCase("par")){
-                    par = true;
-                }
-                else if(parElegido.equalsIgnoreCase("impar")){
-                   par = false;
-                }
-            }
-        } while (!a);
-        servicio.apostarPar(par, apuesta, tab);
+        double apuesta = sc.nextDouble();
+        servicio.apostarHuerfanos(true, apuesta, tab);
     }
 }

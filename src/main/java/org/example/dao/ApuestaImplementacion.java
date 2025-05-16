@@ -3,6 +3,7 @@ package org.example.dao;
 import lombok.Data;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 
 import java.util.ArrayList;
@@ -28,16 +29,14 @@ public class ApuestaImplementacion implements daoApuesta {
 
     }
     @Override
-    public List<Casilla> apostarNumero(int cantidad, int numeros, double apuesta, Tablero tab) {
+    public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
-        int contador = 0;
-        for (int i = 0; i < 12 && contador < cantidad; i++) {
-            for (int j = 0; j < 3 && contador < cantidad; j++) {
-                if (tab.getTablero()[i][j].getNumero() == numeros) {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tab.getTablero()[i][j] != null && tab.getTablero()[i][j].getNumero() == numeros) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (36 * apuesta));
                     casillasApostadas.add(casilla);
-                    contador++;
                 }
             }
         }
@@ -46,11 +45,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarFila(int fila, int apuesta, Tablero tab) {
+    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.queFila(tab.getTablero()[i][j]) == fila) {
+                if (tab.getTablero()[i][j] != null &&tab.queFila(tab.getTablero()[i][j]) == fila) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (3 * apuesta));
                     casillasApostadas.add(casilla);
@@ -62,11 +61,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarDocena(int docena, int apuesta, Tablero tab) {
+    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.queDocena(tab.getTablero()[i][j]) == docena) {
+                if (tab.getTablero()[i][j] != null && tab.queDocena(tab.getTablero()[i][j]) == docena) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (3 * apuesta));
                     casillasApostadas.add(casilla);
@@ -78,12 +77,12 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarColor(int apuesta, boolean color, Tablero tab) {
+    public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
-                if (casilla.isColor() == color) {
+                if (casilla != null && casilla.isColor() == color) {
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
 
@@ -94,11 +93,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarMayor(int apuesta, Tablero tab, boolean mayor) {
+    public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.esMayor(tab.getTablero()[i][j]) == mayor) {
+                if (tab.getTablero()[i][j] != null && tab.esMayor(tab.getTablero()[i][j]) == mayor) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
@@ -110,11 +109,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarPar(boolean par, int apuesta, Tablero tab) {
+    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.esPar(tab.getTablero()[i][j]) == par) {
+                if (tab.getTablero()[i][j] != null && tab.esPar(tab.getTablero()[i][j]) == par) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
@@ -125,11 +124,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarHuerfanos(boolean huerfanos, int apuesta, Tablero tab) {
+    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab) {
         this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
+                if (tab.getTablero()[i][j] != null && tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (10 * apuesta));
                     casillasApostadas.add(casilla);
@@ -138,6 +137,13 @@ public class ApuestaImplementacion implements daoApuesta {
         }
 
         return casillasApostadas;
+    }
+
+    @Override
+    public Casilla resultadoTirada(Tablero tab) {
+        Tirada tirada = new Tirada();
+        //tirada.resultadoTirada();
+        return null;
     }
 
     public List<Casilla> borrarDuplicados(List<Casilla> lista) {
@@ -152,7 +158,7 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public void cobrarGananciar() {
+    public void cobrarGanancias() {
     }
 
     //Metodos Usuario

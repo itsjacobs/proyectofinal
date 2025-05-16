@@ -32,6 +32,7 @@ public class Casilla {
         this.valor = Integer.parseInt(token[2]);
     }
 
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(numero);

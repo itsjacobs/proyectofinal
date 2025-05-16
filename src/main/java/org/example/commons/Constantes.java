@@ -16,11 +16,14 @@ public class Constantes {
     public static final String MENU_APUESTAS = "---------------Bienvenido al menu de Apuestas---------------\n" +
             "1.Apostar a numero\n" +
             "2.Apostar a color\n" +
-            "3. Apostar a par/impar" +
+            "3.Apostar a par/impar\n" +
             "4.Apostar a mayor/menor\n" +
             "5.Apostar a fila\n" +
             "6.Apostar a docena\n" +
-            "7. Tirar\n";
+            "7.Apostar a huerfanos\n" +
+            "8.Terminar apuesta\n" +
+            "9.Cobrar Ganancias\n" +
+            "10.Salir\n";
     public static final String MENSAJE_OPCION_INVALIDA = "Opcion invalida, por favor elija una opcion valida\n";
     public static final String MENSAJE_ERROR_ESCRITURA = "No se pudo escribir el fichero, no se ha encontrado";
     public static final String MENSAJE_ERROR_LECTURA = "No se pudo leer el fichero";

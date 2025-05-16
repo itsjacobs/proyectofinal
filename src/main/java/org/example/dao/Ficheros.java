@@ -33,11 +33,13 @@ public class Ficheros {
         PrintWriter escribir = null;
         boolean a = false;
         try{
-            escribir = new PrintWriter(fichero);
+            escribir = new PrintWriter(new FileWriter(fichero,true));
         }
         catch(FileNotFoundException e){
             System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         for(int i = 0; i< lista.size(); i++){
             escribir.println(lista.get(i).toStringFicheroUsuario());

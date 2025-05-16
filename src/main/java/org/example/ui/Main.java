@@ -12,16 +12,95 @@ import org.example.service.gestionApuestasImplementacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
+        boolean menu1 = false;
+        boolean menu2 = false;
+        Scanner sc = new Scanner(System.in);
+        gestionApuestasImplementacion ge = new gestionApuestasImplementacion();
+        ArrayList<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
         Ficheros ficheros = new Ficheros();
+        EntSalida es = new EntSalida(ge);
+        Tablero tab = new Tablero();
+        Tirada tirada = new Tirada();
+
+        es.iniciarSesion();
+        do{
+            System.out.println(Constantes.MENU_USUARIO);
+            int opc = sc.nextInt();
+            switch(opc){
+                case 1:
+                    do{
+                        System.out.println(Constantes.MENU_APUESTAS);
+                        int opc2 = sc.nextInt();
+                        switch(opc2){
+                            case 1:
+                                es.apostarNumero(tab);
+                                break;
+                            case 2:
+                                es.apostarColor(tab);
+                                break;
+                            case 3:
+                                es.apostarPar(tab);
+                                break;
+                            case 4:
+                                es.apostarMayor(tab);
+                                break;
+                            case 5:
+                                es.apostarFila(tab);
+                                break;
+                            case 6:
+                                es.apostarDocena(tab);
+                                break;
+                            case 7:
+                                es.apostarHuerfano(tab);
+                                break;
+                            case 8:
+                                Casilla casilla = new Casilla(tirada.tirar());
+                                ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
+                                break;
+                            case 9:
+                                break;
+                        }
+                    }while(!menu2);
+
+            }
+        }while(!menu1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*Ficheros ficheros = new Ficheros();
         List<Usuario> listaUsuarios = new ArrayList<>();
-        Usuario usuario = new Usuario("12345678A", "Ethan", "1234");
-        Usuario usuario2 = new Usuario("12345678B", "Ethan", "1234");
-        listaUsuarios.add(usuario2);
-        listaUsuarios.add(usuario);
         ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
         gestionApuestas ga = new gestionApuestasImplementacion();
         EntSalida es = new EntSalida(ga);
@@ -52,6 +131,6 @@ public class Main {
         System.out.println("es par: "+ tab.esPar(casilla));
         System.out.println("es Mayor: "+ tab.esMayor(casilla));
         System.out.println("que fila: "+ tab.queFila(casilla));
-        System.out.println("que Docena: "+ tab.queDocena(casilla));
+        System.out.println("que Docena: "+ tab.queDocena(casilla));*/
     }
 }
