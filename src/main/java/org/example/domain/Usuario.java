@@ -25,12 +25,13 @@ public class Usuario {
     public boolean registrarse(Usuario usuario) {
         boolean a = false;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
-        if (!lista.contains(usuario)) {
+        List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).toList();
+        if (comprobacion.isEmpty()) {
             lista.add(usuario);
-            a = true;
-        } else {
-            System.out.println("El usuario ya existe");
+            a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, lista);
+
         }
+        System.out.println(a);
         return a;
     }
 

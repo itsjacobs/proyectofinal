@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.commons.Constantes;
-import org.example.domain.Casilla;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheros {
-    public static boolean escribirFicheroApuestas(String fichero, List<Apuesta> lista){
+    public static boolean escribirFicheroApuestas(String fichero, List<ApuestaImplementacion> lista){
         PrintWriter escribir = null;
         boolean a = false;
         try{

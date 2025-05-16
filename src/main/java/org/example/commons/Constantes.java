@@ -13,7 +13,7 @@ public class Constantes {
     public static final String MENU_USUARIO = "---------------Bienvenido al menu de Usuario---------------\n" +
             "1.Apostar\n" +
             "2.Salir\n";
-    public static final String MENU_Apuestas = "---------------Bienvenido al menu de Apuestas---------------\n" +
+    public static final String MENU_APUESTAS = "---------------Bienvenido al menu de Apuestas---------------\n" +
             "1.Apostar a numero\n" +
             "2.Apostar a color\n" +
             "3. Apostar a par/impar" +

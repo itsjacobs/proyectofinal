@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Random;
 
 @Data
-public class Apuesta implements daoApuesta {
+public class ApuestaImplementacion implements daoApuesta {
     private String id;
     private List<Casilla> casillasApostadas;
     private List<Usuario> usuarios;
 
-    public Apuesta() {
+    public ApuestaImplementacion() {
         Random rnd = new Random();
         this.id = String.valueOf(rnd.nextInt(0,10));
     }

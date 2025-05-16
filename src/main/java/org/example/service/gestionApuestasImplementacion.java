@@ -1,22 +1,21 @@
 package org.example.service;
 
-import org.example.dao.Apuesta;
+import org.example.dao.ApuestaImplementacion;
 import org.example.dao.daoApuesta;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
-import org.example.domain.Usuario;
 
 import java.util.List;
 
 public class gestionApuestasImplementacion implements gestionApuestas {
     private daoApuesta daoApuesta;
 
-    public gestionApuestasImplementacion(Apuesta daoApuesta) {
-        this.daoApuesta = daoApuesta;
+    public gestionApuestasImplementacion(ApuestaImplementacion daoApuestaImplementacion) {
+        this.daoApuesta = daoApuestaImplementacion;
     }
 
     public gestionApuestasImplementacion() {
-        this.daoApuesta = new Apuesta();
+        this.daoApuesta = new ApuestaImplementacion();
     }
 
     @Override

@@ -1,9 +1,7 @@
 package org.example.domain;
 
 import lombok.Data;
-import lombok.Getter;
 import org.example.commons.Constantes;
-import org.example.dao.Apuesta;
 
 import java.util.Objects;
 

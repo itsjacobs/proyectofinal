@@ -1,7 +1,7 @@
 package org.example.ui;
 
 import org.example.commons.Constantes;
-import org.example.dao.Apuesta;
+import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
@@ -12,7 +12,6 @@ import org.example.service.gestionApuestasImplementacion;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class Main {
@@ -32,20 +31,20 @@ public class Main {
         Casilla casilla = new Casilla(tirada.tirar());
         tab.rellenarTablero();
         tab.pintarTablero();
-        ArrayList<Apuesta> apuestas = new ArrayList<Apuesta>();
+        ArrayList<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
         listaTiradas.add(tirada);
-        Apuesta one = new Apuesta();
-        Apuesta two = new Apuesta();
-        Apuesta three = new Apuesta();
+        ApuestaImplementacion one = new ApuestaImplementacion();
+        ApuestaImplementacion two = new ApuestaImplementacion();
+        ApuestaImplementacion three = new ApuestaImplementacion();
         one.apostarNumero(1, 1, 50, tab);
         two.apostarMayor(50, tab, true);
         three.apostarFila(3, 50, tab);
-        apuestas.add(one);
-        apuestas.add(two);
-        apuestas.add(three);
+        apuestaImplementacions.add(one);
+        apuestaImplementacions.add(two);
+        apuestaImplementacions.add(three);
         //apuesta.borrarDuplicados(apuesta.getCasillasApostadas());
-        ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestas);
+        ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
         ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
         tirada.resultadoTirada(casilla);
         System.out.println("el color de la casilla es: "+ casilla.isColor());
