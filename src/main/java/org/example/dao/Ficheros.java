@@ -22,9 +22,10 @@ public class Ficheros {
         System.out.println(lista.size());
         for(int i = 0; i< lista.size(); i++){
             System.out.println(lista.get(i).toStringFicheroApuesta());
-           escribir.println(lista.get(i).toStringFicheroApuesta());
+            escribir.println(lista.get(i).toStringFicheroApuesta());
             a = true;
         }
+
         escribir.close();
         return a;
     }

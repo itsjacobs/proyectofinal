@@ -21,11 +21,11 @@ public class Main {
         boolean menu2 = false;
         Scanner sc = new Scanner(System.in);
         gestionApuestasImplementacion ge = new gestionApuestasImplementacion();
-        ArrayList<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
-        Ficheros ficheros = new Ficheros();
+        List<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
         EntSalida es = new EntSalida(ge);
         Tablero tab = new Tablero();
         Tirada tirada = new Tirada();
+        ArrayList<Tirada> listaTiradas = new ArrayList<>();
 
         es.iniciarSesion();
         do{
@@ -38,7 +38,9 @@ public class Main {
                         int opc2 = sc.nextInt();
                         switch(opc2){
                             case 1:
+                                ApuestaImplementacion apuesta = new ApuestaImplementacion();
                                 es.apostarNumero(tab);
+                                apuestaImplementacions.add(apuesta);
                                 break;
                             case 2:
                                 es.apostarColor(tab);
@@ -59,10 +61,26 @@ public class Main {
                                 es.apostarHuerfano(tab);
                                 break;
                             case 8:
-                                Casilla casilla = new Casilla(tirada.tirar());
-                                ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
+                                es.resultadoTirada();
+                                listaTiradas.add(tirada);
+                                Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                                Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
                                 break;
                             case 9:
+                                break;
+                            case 10:
+                                System.out.println("¿Quieres salir del programa? (si/no)");
+                                String salir = sc.next();
+                                if(salir.equalsIgnoreCase("si")){
+                                    menu2 = true;
+                                    menu1 = true;
+                                }
+                                else if(salir.equalsIgnoreCase("no")){
+                                    menu2 = false;
+                                }
+                                else{
+                                    System.out.println("Opcion no valida");
+                                }
                                 break;
                         }
                     }while(!menu2);

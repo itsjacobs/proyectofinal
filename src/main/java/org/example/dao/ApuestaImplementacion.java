@@ -18,6 +18,7 @@ public class ApuestaImplementacion implements daoApuesta {
 
     public ApuestaImplementacion() {
         Random rnd = new Random();
+        this.casillasApostadas = new ArrayList<>();
         this.id = String.valueOf(rnd.nextInt(0,10));
     }
 
@@ -139,13 +140,6 @@ public class ApuestaImplementacion implements daoApuesta {
         return casillasApostadas;
     }
 
-    @Override
-    public Casilla resultadoTirada(Tablero tab) {
-        Tirada tirada = new Tirada();
-        //tirada.resultadoTirada();
-        return null;
-    }
-
     public List<Casilla> borrarDuplicados(List<Casilla> lista) {
         List<Casilla> listaSinDuplicados = new ArrayList<>();
         listaSinDuplicados = casillasApostadas.stream().distinct().toList();
@@ -175,6 +169,14 @@ public class ApuestaImplementacion implements daoApuesta {
         Usuario usuario = new Usuario(id, nombre, contrasena);
         return usuario.registrarse(usuario);
 
+    }
+
+    //Métodos Tirada
+
+    @Override
+    public void resultadoTirada() {
+       Tirada tirada = new Tirada();
+       tirada.resultadoTirada();
     }
 
     public String toStringFicheroApuesta(){

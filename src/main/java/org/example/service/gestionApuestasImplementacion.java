@@ -18,6 +18,10 @@ public class gestionApuestasImplementacion implements gestionApuestas {
         this.daoApuesta = new ApuestaImplementacion();
     }
 
+
+    //Métodos de Apuestas
+
+
     @Override
     public void repetirTirada() {
 
@@ -69,6 +73,10 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
     }
 
+
+    //Métodos de Usuario
+
+
     @Override
     public boolean iniciarSesion(String id, String contraseña) {
         return daoApuesta.iniciarSesion(id, contraseña);
@@ -77,6 +85,15 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     @Override
     public boolean registrarse(String id, String nombre, String contraseña) {
         return daoApuesta.registrarse(id, nombre, contraseña);
+    }
+
+
+    //Métodos de Tirada
+
+
+    @Override
+    public void resultadoTirada() {
+        daoApuesta.resultadoTirada();
     }
 }
 

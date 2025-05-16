@@ -1,6 +1,7 @@
 package org.example.ui;
 
 import org.example.commons.*;
+import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
 import org.example.domain.Tablero;
 import org.example.domain.Usuario;
@@ -21,6 +22,10 @@ public class EntSalida {
     public EntSalida() {
         this.servicio = new gestionApuestasImplementacion();
     }
+
+
+    //Métodos de Usuario
+
 
     public void iniciarSesion() {
         Scanner sc = new Scanner(System.in);
@@ -70,6 +75,11 @@ public class EntSalida {
         }
 
     }
+
+
+    //Métodos de Apuestas
+
+
     public void repetirTirada(){
 
     }
@@ -91,7 +101,6 @@ public class EntSalida {
                 System.out.println(e.getMessage());
             }
         } while (!a);
-
         servicio.apostarNumero(numero, apuesta, tab);
     }
 
@@ -139,7 +148,9 @@ public class EntSalida {
         if(!a){
             docena = sc.nextInt();
         }
+
         servicio.apostarDocena(docena, apuesta, tab);
+
     }
     public void apostarColor(Tablero tab) {
         Scanner sc = new Scanner(System.in);
@@ -169,6 +180,7 @@ public class EntSalida {
             }
         }
         servicio.apostarColor(color, apuesta, tab);
+
     }
     public void apostarMayor(Tablero tab){
         Scanner sc = new Scanner(System.in);
@@ -197,6 +209,7 @@ public class EntSalida {
             }
         }
         servicio.apostarMayor(mayor, apuesta, tab);
+
     }
     public void apostarPar(Tablero tab) {
         Scanner sc = new Scanner(System.in);
@@ -223,6 +236,7 @@ public class EntSalida {
             par = false;
         }
         servicio.apostarPar(par, apuesta, tab);
+
     }
     public void apostarHuerfano(Tablero tab){
         Scanner sc = new Scanner(System.in);
@@ -230,5 +244,13 @@ public class EntSalida {
         System.out.println("Cuanto quieres apostar?");
         double apuesta = sc.nextDouble();
         servicio.apostarHuerfanos(true, apuesta, tab);
+
+    }
+
+    //Métodos de tirada
+
+
+    public void resultadoTirada(){
+        servicio.resultadoTirada();
     }
 }
