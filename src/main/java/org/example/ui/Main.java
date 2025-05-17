@@ -26,7 +26,6 @@ public class Main {
         List<Casilla> casillasApostadas = new ArrayList<>();
         EntSalida es = new EntSalida(ge);
         Tablero tab = new Tablero();
-
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
 
         es.iniciarSesion();
@@ -76,6 +75,7 @@ public class Main {
                                 Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
                                 break;
                             case 9:
+                                es.cobrarGanancias();
                                 break;
                             case 10:
                                 System.out.println("¿Quieres salir del programa? (si/no)");

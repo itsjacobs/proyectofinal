@@ -17,7 +17,7 @@ public interface gestionApuestas {
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta,Tablero tab);
     public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas);
     public void recopilacionApuesta();
-    public void cobrarGananciar();
+    public double cobrarGanancias();
     public boolean iniciarSesion(String id, String contrasena);
     public boolean registrarse(String id, String contrasena, String nombre);
     public int resultadoTirada();

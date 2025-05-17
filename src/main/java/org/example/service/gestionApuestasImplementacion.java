@@ -73,11 +73,11 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
     }
 
+
     @Override
-    public void cobrarGananciar() {
-
+    public double cobrarGanancias(){
+        return daoApuesta.cobrarGanancias();
     }
-
 
     //Métodos de Usuario
 

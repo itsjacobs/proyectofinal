@@ -11,6 +11,7 @@ public class Usuario {
     private String id;
     private String nombre;
     private String contraseña;
+    private double saldo;
 
     public Usuario(String id, String nombre, String contraseña) {
         this.id = id;
@@ -22,6 +23,7 @@ public class Usuario {
         this.nombre ="";
         this.contraseña = contraseña;
          }
+
     public boolean registrarse(Usuario usuario) {
         boolean a = false;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);

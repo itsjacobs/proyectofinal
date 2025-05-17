@@ -55,7 +55,6 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-
         return casillasApostadas;
     }
 
@@ -140,12 +139,20 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public void recopilacionApuesta() {
+    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas2) {
+        casillasApostadas.addAll(casillasApostadas2);
+        return casillasApostadas;
 
     }
 
     @Override
-    public void cobrarGanancias() {
+    public double cobrarGanancias() {
+        for (Casilla casilla : casillasApostadas){
+            if (casilla.getValor() > 0){
+                return casilla.getValor();
+            }
+        }
+        return 0;
     }
 
     //Metodos Usuario
@@ -164,7 +171,9 @@ public class ApuestaImplementacion implements daoApuesta {
 
     }
 
+
     //Métodos Tirada
+
 
     @Override
     public int resultadoTirada() {
@@ -180,15 +189,4 @@ public class ApuestaImplementacion implements daoApuesta {
         }
         return sb.toString();
     }
-
-    /*public String toStringGanancias(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Apuesta: ").append(id).append("\n");
-        for (Casilla casilla: casillasApostadas){
-            sb.append(casilla.getValor()).append("\n");
-        }
-        return sb.toString();
-    }*/
-
-
 }

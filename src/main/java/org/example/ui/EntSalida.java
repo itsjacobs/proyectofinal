@@ -252,6 +252,13 @@ public class EntSalida {
         servicio.apostarHuerfanos(true, apuesta, tab);
 
     }
+    public void cobrarGanancias(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Cuanto quieres cobrar?");
+        double cantidad = sc.nextDouble();
+        sc.nextLine();
+        servicio.cobrarGanancias();
+    }
 
     //Métodos de tirada
 

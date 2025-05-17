@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.commons.Constantes;
+import org.example.domain.ApuestasUsuario;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 
@@ -81,6 +82,23 @@ public class Ficheros {
         }
         for(int i = 0; i< lista.size(); i++){
             escribir.println(lista.get(i).toStringFicheroTirada());
+            a = true;
+        }
+        escribir.close();
+        return a;
+    }
+    public static boolean escribirFicheroGanancias(String fichero, List<ApuestasUsuario> lista) {
+        PrintWriter escribir = null;
+        boolean a = false;
+        try {
+            escribir = new PrintWriter(fichero);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println(lista.get(i).toStringFicheroGanancias());
+            escribir.println(lista.get(i).toStringFicheroGanancias());
             a = true;
         }
         escribir.close();
