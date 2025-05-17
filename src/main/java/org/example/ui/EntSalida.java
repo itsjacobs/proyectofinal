@@ -3,6 +3,7 @@ package org.example.ui;
 import org.example.commons.*;
 import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
+import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import org.example.domain.Usuario;
 import org.example.service.gestionApuestas;
@@ -11,9 +12,12 @@ import org.example.service.gestionApuestasImplementacion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Data;
 
+@Data
 public class EntSalida {
     private gestionApuestas servicio;
+
 
     public EntSalida(gestionApuestas servicio) {
         this.servicio = servicio;
@@ -84,7 +88,7 @@ public class EntSalida {
 
     }
 
-    public void apostarNumero(Tablero tab) {
+    public List<Casilla> apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         System.out.println("¿Cuánto quieres apostar?");
         double apuesta = sc.nextDouble();
@@ -101,7 +105,9 @@ public class EntSalida {
                 System.out.println(e.getMessage());
             }
         } while (!a);
-        servicio.apostarNumero(numero, apuesta, tab);
+
+
+        return servicio.apostarNumero(numero, apuesta, tab);
     }
 
 

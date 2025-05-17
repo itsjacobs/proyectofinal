@@ -33,8 +33,8 @@ public class ApuestaImplementacion implements daoApuesta {
     public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.getTablero()[i][j] != null && tab.getTablero()[i][j].getNumero() == numeros) {
-                    Casilla casilla = tab.getTablero()[i][j];
+                Casilla casilla = tab.getTablero()[i][j];
+                if (casilla != null && casilla.getNumero() == numeros) {
                     casilla.setValor(casilla.getValor() + (36 * apuesta));
                     casillasApostadas.add(casilla);
                 }

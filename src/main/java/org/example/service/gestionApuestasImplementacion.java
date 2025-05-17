@@ -64,6 +64,11 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
     @Override
+    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas) {
+        return daoApuesta.añadirApuesta(casillasApostadas);
+    }
+
+    @Override
     public void recopilacionApuesta() {
 
     }

@@ -21,7 +21,9 @@ public class Main {
         boolean menu2 = false;
         Scanner sc = new Scanner(System.in);
         gestionApuestasImplementacion ge = new gestionApuestasImplementacion();
-        List<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
+        ApuestaImplementacion apuesta = new ApuestaImplementacion();
+        List<ApuestaImplementacion> apuestaImplementacions = new ArrayList<>();
+        List<Casilla> casillasApostadas = new ArrayList<>();
         EntSalida es = new EntSalida(ge);
         Tablero tab = new Tablero();
 
@@ -38,12 +40,15 @@ public class Main {
                         int opc2 = sc.nextInt();
                         switch(opc2){
                             case 1:
-                                ApuestaImplementacion apuesta = new ApuestaImplementacion();
-                                es.apostarNumero(tab);
+                                casillasApostadas.addAll(es.apostarNumero(tab));
+                                apuesta.setCasillasApostadas(casillasApostadas);
                                 apuestaImplementacions.add(apuesta);
+                                ge.añadirApuesta(casillasApostadas);
+
                                 break;
                             case 2:
                                 es.apostarColor(tab);
+
                                 break;
                             case 3:
                                 es.apostarPar(tab);
@@ -65,8 +70,9 @@ public class Main {
                                 Tirada tirada = new Tirada(resultado);
                                 Casilla casilla = new Casilla(resultado);
                                 listaTiradas.add(tirada);
-                                //for(Casilla casilla2 : apuesta)
+                                System.out.println("La casilla ganadora es: " + resultado);
                                 Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                                System.out.println(casillasApostadas);
                                 Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
                                 break;
                             case 9:
