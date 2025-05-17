@@ -250,7 +250,7 @@ public class EntSalida {
     //Métodos de tirada
 
 
-    public void resultadoTirada(){
-        servicio.resultadoTirada();
+    public int resultadoTirada(){
+        return servicio.resultadoTirada();
     }
 }

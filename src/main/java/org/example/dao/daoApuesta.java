@@ -19,5 +19,5 @@ public interface daoApuesta {
     public void cobrarGanancias();
     public boolean iniciarSesion(String nombre, String contrasena);
     public boolean registrarse(String id, String nombre, String contrasena);
-    public void resultadoTirada();
+    public int resultadoTirada();
 }

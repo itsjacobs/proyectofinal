@@ -42,8 +42,8 @@ public class Ficheros {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for(int i = 0; i< lista.size(); i++){
-            escribir.println(lista.get(i).toStringFicheroUsuario());
+        for (Usuario usuario : lista) {
+            escribir.println(usuario.toStringFicheroUsuario());
             a = true;
         }
         escribir.close();

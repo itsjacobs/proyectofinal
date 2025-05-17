@@ -92,8 +92,8 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
 
     @Override
-    public void resultadoTirada() {
-        daoApuesta.resultadoTirada();
+    public int resultadoTirada() {
+        return daoApuesta.resultadoTirada();
     }
 }
 

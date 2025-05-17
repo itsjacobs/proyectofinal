@@ -24,7 +24,7 @@ public class Main {
         List<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
         EntSalida es = new EntSalida(ge);
         Tablero tab = new Tablero();
-        Tirada tirada = new Tirada();
+
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
 
         es.iniciarSesion();
@@ -61,8 +61,11 @@ public class Main {
                                 es.apostarHuerfano(tab);
                                 break;
                             case 8:
-                                es.resultadoTirada();
+                                int resultado = es.resultadoTirada();
+                                Tirada tirada = new Tirada(resultado);
+                                Casilla casilla = new Casilla(resultado);
                                 listaTiradas.add(tirada);
+                                //for(Casilla casilla2 : apuesta)
                                 Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
                                 Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
                                 break;

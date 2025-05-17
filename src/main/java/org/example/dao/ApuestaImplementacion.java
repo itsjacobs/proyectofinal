@@ -31,7 +31,6 @@ public class ApuestaImplementacion implements daoApuesta {
     }
     @Override
     public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.getTablero()[i][j].getNumero() == numeros) {
@@ -47,7 +46,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null &&tab.queFila(tab.getTablero()[i][j]) == fila) {
@@ -63,7 +61,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.queDocena(tab.getTablero()[i][j]) == docena) {
@@ -79,7 +76,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -95,7 +91,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esMayor(tab.getTablero()[i][j]) == mayor) {
@@ -111,7 +106,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esPar(tab.getTablero()[i][j]) == par) {
@@ -126,7 +120,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab) {
-        this.casillasApostadas = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
@@ -174,9 +167,9 @@ public class ApuestaImplementacion implements daoApuesta {
     //Métodos Tirada
 
     @Override
-    public void resultadoTirada() {
+    public int resultadoTirada() {
        Tirada tirada = new Tirada();
-       tirada.resultadoTirada();
+       return tirada.tirar();
     }
 
     public String toStringFicheroApuesta(){
