@@ -111,7 +111,7 @@ public class EntSalida {
     }
 
 
-    public void apostarFila(Tablero tab){
+    public List<Casilla> apostarFila(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         System.out.println("Cuanto quieres apostar?");
@@ -132,9 +132,9 @@ public class EntSalida {
         if(!a){
             fila = sc.nextInt();
         }
-        servicio.apostarFila(fila, apuesta, tab);
+        return servicio.apostarFila(fila, apuesta, tab);
     }
-    public void apostarDocena(Tablero tab){
+    public List<Casilla> apostarDocena(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         int docena = 0;
@@ -155,10 +155,10 @@ public class EntSalida {
             docena = sc.nextInt();
         }
 
-        servicio.apostarDocena(docena, apuesta, tab);
+        return servicio.apostarDocena(docena, apuesta, tab);
 
     }
-    public void apostarColor(Tablero tab) {
+    public List<Casilla> apostarColor(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         boolean color = false;
@@ -185,10 +185,10 @@ public class EntSalida {
                 color = false;
             }
         }
-        servicio.apostarColor(color, apuesta, tab);
+        return servicio.apostarColor(color, apuesta, tab);
 
     }
-    public void apostarMayor(Tablero tab){
+    public List<Casilla> apostarMayor(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         boolean mayor = false;
@@ -214,10 +214,10 @@ public class EntSalida {
                 mayor = false;
             }
         }
-        servicio.apostarMayor(mayor, apuesta, tab);
+        return servicio.apostarMayor(mayor, apuesta, tab);
 
     }
-    public void apostarPar(Tablero tab) {
+    public List<Casilla> apostarPar(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         boolean par = false;
@@ -241,16 +241,15 @@ public class EntSalida {
         } else if (parElegido.equalsIgnoreCase("impar")) {
             par = false;
         }
-        servicio.apostarPar(par, apuesta, tab);
+        return servicio.apostarPar(par, apuesta, tab);
 
     }
-    public void apostarHuerfano(Tablero tab){
+    public List<Casilla> apostarHuerfano(Tablero tab){
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         System.out.println("Cuanto quieres apostar?");
         double apuesta = sc.nextDouble();
-        servicio.apostarHuerfanos(true, apuesta, tab);
-
+        return servicio.apostarHuerfanos(true, apuesta, tab);
     }
     public void cobrarGanancias(){
         Scanner sc = new Scanner(System.in);

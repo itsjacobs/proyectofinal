@@ -22,12 +22,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         gestionApuestasImplementacion ge = new gestionApuestasImplementacion();
         ApuestaImplementacion apuesta = new ApuestaImplementacion();
-        List<ApuestaImplementacion> apuestaImplementacions = new ArrayList<>();
+        List<ApuestaImplementacion> apuestaImplementacion = new ArrayList<>();
         List<Casilla> casillasApostadas = new ArrayList<>();
         EntSalida es = new EntSalida(ge);
         Tablero tab = new Tablero();
+        tab.rellenarTablero();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
-
         es.iniciarSesion();
         do{
             System.out.println(Constantes.MENU_USUARIO);
@@ -39,30 +39,25 @@ public class Main {
                         int opc2 = sc.nextInt();
                         switch(opc2){
                             case 1:
-                                casillasApostadas.addAll(es.apostarNumero(tab));
-                                apuesta.setCasillasApostadas(casillasApostadas);
-                                apuestaImplementacions.add(apuesta);
-                                ge.añadirApuesta(casillasApostadas);
-
+                                apuesta.setCasillasApostadas(es.apostarNumero(tab));
                                 break;
                             case 2:
-                                es.apostarColor(tab);
-
+                                apuesta.setCasillasApostadas(es.apostarColor(tab));
                                 break;
                             case 3:
-                                es.apostarPar(tab);
+                                apuesta.setCasillasApostadas(es.apostarPar(tab));
                                 break;
                             case 4:
-                                es.apostarMayor(tab);
+                                apuesta.setCasillasApostadas(es.apostarMayor(tab));
                                 break;
                             case 5:
-                                es.apostarFila(tab);
+                                apuesta.setCasillasApostadas(es.apostarFila(tab));
                                 break;
                             case 6:
-                                es.apostarDocena(tab);
+                                apuesta.setCasillasApostadas(es.apostarDocena(tab));
                                 break;
                             case 7:
-                                es.apostarHuerfano(tab);
+                                apuesta.setCasillasApostadas(es.apostarHuerfano(tab));
                                 break;
                             case 8:
                                 int resultado = es.resultadoTirada();
@@ -71,8 +66,10 @@ public class Main {
                                 listaTiradas.add(tirada);
                                 System.out.println("La casilla ganadora es: " + resultado);
                                 Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                                apuestaImplementacion.add(apuesta);
                                 System.out.println(casillasApostadas);
-                                Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
+                                Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
+                                apuesta.repetirTirada();
                                 break;
                             case 9:
                                 es.cobrarGanancias();
@@ -97,67 +94,5 @@ public class Main {
             }
         }while(!menu1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*Ficheros ficheros = new Ficheros();
-        List<Usuario> listaUsuarios = new ArrayList<>();
-        ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
-        gestionApuestas ga = new gestionApuestasImplementacion();
-        EntSalida es = new EntSalida(ga);
-        es.iniciarSesion();
-        Tablero tab = new Tablero();
-        Tirada tirada = new Tirada();
-        Casilla casilla = new Casilla(tirada.tirar());
-        tab.rellenarTablero();
-        tab.pintarTablero();
-        ArrayList<ApuestaImplementacion> apuestaImplementacions = new ArrayList<ApuestaImplementacion>();
-        ArrayList<Tirada> listaTiradas = new ArrayList<>();
-        listaTiradas.add(tirada);
-        ApuestaImplementacion one = new ApuestaImplementacion();
-        ApuestaImplementacion two = new ApuestaImplementacion();
-        ApuestaImplementacion three = new ApuestaImplementacion();
-        one.apostarNumero(1, 1, 50, tab);
-        two.apostarMayor(50, tab, true);
-        three.apostarFila(3, 50, tab);
-        apuestaImplementacions.add(one);
-        apuestaImplementacions.add(two);
-        apuestaImplementacions.add(three);
-        //apuesta.borrarDuplicados(apuesta.getCasillasApostadas());
-        ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacions);
-        ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
-        tirada.resultadoTirada(casilla);
-        System.out.println("el color de la casilla es: "+ casilla.isColor());
-        System.out.println("es huerfano: "+ tab.esHuerfano(casilla));
-        System.out.println("es par: "+ tab.esPar(casilla));
-        System.out.println("es Mayor: "+ tab.esMayor(casilla));
-        System.out.println("que fila: "+ tab.queFila(casilla));
-        System.out.println("que Docena: "+ tab.queDocena(casilla));*/
     }
 }

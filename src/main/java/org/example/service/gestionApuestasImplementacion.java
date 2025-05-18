@@ -44,8 +44,8 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
 
     @Override
-    public List<Casilla> apostarColor( boolean color,double apuesta, Tablero tab) {
-        return daoApuesta.apostarColor( color, apuesta,tab);
+    public List<Casilla> apostarColor(boolean color,double apuesta, Tablero tab) {
+        return daoApuesta.apostarColor(color, apuesta,tab);
     }
 
     @Override

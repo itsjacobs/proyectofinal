@@ -30,7 +30,25 @@ public class Ficheros {
         escribir.close();
         return a;
     }
-
+    public static List<ApuestaImplementacion> leerFicheroApuestas(String fichero){
+        List<ApuestaImplementacion> lista = new ArrayList<>();
+        String Linea = null;
+        try{
+            Scanner sc = new Scanner(new File(fichero));
+            while(sc.hasNextLine()){
+                Linea = sc.nextLine();
+                String[] partes = Linea.split("-");
+                String id = partes[0];
+                ApuestaImplementacion apuesta = new ApuestaImplementacion();
+                apuesta.setId(id);
+                lista.add(apuesta);
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println(Constantes.MENSAJE_ERROR_LECTURA);
+        }
+        return lista;
+    }
     public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista){
         PrintWriter escribir = null;
         boolean a = false;

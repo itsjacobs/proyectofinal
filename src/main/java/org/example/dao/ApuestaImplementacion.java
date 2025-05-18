@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import lombok.Data;
+import org.example.commons.Constantes;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import org.example.domain.Tirada;
@@ -20,6 +21,7 @@ public class ApuestaImplementacion implements daoApuesta {
         Random rnd = new Random();
         this.casillasApostadas = new ArrayList<>();
         this.id = String.valueOf(rnd.nextInt(0,10));
+        this.usuarios = new ArrayList<>();
     }
 
     //Metodos Apuestas
@@ -27,7 +29,11 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public void repetirTirada() {
-
+        List<ApuestaImplementacion> lista = Ficheros.leerFicheroApuestas(Constantes.APUESTA_FILE);
+        if (lista.isEmpty()) {
+            return;
+        }
+        this.casillasApostadas = new ArrayList<>();
     }
     @Override
     public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
@@ -40,7 +46,6 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-
         return casillasApostadas;
     }
 
@@ -48,8 +53,8 @@ public class ApuestaImplementacion implements daoApuesta {
     public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
-                if (tab.getTablero()[i][j] != null &&tab.queFila(tab.getTablero()[i][j]) == fila) {
-                    Casilla casilla = tab.getTablero()[i][j];
+                Casilla casilla = tab.getTablero()[i][j];
+                if (tab.getTablero()[i][j] != null && tab.queFila(tab.getTablero()[i][j]) == fila) {
                     casilla.setValor(casilla.getValor() + (3 * apuesta));
                     casillasApostadas.add(casilla);
                 }
@@ -128,7 +133,6 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-
         return casillasApostadas;
     }
 
