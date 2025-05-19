@@ -5,6 +5,7 @@ import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
@@ -45,15 +46,15 @@ public class EntSalida {
         while (!a) {
             int opc = 0;
             do {
-                try{
+                try {
                     System.out.println(Constantes.MENU_IS);
                     opc = sc.nextInt();
                     b = true;
-                } catch(InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Caracter incorrecto");
                     sc.nextLine();
                 }
-            } while(!b);
+            } while (!b);
 
             switch (opc) {
                 case 1:
@@ -101,7 +102,8 @@ public class EntSalida {
     public List<Casilla> apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         System.out.println("¿Cuánto quieres apostar?");
-        double apuesta = sc.nextDouble();sc.nextLine();
+        double apuesta = sc.nextDouble();
+        sc.nextLine();
         int numero = 0;
         boolean a = false;
         do {
@@ -111,7 +113,8 @@ public class EntSalida {
                 Comprobaciones.comprobarRuleta(numero);
                 a = true;
             } catch (Ruleta e) {
-                System.out.println(e.getMessage());            }
+                System.out.println(e.getMessage());
+            }
         } while (!a);
         return servicio.apostarNumero(numero, apuesta, tab);
     }
@@ -134,7 +137,7 @@ public class EntSalida {
                 System.out.println(e.getMessage());
             }
         } while (!a);
-       return servicio.apostarFila(fila, apuesta, tab);
+        return servicio.apostarFila(fila, apuesta, tab);
     }
 
     public List<Casilla> apostarDocena(Tablero tab) {
@@ -207,11 +210,11 @@ public class EntSalida {
             }
         } while (!a);
 
-            if (mayorElegido.equalsIgnoreCase("mayor")) {
-                mayor = true;
-            } else if (mayorElegido.equalsIgnoreCase("menor")) {
-                mayor = false;
-            }
+        if (mayorElegido.equalsIgnoreCase("mayor")) {
+            mayor = true;
+        } else if (mayorElegido.equalsIgnoreCase("menor")) {
+            mayor = false;
+        }
 
         return servicio.apostarMayor(mayor, apuesta, tab);
 
@@ -267,5 +270,112 @@ public class EntSalida {
 
     public int resultadoTirada() {
         return servicio.resultadoTirada();
+    }
+
+    //Metodos de Menu
+
+    public void menuApuestas(ApuestaImplementacion apuesta, Tablero tab) {
+        Scanner sc = new Scanner(System.in);
+        List<ApuestaImplementacion> apuestaImplementacion = new ArrayList<>();
+        List<Casilla> casillasApostadas = new ArrayList<>();
+        ArrayList<Tirada> listaTiradas = new ArrayList<>();
+        boolean menu = false;
+        tab.rellenarTablero();
+
+        do {
+            int opc2 = 0;
+            tab.pintarTablero();
+            try {
+                System.out.println(Constantes.MENU_APUESTAS);
+                opc2 = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Caracter incorrecto");
+                sc.nextLine();
+            }
+
+            switch (opc2) {
+                case 1:
+                    apuesta.setCasillasApostadas(apostarNumero(tab));
+                    break;
+                case 2:
+                    apuesta.setCasillasApostadas(apostarColor(tab));
+                    break;
+                case 3:
+                    apuesta.setCasillasApostadas(apostarPar(tab));
+                    break;
+                case 4:
+                    apuesta.setCasillasApostadas(apostarMayor(tab));
+                    break;
+                case 5:
+                    apuesta.setCasillasApostadas(apostarFila(tab));
+                    break;
+                case 6:
+                    apuesta.setCasillasApostadas(apostarDocena(tab));
+                    break;
+                case 7:
+                    apuesta.setCasillasApostadas(apostarHuerfano(tab));
+                    break;
+                case 8:
+                    int resultado = resultadoTirada();
+                    Tirada tirada = new Tirada(resultado);
+                    listaTiradas.add(tirada);
+                    System.out.println("La casilla ganadora es: " + resultado);
+                    Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                    casillasApostadas = apuesta.borrarDuplicados(casillasApostadas);
+                    apuesta = new ApuestaImplementacion();
+                    apuesta.setCasillasApostadas(casillasApostadas);
+                    apuestaImplementacion.add(apuesta);
+                    Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
+                    apuesta.repetirTirada();
+                    break;
+                case 9:
+                    cobrarGanancias();
+                    break;
+                case 10:
+                    System.out.println("¿Quieres salir del programa? (si/no)");
+                    String salir = sc.next();
+                    if (salir.equalsIgnoreCase("si")) {
+                        menu = true;
+
+                    } else if (salir.equalsIgnoreCase("no")) {
+                        menu = false;
+                    } else {
+                        System.out.println("Opcion no valida");
+                    }
+                    break;
+            }
+        } while (!menu);
+    }
+
+    public void menuInicioSesion(Tablero tab, ApuestaImplementacion apuesta) {
+            Scanner sc = new Scanner(System.in);
+            boolean menu = false;
+            iniciarSesion();
+            do {
+                int opc = 0;
+                try {
+                    System.out.println(Constantes.MENU_USUARIO);
+                    opc = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    sc.nextLine();
+                }
+
+                switch (opc) {
+                    case 1:
+                        menuApuestas(apuesta, tab);
+                        break;
+                    case 2:
+                        System.out.println("¿Quieres salir del programa? (si/no)");
+                        String salir = sc.next();
+                        if (salir.equalsIgnoreCase("si")) {
+                            menu = true;
+                        } else if (salir.equalsIgnoreCase("no")) {
+                            menu = false;
+                        } else {
+                            System.out.println("Opcion no valida");
+                        }
+                        break;
+                }
+            } while (!menu);
     }
 }

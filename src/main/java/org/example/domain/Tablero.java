@@ -26,10 +26,10 @@ public class Tablero {
         int fil = 1;
         for(int j = 2; j >= 0; j--){
             for(int i = 0; i < 12; i++){
-                if (Tablero[i][j].getNumero() < 10){
+                if (Tablero[i][j]!=null && Tablero[i][j].getNumero() < 10){
                     System.out.print("");
                 }
-                if (Tablero[i][j].isColor()){
+                if (Tablero[i][j]!=null && Tablero[i][j].isColor()){
                     System.out.print(Constantes.BG_RED +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");
                 }else{
                     System.out.print(Constantes.BG_GRAY +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");;
