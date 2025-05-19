@@ -1,21 +1,14 @@
-Apuesta: 6
-true-1-36.0
-false-2-2.0
-false-4-2.0
-false-6-2.0
-false-8-2.0
-false-10-2.0
-false-11-2.0
-false-13-2.0
-false-15-2.0
-false-17-2.0
-false-20-2.0
-false-22-2.0
-false-24-2.0
-false-26-2.0
-false-28-2.0
-false-29-2.0
-false-31-2.0
-false-33-2.0
-false-35-2.0
+Apuesta: 7
+true-5-3900.0
+false-2-300.0
+false-8-300.0
+false-11-300.0
+true-14-300.0
+false-17-300.0
+false-20-300.0
+true-23-300.0
+false-26-300.0
+false-29-300.0
+true-32-300.0
+false-35-300.0
 

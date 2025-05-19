@@ -64,9 +64,10 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
     @Override
-    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas) {
-        return daoApuesta.añadirApuesta(casillasApostadas);
+    public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas) {
+        return daoApuesta.borrarDuplicados(casillasApostadas);
     }
+
 
     @Override
     public void recopilacionApuesta() {
@@ -100,5 +101,7 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     public int resultadoTirada() {
         return daoApuesta.resultadoTirada();
     }
+
+
 }
 

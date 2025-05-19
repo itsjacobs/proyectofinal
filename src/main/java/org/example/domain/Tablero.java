@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import lombok.Data;
+import org.example.commons.Constantes;
 
 import java.util.List;
 @Data
@@ -25,7 +26,16 @@ public class Tablero {
         int fil = 1;
         for(int j = 2; j >= 0; j--){
             for(int i = 0; i < 12; i++){
-                System.out.print(Tablero[i][j] + "\t");
+                if (Tablero[i][j].getNumero() < 10){
+                    System.out.print("");
+                }
+                if (Tablero[i][j].isColor()){
+                    System.out.print(Constantes.BG_RED +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");
+                }else{
+                    System.out.print(Constantes.BG_GRAY +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");;
+                }
+
+                System.out.print(Constantes.RESET);
             }
             System.out.println("fila " + fil);
             System.out.println();

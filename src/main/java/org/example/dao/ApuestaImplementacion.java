@@ -74,7 +74,6 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-
         return casillasApostadas;
     }
 
@@ -104,7 +103,6 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-
         return casillasApostadas;
     }
 
@@ -140,13 +138,6 @@ public class ApuestaImplementacion implements daoApuesta {
         List<Casilla> listaSinDuplicados = new ArrayList<>();
         listaSinDuplicados = casillasApostadas.stream().distinct().toList();
         return listaSinDuplicados;
-    }
-
-    @Override
-    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas2) {
-        casillasApostadas.addAll(casillasApostadas2);
-        return casillasApostadas;
-
     }
 
     @Override

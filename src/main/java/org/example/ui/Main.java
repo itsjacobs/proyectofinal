@@ -66,6 +66,9 @@ public class Main {
                                 listaTiradas.add(tirada);
                                 System.out.println("La casilla ganadora es: " + resultado);
                                 Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                                casillasApostadas = apuesta.borrarDuplicados(casillasApostadas);
+                                apuesta = new ApuestaImplementacion();
+                                apuesta.setCasillasApostadas(casillasApostadas);
                                 apuestaImplementacion.add(apuesta);
                                 System.out.println(casillasApostadas);
                                 Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);

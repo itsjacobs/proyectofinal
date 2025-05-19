@@ -15,9 +15,10 @@ public interface daoApuesta {
     public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab);
     public List<Casilla> apostarPar(boolean par, double apuesta,Tablero tab);
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab);
-    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas);
+    public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
     public double cobrarGanancias();
     public boolean iniciarSesion(String nombre, String contrasena);
     public boolean registrarse(String id, String nombre, String contrasena);
     public int resultadoTirada();
+
 }

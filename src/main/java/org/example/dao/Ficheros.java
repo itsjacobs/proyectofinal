@@ -26,7 +26,6 @@ public class Ficheros {
             escribir.println(lista.get(i).toStringFicheroApuesta());
             a = true;
         }
-
         escribir.close();
         return a;
     }

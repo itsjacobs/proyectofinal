@@ -15,10 +15,11 @@ public interface gestionApuestas {
     public List<Casilla> apostarMayor(boolean mayor,double apuesta,Tablero tab);
     public List<Casilla> apostarPar(boolean par, double apuesta,Tablero tab);
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta,Tablero tab);
-    public List<Casilla> añadirApuesta(List<Casilla> casillasApostadas);
+    public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
     public void recopilacionApuesta();
     public double cobrarGanancias();
     public boolean iniciarSesion(String id, String contrasena);
     public boolean registrarse(String id, String contrasena, String nombre);
     public int resultadoTirada();
+
 }
