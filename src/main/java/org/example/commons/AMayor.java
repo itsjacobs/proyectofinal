@@ -1,10 +1,10 @@
 package org.example.commons;
 
-public class Mayor extends Exception {
-    public Mayor(){
+public class AMayor extends Exception {
+    public AMayor(){
         super("Solo puedes elegir mayor o menor");
     }
-    public Mayor(String message) {
+    public AMayor(String message) {
         super(message);
     }
 }

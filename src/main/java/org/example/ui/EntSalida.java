@@ -101,18 +101,27 @@ public class EntSalida {
 
     public List<Casilla> apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("¿Cuánto quieres apostar?");
-        double apuesta = sc.nextDouble();
-        sc.nextLine();
+        double apuesta = 0;
         int numero = 0;
         boolean a = false;
+        boolean b = false;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         do {
             System.out.println("¿Qué número quieres apostar?");
             numero = sc.nextInt();
             try {
                 Comprobaciones.comprobarRuleta(numero);
                 a = true;
-            } catch (Ruleta e) {
+            } catch (ARuleta e) {
                 System.out.println(e.getMessage());
             }
         } while (!a);
@@ -123,17 +132,28 @@ public class EntSalida {
     public List<Casilla> apostarFila(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
-        System.out.println("Cuanto quieres apostar?");
-        Double apuesta = sc.nextDouble();
-        sc.nextLine();
+        boolean b = false;
+        double apuesta = 0;
         int fila = 0;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
+        sc.nextLine();
         do {
             System.out.println("Que fila quieres apostar?");
             fila = sc.nextInt();
+
             try {
                 Comprobaciones.comprobarNumero(fila);
                 a = true;
-            } catch (Numeros e) {
+            } catch (ANumeros e) {
                 System.out.println(e.getMessage());
             }
         } while (!a);
@@ -143,9 +163,19 @@ public class EntSalida {
     public List<Casilla> apostarDocena(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        boolean b = false;
         int docena = 0;
-        System.out.println("Cuanto quieres apostar?");
-        int apuesta = sc.nextInt();
+        double apuesta = 0;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         do {
             System.out.println("Que docena quieres apostar?");
@@ -153,21 +183,30 @@ public class EntSalida {
             try {
                 Comprobaciones.comprobarNumero(docena);
                 a = true;
-            } catch (Numeros e) {
+            } catch (ANumeros e) {
                 System.out.println(e.getMessage());
             }
         } while (!a);
         return servicio.apostarDocena(docena, apuesta, tab);
-
     }
 
     public List<Casilla> apostarColor(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        boolean b = false;
         boolean color = false;
         String colorElegido = "";
-        System.out.println("Cuanto quieres apostar?");
-        int apuesta = sc.nextInt();
+        double apuesta = 0;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         do {
             System.out.println("Que color quieres apostar?");
@@ -175,7 +214,7 @@ public class EntSalida {
             try {
                 Comprobaciones.comprobarColor(colorElegido);
                 a = true;
-            } catch (Color e) {
+            } catch (AColor e) {
                 System.out.println(e.getMessage());
             }
 
@@ -194,10 +233,20 @@ public class EntSalida {
     public List<Casilla> apostarMayor(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        boolean b = false;
         boolean mayor = false;
         String mayorElegido = "";
-        System.out.println("Cuanto quieres apostar?");
-        Double apuesta = sc.nextDouble();
+        double apuesta = 0;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         do {
             System.out.println("Quieres apostar a mayor o menor?");
@@ -205,7 +254,7 @@ public class EntSalida {
             try {
                 Comprobaciones.comprobarMayor(mayorElegido);
                 a = true;
-            } catch (Mayor e) {
+            } catch (AMayor e) {
                 System.out.println(e.getMessage());
             }
         } while (!a);
@@ -223,10 +272,20 @@ public class EntSalida {
     public List<Casilla> apostarPar(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
+        boolean b = false;
         boolean par = false;
         String parElegido = "";
-        System.out.println("Cuánto quieres apostar?");
-        double apuesta = sc.nextDouble();
+        double apuesta = 0;
+        while (!b){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                b = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         do {
             System.out.println("¿Quieres apostar a par o impar?");
@@ -234,7 +293,7 @@ public class EntSalida {
             try {
                 Comprobaciones.comprobarPar(parElegido);
                 a = true;
-            } catch (Par e) {
+            } catch (APar e) {
                 System.out.println(e.getMessage());
             }
         } while (!a);
@@ -251,8 +310,17 @@ public class EntSalida {
     public List<Casilla> apostarHuerfano(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
-        System.out.println("Cuanto quieres apostar?");
-        double apuesta = sc.nextDouble();
+        double apuesta = 0;
+        while (!a){
+            try {
+                System.out.println("¿Cuánto quieres apostar?");
+                apuesta = sc.nextInt();
+                a = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Lo introducido no es un número");
+                sc.nextLine();
+            }
+        }
         return servicio.apostarHuerfanos(true, apuesta, tab);
     }
 
@@ -284,7 +352,7 @@ public class EntSalida {
 
         do {
             int opc2 = 0;
-            tab.pintarTablero();
+            tab.pintarTablero(apuesta);
             try {
                 System.out.println(Constantes.MENU_APUESTAS);
                 opc2 = sc.nextInt();

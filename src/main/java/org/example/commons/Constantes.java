@@ -30,7 +30,10 @@ public class Constantes {
 
     public static final String RESET = "\u001B[0m";
     public static final String WHITE_BRIGHT = "\u001B[97m";
-    public static final String BG_GRAY = "\u001B[47m";
+    public static final String BG_GRAY = "\u001B[48;5;236m";
     public static final String BG_RED = "\u001B[41m";
+    public static final String BG_APOSTADA = "\u001B[43m";
+    public static final String BG_GREEN = "\u001B[48;5;28m";
+    public static final String BLACK_LETTER =  "\u001B[30m";
 }
 

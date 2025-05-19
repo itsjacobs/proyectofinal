@@ -1,10 +1,10 @@
 package org.example.commons;
 
-public class Color extends Exception {
-    public Color(String message) {
+public class AColor extends Exception {
+    public AColor(String message) {
         super(message);
     }
-    public Color(){
+    public AColor(){
       super("El color tiene que ser rojo o negro");
     }
 }

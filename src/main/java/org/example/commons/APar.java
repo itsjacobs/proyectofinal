@@ -1,10 +1,10 @@
 package org.example.commons;
 
-public class Par extends Exception {
-    public Par(){
+public class APar extends Exception {
+    public APar(){
         super("La opcion tiene que ser par o impar");
     }
-    public Par(String message) {
+    public APar(String message) {
         super(message);
     }
 }

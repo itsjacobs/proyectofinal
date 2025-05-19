@@ -1,10 +1,10 @@
 package org.example.commons;
 
-public class Numeros extends Exception {
-    public Numeros() {
+public class ANumeros extends Exception {
+    public ANumeros() {
         super("El numero tiene que ser entre 1 y 3");
     }
-    public Numeros(String message) {
+    public ANumeros(String message) {
         super(message);
     }
 }

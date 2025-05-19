@@ -32,15 +32,12 @@ public class Usuario {
             lista.add(usuario);
             a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, lista);
         }
-        System.out.println(a);
         return a;
     }
 
     public boolean inicioSesion(Usuario usuario) {
         boolean a = false;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
-        System.out.println(lista);
-        System.out.println(usuario);
         List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).filter(u -> u.contraseña.equals(usuario.contraseña)).toList();
         if (!comprobacion.isEmpty()) {
             a =  true;

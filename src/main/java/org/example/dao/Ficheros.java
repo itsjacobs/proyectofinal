@@ -20,9 +20,7 @@ public class Ficheros {
         catch(FileNotFoundException e){
             System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
         }
-        System.out.println(lista.size());
         for(int i = 0; i< lista.size(); i++){
-            System.out.println(lista.get(i).toStringFicheroApuesta());
             escribir.println(lista.get(i).toStringFicheroApuesta());
             a = true;
         }
@@ -114,7 +112,6 @@ public class Ficheros {
             throw new RuntimeException(e);
         }
         for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).toStringFicheroGanancias());
             escribir.println(lista.get(i).toStringFicheroGanancias());
             a = true;
         }
