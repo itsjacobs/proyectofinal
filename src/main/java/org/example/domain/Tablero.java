@@ -38,7 +38,6 @@ public class Tablero {
                 System.out.print(Constantes.RESET);
             }
             System.out.println("fila " + fil);
-            System.out.println();
             fil++;
         }
         System.out.println("  1ª docena\t\t  2ª docena\t\t  3ª docena");

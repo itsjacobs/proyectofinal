@@ -26,5 +26,4 @@ public class Comprobaciones {
             throw new Par("La opcion elegida tiene que ser par o impar");
         }
     }
-
 }

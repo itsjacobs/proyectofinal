@@ -10,6 +10,7 @@ import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -100,8 +101,7 @@ public class EntSalida {
     public List<Casilla> apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         System.out.println("¿Cuánto quieres apostar?");
-        double apuesta = sc.nextDouble();
-        sc.nextLine();
+        double apuesta = sc.nextDouble();sc.nextLine();
         int numero = 0;
         boolean a = false;
         do {
@@ -113,8 +113,6 @@ public class EntSalida {
             } catch (Ruleta e) {
                 System.out.println(e.getMessage());            }
         } while (!a);
-
-
         return servicio.apostarNumero(numero, apuesta, tab);
     }
 
@@ -262,6 +260,7 @@ public class EntSalida {
         sc.nextLine();
         servicio.cobrarGanancias();
     }
+
 
     //Métodos de tirada
 

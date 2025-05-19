@@ -11,10 +11,11 @@ import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-
+//
 public class Main {
     public static void main(String[] args) {
         boolean menu1 = false;
@@ -30,13 +31,26 @@ public class Main {
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
         es.iniciarSesion();
         do{
-            System.out.println(Constantes.MENU_USUARIO);
-            int opc = sc.nextInt();
+            int opc = 0;
+            try{
+                System.out.println(Constantes.MENU_USUARIO);
+                opc = sc.nextInt();
+            } catch(InputMismatchException e){
+                sc.nextLine();
+            }
+            tab.pintarTablero();
+
             switch(opc){
                 case 1:
                     do{
-                        System.out.println(Constantes.MENU_APUESTAS);
-                        int opc2 = sc.nextInt();
+                        int opc2 = 0;
+                        try{
+                            System.out.println(Constantes.MENU_APUESTAS);
+                            opc2 = sc.nextInt();
+                        } catch(InputMismatchException e){
+                            System.out.println("Caracter incorrecto");
+                            sc.nextLine();
+                        }
                         switch(opc2){
                             case 1:
                                 apuesta.setCasillasApostadas(es.apostarNumero(tab));
@@ -93,7 +107,19 @@ public class Main {
                                 break;
                         }
                     }while(!menu2);
-
+                case 2:
+                    System.out.println("¿Quieres salir del programa? (si/no)");
+                    String salir = sc.next();
+                    if(salir.equalsIgnoreCase("si")){
+                        menu1 = true;
+                    }
+                    else if(salir.equalsIgnoreCase("no")){
+                        menu1 = false;
+                    }
+                    else{
+                        System.out.println("Opcion no valida");
+                    }
+                    break;
             }
         }while(!menu1);
 
