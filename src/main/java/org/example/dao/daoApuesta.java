@@ -7,7 +7,6 @@ import org.example.domain.Usuario;
 import java.util.List;
 
 public interface daoApuesta {
-    public void repetirTirada();
     public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab);
     public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab);
     public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab);
@@ -20,5 +19,6 @@ public interface daoApuesta {
     public boolean iniciarSesion(String nombre, String contrasena);
     public boolean registrarse(String id, String nombre, String contrasena);
     public int resultadoTirada();
+    public void terminarApuesta();
 
 }

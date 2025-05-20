@@ -7,7 +7,6 @@ import org.example.domain.Usuario;
 import java.util.List;
 
 public interface gestionApuestas {
-    public void repetirTirada();
     public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab);
     public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab);
     public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab);

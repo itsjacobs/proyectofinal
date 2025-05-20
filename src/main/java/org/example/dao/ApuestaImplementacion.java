@@ -32,14 +32,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
 
     @Override
-    public void repetirTirada() {
-        List<ApuestaImplementacion> lista = Ficheros.leerFicheroApuestas(Constantes.APUESTA_FILE);
-        if (lista.isEmpty()) {
-            return;
-        }
-        this.casillasApostadas = new ArrayList<>();
-    }
-    @Override
     public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
@@ -183,6 +175,11 @@ public class ApuestaImplementacion implements daoApuesta {
     public int resultadoTirada() {
        Tirada tirada = new Tirada();
        return tirada.tirar();
+    }
+
+    @Override
+    public void terminarApuesta() {
+
     }
 
     public String toStringFicheroApuesta(){

@@ -23,11 +23,6 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
 
     @Override
-    public void repetirTirada() {
-
-    }
-
-    @Override
     public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab) {
         return daoApuesta.apostarNumero(numero, apuesta, tab);
     }

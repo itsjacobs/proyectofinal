@@ -19,6 +19,7 @@ import java.util.Scanner;
 import lombok.Data;
 
 @Data
+@Log4j2
 public class EntSalida {
     private gestionApuestas servicio;
 
@@ -52,7 +53,7 @@ public class EntSalida {
                     opc = sc.nextInt();
                     b = true;
                 } catch (InputMismatchException e) {
-                    System.out.println("Caracter incorrecto");
+                    log.error("Caracter incorrecto");
                     sc.nextLine();
                 }
             } while (!b);
@@ -67,7 +68,7 @@ public class EntSalida {
                         System.out.println("Has iniciado sesión correctamente");
                         a = true;
                     } else {
-                        System.out.println("La contraseña o el DNI/NIE son incorrectos");
+                        log.error("La contraseña o el DNI/NIE son incorrectos");
                     }
                     break;
                 case 2:
@@ -83,16 +84,15 @@ public class EntSalida {
                         Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
                     } else {
                         System.out.println("El usuario ya existe");
+                        log.error("El usuario ya existe");
                     }
                     break;
                 default:
-                    System.out.println(Constantes.MENSAJE_OPCION_INVALIDA);
+                    log.error(Constantes.MENSAJE_OPCION_INVALIDA);
             }
         }
 
     }
-
-
     //Métodos de Apuestas
 
 
@@ -112,7 +112,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -123,7 +123,7 @@ public class EntSalida {
                 Comprobaciones.comprobarRuleta(numero);
                 a = true;
             } catch (ARuleta e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         } while (!a);
         return servicio.apostarNumero(numero, apuesta, tab);
@@ -142,7 +142,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -155,7 +155,7 @@ public class EntSalida {
                 Comprobaciones.comprobarNumero(fila);
                 a = true;
             } catch (ANumeros e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         } while (!a);
         return servicio.apostarFila(fila, apuesta, tab);
@@ -173,7 +173,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -185,7 +185,7 @@ public class EntSalida {
                 Comprobaciones.comprobarNumero(docena);
                 a = true;
             } catch (ANumeros e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         } while (!a);
         return servicio.apostarDocena(docena, apuesta, tab);
@@ -204,7 +204,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -216,7 +216,7 @@ public class EntSalida {
                 Comprobaciones.comprobarColor(colorElegido);
                 a = true;
             } catch (AColor e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
 
         } while (!a);
@@ -244,7 +244,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -256,7 +256,7 @@ public class EntSalida {
                 Comprobaciones.comprobarMayor(mayorElegido);
                 a = true;
             } catch (AMayor e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         } while (!a);
 
@@ -283,7 +283,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -295,7 +295,7 @@ public class EntSalida {
                 Comprobaciones.comprobarPar(parElegido);
                 a = true;
             } catch (APar e) {
-                System.out.println(e.getMessage());
+                log.error(e.getMessage());
             }
         } while (!a);
 
@@ -318,7 +318,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 a = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
+                log.info("Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -361,7 +361,7 @@ public class EntSalida {
                 System.out.println(Constantes.MENU_APUESTAS);
                 opc2 = sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Caracter incorrecto");
+                log.error("Caracter incorrecto");
                 sc.nextLine();
             }
 
@@ -401,7 +401,6 @@ public class EntSalida {
                     List<Casilla> copiaCasillas = new ArrayList<>();
                     copiaCasillas.addAll(bcasillasApostadas);
 
-
                     //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
                     int finalResultado = resultado;
                     Casilla casillaGanadora = copiaCasillas.stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
@@ -432,7 +431,7 @@ public class EntSalida {
                     } else if (salir.equalsIgnoreCase("no")) {
                         menu = false;
                     } else {
-                        System.out.println("Opcion no valida");
+                        log.error("Opcion no valida");
                     }
                     break;
             }
@@ -465,7 +464,7 @@ public class EntSalida {
                         } else if (salir.equalsIgnoreCase("no")) {
                             menu = false;
                         } else {
-                            System.out.println("Opcion no valida");
+                            log.error("Opcion no valida");
                         }
                         break;
                 }
