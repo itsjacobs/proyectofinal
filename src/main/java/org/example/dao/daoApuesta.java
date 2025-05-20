@@ -2,8 +2,10 @@ package org.example.dao;
 
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface daoApuesta {
@@ -19,6 +21,5 @@ public interface daoApuesta {
     public boolean iniciarSesion(String nombre, String contrasena);
     public boolean registrarse(String id, String nombre, String contrasena);
     public int resultadoTirada();
-    public void terminarApuesta();
 
 }

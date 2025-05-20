@@ -177,10 +177,8 @@ public class ApuestaImplementacion implements daoApuesta {
        return tirada.tirar();
     }
 
-    @Override
-    public void terminarApuesta() {
 
-    }
+
 
     public String toStringFicheroApuesta(){
         StringBuilder sb = new StringBuilder();

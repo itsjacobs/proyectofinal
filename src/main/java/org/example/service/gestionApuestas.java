@@ -20,5 +20,4 @@ public interface gestionApuestas {
     public boolean iniciarSesion(String id, String contrasena);
     public boolean registrarse(String id, String contrasena, String nombre);
     public int resultadoTirada();
-
 }

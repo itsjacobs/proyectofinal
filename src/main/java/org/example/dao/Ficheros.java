@@ -1,6 +1,6 @@
 package org.example.dao;
 
-import org.example.commons.Constantes;
+
 import org.example.domain.ApuestasUsuario;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
@@ -18,7 +18,8 @@ public class Ficheros {
             escribir = new PrintWriter(fichero);
         }
         catch(FileNotFoundException e){
-            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         for(int i = 0; i< lista.size(); i++){
             escribir.println(lista.get(i).toStringFicheroApuesta());
@@ -42,7 +43,6 @@ public class Ficheros {
             }
         }
         catch (FileNotFoundException e){
-            System.out.println(Constantes.MENSAJE_ERROR_LECTURA);
         }
         return lista;
     }
@@ -53,8 +53,6 @@ public class Ficheros {
             escribir = new PrintWriter(new FileWriter(fichero,true));
         }
         catch(FileNotFoundException e){
-            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -81,7 +79,7 @@ public class Ficheros {
             }
         }
         catch (FileNotFoundException e){
-            System.out.println(Constantes.MENSAJE_ERROR_LECTURA);
+
         }
         return lista;
     }
@@ -91,7 +89,6 @@ public class Ficheros {
         try{
             escribir = new PrintWriter(new FileWriter(fichero,true));
         }catch(FileNotFoundException e){
-            System.out.println(Constantes.MENSAJE_ERROR_ESCRITURA);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

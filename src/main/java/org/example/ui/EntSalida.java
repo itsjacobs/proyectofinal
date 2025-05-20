@@ -417,7 +417,6 @@ public class EntSalida {
                     System.out.println(apuesta.getCasillasApostadas());
                     bcasillasApostadas = apuesta.getCasillasApostadas();
                     tab.resetTablero();
-
                     break;
                 case 9:
 
