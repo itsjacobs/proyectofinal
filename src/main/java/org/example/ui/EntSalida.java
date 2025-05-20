@@ -1,5 +1,6 @@
 package org.example.ui;
 
+import lombok.extern.log4j.Log4j2;
 import org.example.commons.*;
 import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
@@ -344,6 +345,8 @@ public class EntSalida {
 
     public void menuApuestas(ApuestaImplementacion apuesta, Tablero tab) {
         Scanner sc = new Scanner(System.in);
+        int resultado = resultadoTirada();
+        Tirada tirada = new Tirada(resultado);
         List<ApuestaImplementacion> apuestaImplementacion = new ArrayList<>();
         List<Casilla> casillasApostadas = new ArrayList<>();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
@@ -386,26 +389,29 @@ public class EntSalida {
                     apuesta.setCasillasApostadas(apostarHuerfano(tab));
                     break;
                 case 8:
-                    List<Casilla> casillasApostadasVacio = new ArrayList<>();
-                    int resultado = resultadoTirada();
-                    Tirada tirada = new Tirada(resultado);
+                    //Metodos sobre la tirada en si. Añade al historico de tiradas la nueva, la mete en el fichero y la muestra por pantalla
                     listaTiradas.add(tirada);
-                    System.out.println("La casilla ganadora es: " + resultado);
                     Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+                    System.out.println("La casilla ganadora es: " + resultado);
+
+                    //Creamos una apuesta nueva y le añadimos las casillas apostadas de la ultima apuesta. Ademas las añadimos al fuchero de las casillas apostadas
                     casillasApostadas = apuesta.borrarDuplicados(casillasApostadas);
-                    apuesta = new ApuestaImplementacion();
                     apuesta.setCasillasApostadas(casillasApostadas);
                     apuestaImplementacion.add(apuesta);
                     Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
-                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == resultado).findFirst()
-                            .orElse(null);
+
+                    //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
+                    int finalResultado = resultado;
+                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
                         System.out.println("Has ganado");
                         System.out.println("Has ganado " + casillaGanadora.getValor());
                     } else {
                         System.out.println("Has perdido");
                     }
-                    apuesta.setCasillasApostadas(casillasApostadasVacio);
+                    //Reiniciamos la apuesta
+                    apuesta.setCasillasApostadas(new ArrayList<>());
+
                     break;
                 case 9:
 

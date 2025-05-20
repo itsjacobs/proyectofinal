@@ -150,6 +150,10 @@ public class ApuestaImplementacion implements daoApuesta {
         return 0;
     }
 
+    public void resetApuesta() {
+        this.casillasApostadas = new ArrayList<>();
+    }
+
     //Metodos Usuario
 
 

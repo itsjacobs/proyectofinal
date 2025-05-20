@@ -97,4 +97,14 @@ public class Tablero {
         }
         return docena;
     }
+
+    public void resetTablero() {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (Tablero[i][j] != null) {
+                    Tablero[i][j].setValor(0);
+                }
+            }
+        }
+    }
 }
