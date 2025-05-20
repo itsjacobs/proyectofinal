@@ -141,7 +141,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -172,7 +172,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -203,7 +203,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -243,7 +243,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -282,7 +282,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -317,7 +317,7 @@ public class EntSalida {
                 apuesta = sc.nextInt();
                 a = true;
             } catch (InputMismatchException e) {
-                System.out.println("Lo introducido no es un número");
+                System.out.println(Constantes.BG_RED +Constantes.WHITE_BRIGHT+"Lo introducido no es un número");
                 sc.nextLine();
             }
         }
@@ -350,6 +350,7 @@ public class EntSalida {
         boolean menu = false;
         tab.rellenarTablero();
 
+
         do {
             int opc2 = 0;
             tab.pintarTablero(apuesta);
@@ -362,6 +363,7 @@ public class EntSalida {
             }
 
             switch (opc2) {
+
                 case 1:
                     apuesta.setCasillasApostadas(apostarNumero(tab));
                     break;
@@ -384,6 +386,7 @@ public class EntSalida {
                     apuesta.setCasillasApostadas(apostarHuerfano(tab));
                     break;
                 case 8:
+                    List<Casilla> casillasApostadasVacio = new ArrayList<>();
                     int resultado = resultadoTirada();
                     Tirada tirada = new Tirada(resultado);
                     listaTiradas.add(tirada);
@@ -394,10 +397,18 @@ public class EntSalida {
                     apuesta.setCasillasApostadas(casillasApostadas);
                     apuestaImplementacion.add(apuesta);
                     Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
-                    apuesta.repetirTirada();
+                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == resultado).findFirst()
+                            .orElse(null);
+                    if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
+                        System.out.println("Has ganado");
+                        System.out.println("Has ganado " + casillaGanadora.getValor());
+                    } else {
+                        System.out.println("Has perdido");
+                    }
+                    apuesta.setCasillasApostadas(casillasApostadasVacio);
                     break;
                 case 9:
-                    cobrarGanancias();
+
                     break;
                 case 10:
                     System.out.println("¿Quieres salir del programa? (si/no)");
@@ -412,6 +423,7 @@ public class EntSalida {
                     }
                     break;
             }
+
         } while (!menu);
     }
 

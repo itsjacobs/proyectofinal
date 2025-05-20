@@ -20,10 +20,6 @@ public class Tirada {
         return numero;
     }
 
-    /*public int resultadoTirada(){
-        System.out.println("La casilla ganadora es " + tirar());
-        return tirar();
-    }*/
 
     public double calcularGanancia(Casilla casilla){
         double ganancia = casilla.getValor();

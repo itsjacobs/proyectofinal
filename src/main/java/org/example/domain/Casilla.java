@@ -32,6 +32,9 @@ public class Casilla {
         this.valor = Integer.parseInt(token[2]);
     }
 
+    public int getNumero() {
+        return numero;
+    }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
