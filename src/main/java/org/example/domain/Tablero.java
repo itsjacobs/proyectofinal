@@ -25,18 +25,18 @@ public class Tablero {
     }
     public void pintarTablero(ApuestaImplementacion apuesta){
         int fil = 1;
-        List<Casilla> casillasApostadas = apuesta.getCasillasApostadas();
+
         System.out.println(Constantes.BG_GREEN);
         System.out.println(Constantes.BG_GREEN);
         System.out.println(Constantes.BG_GREEN);
         for(int j = 2; j >= 0; j--){
             for(int i = 0; i < 12; i++){
-                if (casillasApostadas.contains(Tablero[i][j])){
+                if (apuesta.getCasillasApostadas().contains(Tablero[i][j])){
                     System.out.print(Constantes.BG_APOSTADA + Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");
                 }
-                if (Tablero[i][j]!=null && Tablero[i][j].isColor() && !casillasApostadas.contains(Tablero[i][j])){
+                if (Tablero[i][j]!=null && Tablero[i][j].isColor() && !apuesta.getCasillasApostadas().contains(Tablero[i][j])){
                     System.out.print(Constantes.BG_RED +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");
-                }else if (Tablero[i][j]!=null && !Tablero[i][j].isColor() && !casillasApostadas.contains(Tablero[i][j])){
+                }else if (Tablero[i][j]!=null && !Tablero[i][j].isColor() && !apuesta.getCasillasApostadas().contains(Tablero[i][j])){
                     System.out.print(Constantes.BG_GRAY +Constantes.WHITE_BRIGHT + " " + Tablero[i][j] + "\t");
                 }
                 System.out.print(Constantes.RESET);
@@ -99,11 +99,10 @@ public class Tablero {
     }
 
     public void resetTablero() {
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (Tablero[i][j] != null) {
-                    Tablero[i][j].setValor(0);
-                }
+        int contador = 1;
+        for(int i = 0; i < 12; i++){
+            for(int j = 0; j < 3; j++){
+                Tablero[i][j] = new Casilla(contador++);
             }
         }
     }

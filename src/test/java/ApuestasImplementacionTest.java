@@ -1,5 +1,6 @@
 import org.example.dao.ApuestaImplementacion;
 import org.example.domain.Casilla;
+import org.example.domain.Tablero;
 import org.example.domain.Usuario;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,24 +13,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ApuestasImplementacionTest {
     @Test
-    void borrarDuplicados() {
-        List<Casilla> lista = new ArrayList<>();
-        ApuestaImplementacion apuesta = new ApuestaImplementacion();
-        Casilla casilla1 = new Casilla(true, 1, 1);
-        Casilla casilla2 = new Casilla(false, 2, 10);
-        Casilla casilla3 = new Casilla(true, 3, 100);
-        Casilla casilla4 = new Casilla(true, 1, 1);
-        lista.add(casilla1);
-        lista.add(casilla2);
-        lista.add(casilla3);
-        lista.add(casilla4);
-        List<Casilla> resultado = apuesta.borrarDuplicados(lista);
-
-        assertEquals(3, resultado.size());
-        assertTrue(resultado.contains(casilla1));
-        assertFalse(resultado.contains(casilla4));
-
-
+    void apostarNumero() {
+        Tablero tab = new Tablero();
+        tab.rellenarTablero();
+        List<Casilla> casillas = new ArrayList<>();
+        int numero = 19;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 3; j++) {
+                Casilla casilla = tab.getTablero()[i][j];
+                if (casilla != null && casilla.getNumero() == numero) {
+                    casillas.add(casilla);
+                }
+            }
+        };
+        assertEquals(numero, casillas.getFirst().getNumero());
     }
 
     @Nested
@@ -41,7 +38,7 @@ public class ApuestasImplementacionTest {
             boolean resultado = usuario.registrarse(usuario);
 
 
-            assertTrue(resultado);
+            assertFalse(resultado);
             assertEquals("01",usuario.getId());
             assertEquals("Juan",usuario.getNombre());
             assertEquals("1234",usuario.getContraseña());

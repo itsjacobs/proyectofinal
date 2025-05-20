@@ -265,7 +265,7 @@ public class EntSalida {
         } else if (mayorElegido.equalsIgnoreCase("menor")) {
             mayor = false;
         }
-
+        sc.close();
         return servicio.apostarMayor(mayor, apuesta, tab);
 
     }
@@ -348,7 +348,7 @@ public class EntSalida {
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
         List<ApuestaImplementacion> apuestaImplementacion = new ArrayList<>();
-        List<Casilla> casillasApostadas = new ArrayList<>();
+        List<Casilla> bcasillasApostadas = new ArrayList<>();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
         boolean menu = false;
         tab.rellenarTablero();
@@ -367,10 +367,10 @@ public class EntSalida {
 
             switch (opc2) {
                 case 1:
-                    apuesta.setCasillasApostadas(apostarNumero(tab));
+                    apuesta.setCasillasApostadasManual(apostarNumero(tab));
                     break;
                 case 2:
-                    apuesta.setCasillasApostadas(apostarColor(tab));
+                    apuesta.setCasillasApostadasManual(apostarColor(tab));
                     break;
                 case 3:
                     apuesta.setCasillasApostadas(apostarPar(tab));
@@ -394,14 +394,17 @@ public class EntSalida {
                     System.out.println("La casilla ganadora es: " + resultado);
 
                     //Creamos una apuesta nueva y le añadimos las casillas apostadas de la ultima apuesta. Ademas las añadimos al fuchero de las casillas apostadas
-                    casillasApostadas = apuesta.borrarDuplicados(casillasApostadas);
-                    apuesta.setCasillasApostadas(casillasApostadas);
+                    bcasillasApostadas = apuesta.borrarDuplicados(bcasillasApostadas);
+                    apuesta.setCasillasApostadas(bcasillasApostadas);
                     apuestaImplementacion.add(apuesta);
                     Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
+                    List<Casilla> copiaCasillas = new ArrayList<>();
+                    copiaCasillas.addAll(bcasillasApostadas);
+
 
                     //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
                     int finalResultado = resultado;
-                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
+                    Casilla casillaGanadora = copiaCasillas.stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
                         System.out.println("Has ganado");
                         System.out.println("Has ganado " + casillaGanadora.getValor());
@@ -413,7 +416,8 @@ public class EntSalida {
 
                     apuesta.setCasillasApostadas(new ArrayList<>());
                     System.out.println(apuesta.getCasillasApostadas());
-                    casillasApostadas = apuesta.getCasillasApostadas();
+                    bcasillasApostadas = apuesta.getCasillasApostadas();
+                    tab.resetTablero();
 
                     break;
                 case 9:
@@ -439,7 +443,7 @@ public class EntSalida {
     public void menuInicioSesion(Tablero tab, ApuestaImplementacion apuesta) {
             Scanner sc = new Scanner(System.in);
             boolean menu = false;
-            iniciarSesion();
+        iniciarSesion();
             do {
                 int opc = 0;
                 try {

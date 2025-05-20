@@ -24,6 +24,10 @@ public class ApuestaImplementacion implements daoApuesta {
         this.usuarios = new ArrayList<>();
     }
 
+    public void setCasillasApostadasManual(List<Casilla> casillasApostadas) {
+        this.casillasApostadas = casillasApostadas;
+    }
+
     //Metodos Apuestas
 
 
@@ -151,6 +155,7 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     public void resetApuesta() {
+
         this.casillasApostadas = new ArrayList<>();
     }
 
