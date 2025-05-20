@@ -366,7 +366,6 @@ public class EntSalida {
             }
 
             switch (opc2) {
-
                 case 1:
                     apuesta.setCasillasApostadas(apostarNumero(tab));
                     break;
@@ -409,8 +408,12 @@ public class EntSalida {
                     } else {
                         System.out.println("Has perdido");
                     }
+                    System.out.println(apuesta.getCasillasApostadas());
                     //Reiniciamos la apuesta
+
                     apuesta.setCasillasApostadas(new ArrayList<>());
+                    System.out.println(apuesta.getCasillasApostadas());
+                    casillasApostadas = apuesta.getCasillasApostadas();
 
                     break;
                 case 9:

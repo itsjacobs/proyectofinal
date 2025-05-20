@@ -31,9 +31,10 @@ public class Casilla {
         this.numero = Integer.parseInt(token[1]);
         this.valor = Integer.parseInt(token[2]);
     }
-
-    public int getNumero() {
-        return numero;
+    public Casilla(boolean color, int numero, double valor) {
+        this.color = color;
+        this.numero = numero;
+        this.valor = valor;
     }
 
     public String toString(){
