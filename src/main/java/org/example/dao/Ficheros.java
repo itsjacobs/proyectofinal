@@ -11,41 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheros {
-    public static boolean escribirFicheroApuestas(String fichero, List<ApuestaImplementacion> lista){
-        PrintWriter escribir = null;
-        boolean a = false;
-        try{
-            escribir = new PrintWriter(fichero);
-        }
-        catch(FileNotFoundException e){
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        for(int i = 0; i< lista.size(); i++){
-            escribir.println(lista.get(i).toStringFicheroApuesta());
-            a = true;
-        }
-        escribir.close();
-        return a;
-    }
-    public static List<ApuestaImplementacion> leerFicheroApuestas(String fichero){
-        List<ApuestaImplementacion> lista = new ArrayList<>();
-        String Linea = null;
-        try{
-            Scanner sc = new Scanner(new File(fichero));
-            while(sc.hasNextLine()){
-                Linea = sc.nextLine();
-                String[] partes = Linea.split("-");
-                String id = partes[0];
-                ApuestaImplementacion apuesta = new ApuestaImplementacion();
-                apuesta.setId(id);
-                lista.add(apuesta);
-            }
-        }
-        catch (FileNotFoundException e){
-        }
-        return lista;
-    }
     public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista){
         PrintWriter escribir = null;
         boolean a = false;
@@ -74,7 +39,8 @@ public class Ficheros {
                 String id = partes[0];
                 String nombre = partes[1];
                 String contraseña = partes[2];
-                Usuario usuario = new Usuario(id, nombre, contraseña);
+                Double cartera = Double.parseDouble(partes[3]);
+                Usuario usuario = new Usuario(id, nombre, contraseña,cartera);
                 lista.add(usuario);
             }
         }

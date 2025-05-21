@@ -23,7 +23,14 @@ public class Usuario {
         this.id = id;
         this.nombre ="";
         this.contraseña = contraseña;
-         }
+    }
+
+    public Usuario(String id, String nombre, String contraseña, Double cartera) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.cartera = cartera;
+    }
 
     public boolean registrarse(Usuario usuario) {
         boolean a = true;
@@ -37,7 +44,7 @@ public class Usuario {
     }
 
     public boolean inicioSesion(Usuario usuario) {
-        boolean a = false;
+        boolean a = true;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
         List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).filter(u -> u.contraseña.equals(usuario.contraseña)).toList();
         if (!comprobacion.isEmpty()) {
@@ -47,7 +54,7 @@ public class Usuario {
     }
     public String toStringFicheroUsuario() {
         StringBuilder SB = new StringBuilder();
-        SB.append(id).append("-").append(nombre).append("-").append(contraseña);
+        SB.append(id).append("-").append(nombre).append("-").append(contraseña).append("-").append(cartera).append("-");
         return SB.toString();
     }
 }
