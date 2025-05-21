@@ -21,8 +21,9 @@ public class ApuestaImplementacion implements daoApuesta {
         Random rnd = new Random();
         this.casillasApostadas = new ArrayList<>();
         this.id = String.valueOf(rnd.nextInt(0,10));
-        this.usuarios = new ArrayList<>();
+        this.usuarios = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
     }
+
 
     public void setCasillasApostadasManual(List<Casilla> casillasApostadas) {
         this.casillasApostadas = casillasApostadas;
@@ -32,7 +33,7 @@ public class ApuestaImplementacion implements daoApuesta {
 
 
     @Override
-    public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab) {
+    public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -42,11 +43,14 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        if (usuario != null){
+            usuario.setCartera(usuario.getCartera() - apuesta);
+        }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
+    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -56,11 +60,14 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        if (usuario != null){
+            usuario.setCartera(usuario.getCartera() - apuesta);
+        }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab) {
+    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.queDocena(tab.getTablero()[i][j]) == docena) {
@@ -70,11 +77,12 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        usuario.setCartera(usuario.getCartera() - apuesta);
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab) {
+    public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -85,11 +93,14 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        if (usuario != null){
+            usuario.setCartera(usuario.getCartera() - apuesta);
+        }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab) {
+    public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esMayor(tab.getTablero()[i][j]) == mayor) {
@@ -99,11 +110,12 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        usuario.setCartera(usuario.getCartera() - apuesta);
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab) {
+    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esPar(tab.getTablero()[i][j]) == par) {
@@ -113,11 +125,14 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
+        if (usuario != null){
+            usuario.setCartera(usuario.getCartera() - apuesta);
+        }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab) {
+    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab,Usuario usuario) {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
@@ -126,6 +141,9 @@ public class ApuestaImplementacion implements daoApuesta {
                     casillasApostadas.add(casilla);
                 }
             }
+        }
+        if (usuario != null){
+            usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
     }
@@ -147,8 +165,7 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     public void resetApuesta() {
-
-        this.casillasApostadas = new ArrayList<>();
+        casillasApostadas.clear();
     }
 
     //Metodos Usuario
@@ -165,6 +182,14 @@ public class ApuestaImplementacion implements daoApuesta {
         Usuario usuario = new Usuario(id, nombre, contrasena);
         return usuario.registrarse(usuario);
 
+    }
+    public Usuario dameUsuario(String id){
+        for (Usuario usuario: usuarios){
+            if (usuario.getId().equalsIgnoreCase(id)){
+                return usuario;
+            }
+        }
+        return null;
     }
 
 

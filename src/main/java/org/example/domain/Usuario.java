@@ -11,12 +11,13 @@ public class Usuario {
     private String id;
     private String nombre;
     private String contraseña;
-    private double saldo;
+    private double cartera;
 
     public Usuario(String id, String nombre, String contraseña) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
+        cartera = 1000;
     }
     public Usuario(String id,String contraseña) {
         this.id = id;

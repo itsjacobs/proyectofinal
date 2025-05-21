@@ -1,6 +1,7 @@
 import org.example.dao.daoApuesta;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Usuario;
 import org.example.service.gestionApuestasImplementacion;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,9 +36,10 @@ public class serviceTest {
     @Order(2)
     void testApostarNumero() {
         Tablero tab = new Tablero();
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         List<Casilla> casillas = List.of(new Casilla(true, 1, 2));
-        when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any())).thenReturn(casillas);
-        List<Casilla> resultado = gestion.apostarNumero(5, 100.0, tab);
+        when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any(),any())).thenReturn(casillas);
+        List<Casilla> resultado = gestion.apostarNumero(5, 100.0, tab, usuario);
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
     }
@@ -45,9 +47,10 @@ public class serviceTest {
     @Order(3)
     void testApostarFila() {
         Tablero tab = new Tablero();
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         List<Casilla> casillas = List.of(new Casilla(false, 19, 2));
-        when(daoApuesta.apostarFila(anyInt(), anyDouble(), any())).thenReturn(casillas);
-        List<Casilla> resultado = gestion.apostarFila(1, 50.0, tab);
+        when(daoApuesta.apostarFila(anyInt(), anyDouble(), any(),any())).thenReturn(casillas);
+        List<Casilla> resultado = gestion.apostarFila(1, 50.0, tab, usuario);
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
     }
@@ -62,27 +65,30 @@ public class serviceTest {
     @Order(5)
     void testApostarColor() {
         Tablero tab = new Tablero();
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         List<Casilla> casillas = List.of(new Casilla(true, 1, 2));
-        when(daoApuesta.apostarColor(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
-        List<Casilla> resultado = gestion.apostarColor(true, 50.0, tab);
+        when(daoApuesta.apostarColor(anyBoolean(), anyDouble(), any(),any())).thenReturn(casillas);
+        List<Casilla> resultado = gestion.apostarColor(true, 50.0, tab, usuario);
         assertThat(resultado.size(), is(1));
     }
     @Test
     @Order(6)
     void testApostarPar() {
         Tablero tab = new Tablero();
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         List<Casilla> casillas = List.of(new Casilla(true, 2, 2));
-        when(daoApuesta.apostarPar(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
-        List<Casilla> resultado = gestion.apostarPar(true, 30.0, tab);
+        when(daoApuesta.apostarPar(anyBoolean(), anyDouble(), any(),any())).thenReturn(casillas);
+        List<Casilla> resultado = gestion.apostarPar(true, 30.0, tab, usuario);
         assertThat(resultado, hasSize(greaterThan(0)));
     }
     @Test
     @Order(7)
     void testApostarHuerfanos() {
         Tablero tab = new Tablero();
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         List<Casilla> casillas = List.of(new Casilla(true, 3, 2));
-        when(daoApuesta.apostarHuerfanos(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
-        List<Casilla> resultado = gestion.apostarHuerfanos(true, 50.0, tab);
+        when(daoApuesta.apostarHuerfanos(anyBoolean(), anyDouble(), any(),any())).thenReturn(casillas);
+        List<Casilla> resultado = gestion.apostarHuerfanos(true, 50.0, tab, usuario);
         assertNotNull(resultado);
         assertTrue(!resultado.isEmpty());
     }
@@ -92,9 +98,10 @@ public class serviceTest {
         double[] apuestas = {10.0, 20.0, 50.0};
         for (double apuesta : apuestas) {
             Tablero tab = new Tablero();
-            when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any()))
+            Usuario usuario = new Usuario("id123", "Juan", "pass123");
+            when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any(),any()))
                     .thenReturn(List.of(new Casilla(true, 1, 2)));
-            List<Casilla> resultado = gestion.apostarNumero(5, apuesta, tab);
+            List<Casilla> resultado = gestion.apostarNumero(5, apuesta, tab, usuario);
             assertNotNull(resultado);
         }
     }

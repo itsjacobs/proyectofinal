@@ -5,6 +5,7 @@ import org.example.dao.ApuestaImplementacion;
 import org.example.dao.daoApuesta;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
+import org.example.domain.Usuario;
 
 import java.util.List;
 @Data
@@ -27,39 +28,39 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
 
     @Override
-    public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab) {
-        return daoApuesta.apostarNumero(numero, apuesta, tab);
+    public List<Casilla> apostarNumero(int numero, double apuesta, Tablero tab, Usuario usuario) {
+        return daoApuesta.apostarNumero(numero, apuesta, tab,usuario);
     }
 
     @Override
-    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab) {
-        return daoApuesta.apostarFila(fila, apuesta, tab);
+    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab,Usuario usuario) {
+        return daoApuesta.apostarFila(fila, apuesta, tab,usuario);
     }
 
     @Override
-    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab) {
-        return daoApuesta.apostarDocena(docena, apuesta, tab);
+    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab,Usuario usuario) {
+        return daoApuesta.apostarDocena(docena, apuesta, tab,usuario);
     }
 
 
     @Override
-    public List<Casilla> apostarColor(boolean color,double apuesta, Tablero tab) {
-        return daoApuesta.apostarColor(color, apuesta,tab);
+    public List<Casilla> apostarColor(boolean color,double apuesta, Tablero tab, Usuario usuario) {
+        return daoApuesta.apostarColor(color, apuesta,tab, usuario);
     }
 
     @Override
-    public List<Casilla> apostarMayor( boolean mayor,double apuesta, Tablero tab) {
-        return daoApuesta.apostarMayor( mayor,apuesta,tab);
+    public List<Casilla> apostarMayor( boolean mayor,double apuesta, Tablero tab, Usuario usuario) {
+        return daoApuesta.apostarMayor( mayor,apuesta,tab, usuario);
     }
 
     @Override
-    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab) {
-        return daoApuesta.apostarPar(par, apuesta, tab);
+    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab, Usuario usuario) {
+        return daoApuesta.apostarPar(par, apuesta, tab, usuario);
     }
 
     @Override
-    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab) {
-        return daoApuesta.apostarHuerfanos(huerfanos, apuesta, tab);
+    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab, Usuario usuario) {
+        return daoApuesta.apostarHuerfanos(huerfanos, apuesta, tab,usuario);
     }
 
     @Override
@@ -92,6 +93,12 @@ public class gestionApuestasImplementacion implements gestionApuestas {
         return daoApuesta.registrarse(id, nombre, contraseña);
     }
 
+    @Override
+    public Usuario dameUsuario(String id) {
+        return daoApuesta.dameUsuario(id);
+    }
+
+
 
     //Métodos de Tirada
 
@@ -100,6 +107,7 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     public int resultadoTirada() {
         return daoApuesta.resultadoTirada();
     }
+
 
 
 }

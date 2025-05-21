@@ -22,6 +22,7 @@ import lombok.Data;
 @Log4j2
 public class EntSalida {
     private gestionApuestas servicio;
+    private Usuario usuarioLogado;
 
 
     public EntSalida(gestionApuestas servicio) {
@@ -41,7 +42,7 @@ public class EntSalida {
         String id = "";
         String contraseña = "";
         String nombre = "";
-        Ficheros ficheros = new Ficheros();
+
         List<Usuario> listaUsuarios = new ArrayList<>();
         boolean a = false;
         boolean b = false;
@@ -65,7 +66,8 @@ public class EntSalida {
                     System.out.println("Ingresa la contraseña:");
                     contraseña = sc.next();
                     if (servicio.iniciarSesion(id, contraseña)) {
-                        System.out.println("Has iniciado sesión correctamente");
+                        usuarioLogado = servicio.dameUsuario(id);
+                        System.out.println("Bienvenido " + usuarioLogado.getNombre() + " has iniciado sesión correctamente");
                         a = true;
                     } else {
                         log.error("La contraseña o el DNI/NIE son incorrectos");
@@ -95,13 +97,9 @@ public class EntSalida {
     }
     //Métodos de Apuestas
 
-
-    public void repetirTirada() {
-
-    }
-
     public List<Casilla> apostarNumero(Tablero tab) {
         Scanner sc = new Scanner(System.in);
+
         double apuesta = 0;
         int numero = 0;
         boolean a = false;
@@ -126,7 +124,7 @@ public class EntSalida {
                 log.error(e.getMessage());
             }
         } while (!a);
-        return servicio.apostarNumero(numero, apuesta, tab);
+        return servicio.apostarNumero(numero, apuesta, tab, usuarioLogado);
     }
 
 
@@ -158,7 +156,7 @@ public class EntSalida {
                 log.error(e.getMessage());
             }
         } while (!a);
-        return servicio.apostarFila(fila, apuesta, tab);
+        return servicio.apostarFila(fila, apuesta, tab, usuarioLogado);
     }
 
     public List<Casilla> apostarDocena(Tablero tab) {
@@ -188,7 +186,7 @@ public class EntSalida {
                 log.error(e.getMessage());
             }
         } while (!a);
-        return servicio.apostarDocena(docena, apuesta, tab);
+        return servicio.apostarDocena(docena, apuesta, tab, usuarioLogado);
     }
 
     public List<Casilla> apostarColor(Tablero tab) {
@@ -227,7 +225,7 @@ public class EntSalida {
             color = false;
         }
 
-        return servicio.apostarColor(color, apuesta, tab);
+        return servicio.apostarColor(color, apuesta, tab,usuarioLogado);
 
     }
 
@@ -266,7 +264,7 @@ public class EntSalida {
             mayor = false;
         }
         sc.close();
-        return servicio.apostarMayor(mayor, apuesta, tab);
+        return servicio.apostarMayor(mayor, apuesta, tab,usuarioLogado);
 
     }
 
@@ -304,7 +302,7 @@ public class EntSalida {
         } else if (parElegido.equalsIgnoreCase("impar")) {
             par = false;
         }
-        return servicio.apostarPar(par, apuesta, tab);
+        return servicio.apostarPar(par, apuesta, tab, usuarioLogado);
 
     }
 
@@ -322,7 +320,7 @@ public class EntSalida {
                 sc.nextLine();
             }
         }
-        return servicio.apostarHuerfanos(true, apuesta, tab);
+        return servicio.apostarHuerfanos(true, apuesta, tab,usuarioLogado);
     }
 
     public void cobrarGanancias() {
@@ -344,6 +342,7 @@ public class EntSalida {
     //Metodos de Menu
 
     public void menuApuestas(Tablero tab) {
+        System.out.println(usuarioLogado.getCartera());
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
@@ -395,13 +394,16 @@ public class EntSalida {
                     int finalResultado = resultado;
                     Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
-                        System.out.println("Has ganado");
                         System.out.println("Has ganado " + casillaGanadora.getValor());
+                        usuarioLogado.setCartera(usuarioLogado.getCartera() + casillaGanadora.getValor());
+                        System.out.println("Tu saldo es: " + usuarioLogado.getCartera());
                     } else {
                         System.out.println("Has perdido");
                     }
-                    System.out.println(apuesta.getCasillasApostadas());
-                    System.out.println(apuesta.getCasillasApostadas());
+                    apuesta.resetApuesta();
+                    resultado = resultadoTirada();
+                    tirada = new Tirada(resultado);
+
                     break;
                 case 9:
 

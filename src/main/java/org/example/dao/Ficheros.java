@@ -99,20 +99,4 @@ public class Ficheros {
         escribir.close();
         return a;
     }
-    public static boolean escribirFicheroGanancias(String fichero, List<ApuestasUsuario> lista) {
-        PrintWriter escribir = null;
-        boolean a = false;
-        try {
-            escribir = new PrintWriter(fichero);
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        for (int i = 0; i < lista.size(); i++) {
-            escribir.println(lista.get(i).toStringFicheroGanancias());
-            a = true;
-        }
-        escribir.close();
-        return a;
-    }
 }
