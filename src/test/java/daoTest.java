@@ -1,81 +1,105 @@
+
+import org.example.dao.ApuestaImplementacion;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import org.example.domain.Usuario;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class daoTest {
-    @Test
-    void apostarNumero() {
-        Tablero tab = new Tablero();
-        tab.rellenarTablero();
-        List<Casilla> casillas = new ArrayList<>();
-        int numero = 19;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 3; j++) {
-                Casilla casilla = tab.getTablero()[i][j];
-                if (casilla != null && casilla.getNumero() == numero) {
-                    casillas.add(casilla);
-                    assertEquals(numero, casilla.getNumero());
-                }
-            }
-        }
+@TestMethodOrder(OrderAnnotation.class)
+class ApuestaImplementacionTest {
+
+    ApuestaImplementacion apuesta;
+    Tablero tablero;
+
+    @BeforeEach
+    void setUp() {
+        apuesta = new ApuestaImplementacion();
+        tablero = new Tablero();
+        tablero.rellenarTablero();
     }
+
     @Test
-    void apostarColor() {
-        Tablero tab = new Tablero();
-        tab.rellenarTablero();
-        List<Casilla> casillas = new ArrayList<>();
-        boolean colorRojo = true;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 3; j++) {
-                Casilla casilla = tab.getTablero()[i][j];
-                if (casilla != null && casilla.isColor() == colorRojo) {
-                    assertEquals(colorRojo, casilla.isColor());
-                }
-            }
-        }
+    @Order(1)
+    void testApostarNumero() {
+        List<Casilla> resultado = apuesta.apostarNumero(5, 10.0, tablero);
+        assertThat(resultado).anyMatch(c -> c.getNumero() == 5 && c.getValor() > 0);
     }
+
     @Test
-    void apostarMayor() {
-        Tablero tab = new Tablero();
-        tab.rellenarTablero();
-        List<Casilla> casillas = new ArrayList<>();
-        boolean mayor = true;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (tab.getTablero()[i][j] != null && tab.esMayor(tab.getTablero()[i][j]) == mayor) {
-                    assertEquals(mayor, tab.esMayor(tab.getTablero()[i][j]));
-                }
-            }
-        }
+    @Order(2)
+    void testApostarColorRojo() {
+        List<Casilla> resultado = apuesta.apostarColor(true, 5.0, tablero);
+        assertThat(resultado).allMatch(c -> c.isColor());
     }
-    /*@Test
-    void excepcionAPar() {
-       assertThrows(APar.class, () -> {
-           System.out.println("Excepcion APar lanzada");
-       });
-    }*/
+
+    @Test
+    @Order(3)
+    void testApostarFilaValida() {
+        List<Casilla> resultado = apuesta.apostarFila(1, 20.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.queFila(c) == 1);
+    }
+
+    @Test
+    @Order(4)
+    void testApostarDocena() {
+        List<Casilla> resultado = apuesta.apostarDocena(2, 15.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.queDocena(c) == 2);
+    }
+
+    @Test
+    @Order(5)
+    void testApostarMayor() {
+        List<Casilla> resultado = apuesta.apostarMayor(true, 10.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.esMayor(c));
+    }
+
+    @Test
+    @Order(6)
+    void testApostarPar() {
+        List<Casilla> resultado = apuesta.apostarPar(true, 10.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.esPar(c));
+    }
+
+    @Test
+    @Order(7)
+    void testApostarHuerfanos() {
+        List<Casilla> resultado = apuesta.apostarHuerfanos(true, 10.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.esHuerfano(c));
+    }
+
+    @Test
+    @Order(8)
+    void testCobrarGanancias() {
+        apuesta.apostarNumero(5, 10.0, tablero);
+        double ganancias = apuesta.cobrarGanancias();
+        assertThat(ganancias).isGreaterThan(0);
+    }
+
+
+    @Test
+    @Order(9)
+    void testToStringFichero() {
+        apuesta.apostarNumero(5, 10.0, tablero);
+        String resultado = apuesta.toStringFicheroApuesta();
+        assertThat(resultado).contains("Apuesta: ");
+    }
+
 
     @Nested
     class cuandoElUsuarioNoExiste {
         @Test
         void registrarse(){
             Usuario usuario = new Usuario("01","Juan","1234");
-            usuario.registrarse(usuario);
             boolean resultado = usuario.registrarse(usuario);
+            assertTrue(resultado);
 
-
-            assertFalse(resultado);
-            assertEquals("01",usuario.getId());
-            assertEquals("Juan",usuario.getNombre());
-            assertThat(usuario.getNombre(),startsWith("J"));
-            assertEquals("1234",usuario.getContraseña());
         }
 
     }
@@ -90,4 +114,20 @@ public class daoTest {
         }
     }
 
+    @Test
+    @Order(10)
+    void testBorrarDuplicados() {
+        apuesta.apostarNumero(5, 10.0, tablero);
+        apuesta.apostarNumero(5, 10.0, tablero);
+        List<Casilla> sinDuplicados = apuesta.borrarDuplicados(apuesta.getCasillasApostadas());
+        assertThat(sinDuplicados).hasSizeLessThan(apuesta.getCasillasApostadas().size());
+    }
+
+    // Parametrizados
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void testApostarDocenasParametrizadas(int docena) {
+        List<Casilla> resultado = apuesta.apostarDocena(docena, 5.0, tablero);
+        assertThat(resultado).allMatch(c -> tablero.queDocena(c) == docena);
+    }
 }

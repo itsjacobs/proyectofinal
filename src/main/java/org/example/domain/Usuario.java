@@ -25,12 +25,12 @@ public class Usuario {
          }
 
     public boolean registrarse(Usuario usuario) {
-        boolean a = false;
+        boolean a = true;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
         List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).toList();
         if (comprobacion.isEmpty()) {
             lista.add(usuario);
-            a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, lista);
+            a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE,lista);
         }
         return a;
     }

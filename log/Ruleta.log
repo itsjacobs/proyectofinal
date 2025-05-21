@@ -10,3 +10,5 @@
 2025-05-20 21:00:50.754 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
 2025-05-20 21:39:46.938 ERROR [main] org.example.ui.EntSalida - Opcion invalida, por favor elija una opcion valida
 
+2025-05-21 09:09:18.592 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
+2025-05-21 09:09:28.464 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos

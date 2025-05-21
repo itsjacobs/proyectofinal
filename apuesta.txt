@@ -1,33 +1,5 @@
-Apuesta: 0
-true-1-36.0
-false-4-30.0
-true-7-30.0
-false-10-30.0
-false-13-30.0
-true-16-30.0
-true-19-30.0
-false-22-30.0
-true-25-30.0
-false-28-30.0
-false-31-30.0
-true-34-30.0
-
-Apuesta: 0
-true-1-36.0
-false-4-30.0
-true-7-30.0
-false-10-30.0
-false-13-30.0
-true-16-30.0
-true-19-30.0
-false-22-30.0
-true-25-30.0
-false-28-30.0
-false-31-30.0
-true-34-30.0
-
-Apuesta: 0
-true-1-36.0
+Apuesta: 2
+true-1-30.0
 false-4-30.0
 true-7-30.0
 false-10-30.0

@@ -146,13 +146,10 @@ public class ApuestaImplementacion implements daoApuesta {
         return 0;
     }
 
-    public void resetApuesta() {
-
-        this.casillasApostadas = new ArrayList<>();
-    }
-
     //Metodos Usuario
-
+    public void resetApuestas(){
+        casillasApostadas.clear();
+    }
 
     @Override
     public boolean iniciarSesion(String id, String contraseña) {

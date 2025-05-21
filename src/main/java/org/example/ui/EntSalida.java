@@ -343,16 +343,14 @@ public class EntSalida {
 
     //Metodos de Menu
 
-    public void menuApuestas(ApuestaImplementacion apuesta, Tablero tab) {
+    public void menuApuestas(Tablero tab) {
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
-        List<ApuestaImplementacion> apuestaImplementacion = new ArrayList<>();
-        List<Casilla> bcasillasApostadas = new ArrayList<>();
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
         boolean menu = false;
         tab.rellenarTablero();
-
+        ApuestaImplementacion apuesta = new ApuestaImplementacion();
 
         do {
             int opc2 = 0;
@@ -393,17 +391,9 @@ public class EntSalida {
                     Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
                     System.out.println("La casilla ganadora es: " + resultado);
 
-                    //Creamos una apuesta nueva y le añadimos las casillas apostadas de la ultima apuesta. Ademas las añadimos al fuchero de las casillas apostadas
-                    bcasillasApostadas = apuesta.borrarDuplicados(bcasillasApostadas);
-                    apuesta.setCasillasApostadas(bcasillasApostadas);
-                    apuestaImplementacion.add(apuesta);
-                    Ficheros.escribirFicheroApuestas(Constantes.APUESTA_FILE, apuestaImplementacion);
-                    List<Casilla> copiaCasillas = new ArrayList<>();
-                    copiaCasillas.addAll(bcasillasApostadas);
-
                     //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
                     int finalResultado = resultado;
-                    Casilla casillaGanadora = copiaCasillas.stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
+                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
                         System.out.println("Has ganado");
                         System.out.println("Has ganado " + casillaGanadora.getValor());
@@ -411,12 +401,8 @@ public class EntSalida {
                         System.out.println("Has perdido");
                     }
                     System.out.println(apuesta.getCasillasApostadas());
-                    //Reiniciamos la apuesta
-
-                    apuesta.setCasillasApostadas(new ArrayList<>());
+                    apuesta.resetApuestas();
                     System.out.println(apuesta.getCasillasApostadas());
-                    bcasillasApostadas = apuesta.getCasillasApostadas();
-                    tab.resetTablero();
                     break;
                 case 9:
 
@@ -438,7 +424,7 @@ public class EntSalida {
         } while (!menu);
     }
 
-    public void menuInicioSesion(Tablero tab, ApuestaImplementacion apuesta) {
+    public void menuInicioSesion(Tablero tab) {
             Scanner sc = new Scanner(System.in);
             boolean menu = false;
         iniciarSesion();
@@ -453,7 +439,7 @@ public class EntSalida {
 
                 switch (opc) {
                     case 1:
-                        menuApuestas(apuesta, tab);
+                        menuApuestas(tab);
                         break;
                     case 2:
                         System.out.println("¿Quieres salir del programa? (si/no)");
