@@ -1,4 +1,3 @@
-
 import org.example.dao.ApuestaImplementacion;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
@@ -131,3 +130,4 @@ class ApuestaImplementacionTest {
         assertThat(resultado).allMatch(c -> tablero.queDocena(c) == docena);
     }
 }
+

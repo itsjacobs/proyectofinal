@@ -1,17 +1,21 @@
 package org.example.service;
 
+import lombok.Data;
 import org.example.dao.ApuestaImplementacion;
 import org.example.dao.daoApuesta;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 
 import java.util.List;
-
+@Data
 public class gestionApuestasImplementacion implements gestionApuestas {
     private daoApuesta daoApuesta;
 
     public gestionApuestasImplementacion(ApuestaImplementacion daoApuestaImplementacion) {
         this.daoApuesta = daoApuestaImplementacion;
+    }
+    public gestionApuestasImplementacion(daoApuesta daoApuesta) {
+        this.daoApuesta = daoApuesta;
     }
 
     public gestionApuestasImplementacion() {

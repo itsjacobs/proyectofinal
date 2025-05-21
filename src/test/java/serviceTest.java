@@ -36,7 +36,7 @@ public class serviceTest {
     void testApostarNumero() {
         Tablero tab = new Tablero();
         List<Casilla> casillas = List.of(new Casilla(true, 1, 2));
-        when(daoApuesta.apostarNumero(anyInt(), anyDouble(), tab)).thenReturn(casillas);
+        when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarNumero(5, 100.0, tab);
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
@@ -46,7 +46,7 @@ public class serviceTest {
     void testApostarFila() {
         Tablero tab = new Tablero();
         List<Casilla> casillas = List.of(new Casilla(false, 19, 2));
-        when(daoApuesta.apostarFila(anyInt(), anyDouble(), tab)).thenReturn(casillas);
+        when(daoApuesta.apostarFila(anyInt(), anyDouble(), any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarFila(1, 50.0, tab);
         assertNotNull(resultado);
         assertEquals(1, resultado.size());
@@ -63,7 +63,7 @@ public class serviceTest {
     void testApostarColor() {
         Tablero tab = new Tablero();
         List<Casilla> casillas = List.of(new Casilla(true, 1, 2));
-        when(daoApuesta.apostarColor(anyBoolean(), anyDouble(), tab)).thenReturn(casillas);
+        when(daoApuesta.apostarColor(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarColor(true, 50.0, tab);
         assertThat(resultado.size(), is(1));
     }
@@ -72,7 +72,7 @@ public class serviceTest {
     void testApostarPar() {
         Tablero tab = new Tablero();
         List<Casilla> casillas = List.of(new Casilla(true, 2, 2));
-        when(daoApuesta.apostarPar(anyBoolean(), anyDouble(), tab)).thenReturn(casillas);
+        when(daoApuesta.apostarPar(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarPar(true, 30.0, tab);
         assertThat(resultado, hasSize(greaterThan(0)));
     }
@@ -81,8 +81,7 @@ public class serviceTest {
     void testApostarHuerfanos() {
         Tablero tab = new Tablero();
         List<Casilla> casillas = List.of(new Casilla(true, 3, 2));
-        when(daoApuesta.apostarHuerfanos(anyBoolean(), anyDouble(), tab)).thenReturn(casillas);
-
+        when(daoApuesta.apostarHuerfanos(anyBoolean(), anyDouble(), any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarHuerfanos(true, 50.0, tab);
         assertNotNull(resultado);
         assertTrue(!resultado.isEmpty());
@@ -93,6 +92,8 @@ public class serviceTest {
         double[] apuestas = {10.0, 20.0, 50.0};
         for (double apuesta : apuestas) {
             Tablero tab = new Tablero();
+            when(daoApuesta.apostarNumero(anyInt(), anyDouble(), any()))
+                    .thenReturn(List.of(new Casilla(true, 1, 2)));
             List<Casilla> resultado = gestion.apostarNumero(5, apuesta, tab);
             assertNotNull(resultado);
         }
@@ -112,4 +113,3 @@ public class serviceTest {
         assertEquals(25, resultado);
     }
 }
-

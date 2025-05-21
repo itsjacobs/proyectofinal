@@ -30,7 +30,7 @@ public class Usuario {
         List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).toList();
         if (comprobacion.isEmpty()) {
             lista.add(usuario);
-            a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE,lista);
+            a = Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, lista);
         }
         return a;
     }

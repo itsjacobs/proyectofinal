@@ -401,7 +401,6 @@ public class EntSalida {
                         System.out.println("Has perdido");
                     }
                     System.out.println(apuesta.getCasillasApostadas());
-                    apuesta.resetApuestas();
                     System.out.println(apuesta.getCasillasApostadas());
                     break;
                 case 9:
