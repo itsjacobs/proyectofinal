@@ -183,13 +183,15 @@ public class ApuestaImplementacion implements daoApuesta {
         return usuario.registrarse(usuario);
 
     }
-    public Usuario dameUsuario(String id){
-        for (Usuario usuario: usuarios){
-            if (usuario.getId().equalsIgnoreCase(id)){
-                return usuario;
+    public Usuario dameUsuario(String id) {
+        Usuario usuario1 = null;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equalsIgnoreCase(id)) {
+                usuario1 = new Usuario(usuario.getId(), usuario.getNombre(), usuario.getContraseña());
+                break;
             }
         }
-        return null;
+        return usuario1;
     }
 
 

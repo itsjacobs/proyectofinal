@@ -48,7 +48,7 @@ public class serviceTest {
     void testApostarFila() {
         Tablero tab = new Tablero();
         Usuario usuario = new Usuario("id123", "Juan", "pass123");
-        List<Casilla> casillas = List.of(new Casilla(false, 19, 2));
+        List<Casilla> casillas = List.of(new Casilla(true, 1, 2));
         when(daoApuesta.apostarFila(anyInt(), anyDouble(), any(),any())).thenReturn(casillas);
         List<Casilla> resultado = gestion.apostarFila(1, 50.0, tab, usuario);
         assertNotNull(resultado);

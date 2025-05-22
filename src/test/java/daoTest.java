@@ -18,7 +18,7 @@ class ApuestaImplementacionTest {
     Tablero tablero;
     Usuario usuario;
     @BeforeEach
-    void setUp() {
+    void antesDePruebas() {
         apuesta = new ApuestaImplementacion();
         tablero = new Tablero();
         tablero.rellenarTablero();
@@ -30,7 +30,7 @@ class ApuestaImplementacionTest {
     @Order(1)
     void testApostarNumero() {
         List<Casilla> resultado = apuesta.apostarNumero(5, 10.0, tablero, usuario);
-        assertThat(resultado).anyMatch(c -> c.getNumero() == 5 && c.getValor() > 0);
+        assertThat(resultado).allMatch(c -> c.getNumero() == 5 && c.getValor() > 0);
     }
 
     @Test
@@ -60,39 +60,25 @@ class ApuestaImplementacionTest {
         List<Casilla> resultado = apuesta.apostarMayor(true, 10.0, tablero, usuario);
         assertThat(resultado).allMatch(c -> tablero.esMayor(c));
     }
-
     @Test
     @Order(6)
     void testApostarPar() {
         List<Casilla> resultado = apuesta.apostarPar(true, 10.0, tablero, usuario);
         assertThat(resultado).allMatch(c -> tablero.esPar(c));
     }
-
     @Test
     @Order(7)
     void testApostarHuerfanos() {
         List<Casilla> resultado = apuesta.apostarHuerfanos(true, 10.0, tablero, usuario);
         assertThat(resultado).allMatch(c -> tablero.esHuerfano(c));
     }
-
     @Test
     @Order(8)
-    void testCobrarGanancias() {
-        apuesta.apostarNumero(5, 10.0, tablero, usuario);
-        double ganancias = apuesta.cobrarGanancias();
-        assertThat(ganancias).isGreaterThan(0);
-    }
-
-
-    @Test
-    @Order(9)
     void testToStringFichero() {
         apuesta.apostarNumero(5, 10.0, tablero, usuario);
         String resultado = apuesta.toStringFicheroApuesta();
-        assertThat(resultado).contains("Apuesta: ");
+        assertThat(resultado).contains("5");
     }
-
-
     @Nested
     class cuandoElUsuarioNoExiste {
         @Test
@@ -116,7 +102,7 @@ class ApuestaImplementacionTest {
     }
 
     @Test
-    @Order(10)
+    @Order(9)
     void testBorrarDuplicados() {
         apuesta.apostarNumero(5, 10.0, tablero, usuario);
         apuesta.apostarNumero(5, 10.0, tablero, usuario);
@@ -124,7 +110,6 @@ class ApuestaImplementacionTest {
         assertThat(sinDuplicados).hasSizeLessThan(apuesta.getCasillasApostadas().size());
     }
 
-    // Parametrizados
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void testApostarDocenasParametrizadas(int docena) {

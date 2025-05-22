@@ -39,8 +39,7 @@ public class Ficheros {
                 String id = partes[0];
                 String nombre = partes[1];
                 String contraseña = partes[2];
-                Double cartera = Double.parseDouble(partes[3]);
-                Usuario usuario = new Usuario(id, nombre, contraseña,cartera);
+                Usuario usuario = new Usuario(id, nombre, contraseña);
                 lista.add(usuario);
             }
         }

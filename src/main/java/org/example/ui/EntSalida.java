@@ -42,7 +42,7 @@ public class EntSalida {
         String id = "";
         String contraseña = "";
         String nombre = "";
-        Ficheros ficheros = new Ficheros();
+
         List<Usuario> listaUsuarios = new ArrayList<>();
         boolean a = false;
         boolean b = false;
@@ -67,8 +67,8 @@ public class EntSalida {
                     contraseña = sc.next();
                     if (servicio.iniciarSesion(id, contraseña)) {
                         usuarioLogado = servicio.dameUsuario(id);
+                        System.out.println("Bienvenido " + usuarioLogado.getNombre() + " has iniciado sesión correctamente");
                         a = true;
-                        System.out.println("Bienvenido, has iniciado sesión correctamente");
                     } else {
                         log.error("La contraseña o el DNI/NIE son incorrectos");
                     }
@@ -83,7 +83,7 @@ public class EntSalida {
                     contraseña = sc.nextLine();
                     if (servicio.registrarse(id, nombre, contraseña)) {
                         System.out.println("Te has registrado correctamente");
-                        ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
+                        Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
                     } else {
                         System.out.println("El usuario ya existe");
                         log.error("El usuario ya existe");
