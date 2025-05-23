@@ -178,17 +178,11 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public boolean registrarse(String id, String nombre, String contrasena, double cartera) {
-        boolean a = false;
-        Usuario usuario = new Usuario(id, nombre, contrasena,cartera);
-        List<Usuario> comprobacion = usuarios.stream().filter(u -> u.getId().equalsIgnoreCase(usuario.getId())).toList();
-        if (comprobacion.isEmpty()) {
-           a = usuarios.add(usuario);
-        }
-        return a;
+    public boolean registrarse(String id, String nombre, String contrasena) {
+        Usuario usuario = new Usuario(id, nombre, contrasena);
+        return usuario.registrarse(usuario);
 
     }
-    @Override
     public Usuario dameUsuario(String id){
         for (Usuario usuario: usuarios){
             if (usuario.getId().equalsIgnoreCase(id)){
@@ -196,10 +190,6 @@ public class ApuestaImplementacion implements daoApuesta {
             }
         }
         return null;
-    }
-    @Override
-    public List<Usuario> listaUsuarios(){
-        return usuarios;
     }
 
 

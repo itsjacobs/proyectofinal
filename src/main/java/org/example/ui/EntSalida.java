@@ -43,7 +43,7 @@ public class EntSalida {
         String contraseña = "";
         String nombre = "";
 
-
+        List<Usuario> listaUsuarios = new ArrayList<>();
         boolean a = false;
         boolean b = false;
         while (!a) {
@@ -67,7 +67,7 @@ public class EntSalida {
                     contraseña = sc.next();
                     if (servicio.iniciarSesion(id, contraseña)) {
                         usuarioLogado = servicio.dameUsuario(id);
-                        System.out.println("Bienvenido  has iniciado sesión correctamente");
+                        System.out.println("Bienvenido " + usuarioLogado.getNombre() + " has iniciado sesión correctamente");
                         a = true;
                     } else {
                         log.error("La contraseña o el DNI/NIE son incorrectos");
@@ -81,13 +81,9 @@ public class EntSalida {
                     nombre = sc.nextLine();
                     System.out.println("Ingresa una contraseña");
                     contraseña = sc.nextLine();
-                    System.out.println("Cuanto dinero quieres añadir a tu cuenta?");
-                    double cartera = sc.nextDouble();
-                    if (servicio.registrarse(id, nombre, contraseña, cartera)) {
+                    if (servicio.registrarse(id, nombre, contraseña)) {
                         System.out.println("Te has registrado correctamente");
-                        a = true;
-
-
+                        Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
                     } else {
                         System.out.println("El usuario ya existe");
                         log.error("El usuario ya existe");
@@ -108,7 +104,7 @@ public class EntSalida {
         int numero = 0;
         boolean a = false;
         boolean b = false;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -138,7 +134,7 @@ public class EntSalida {
         boolean b = false;
         double apuesta = 0;
         int fila = 0;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -169,7 +165,7 @@ public class EntSalida {
         boolean b = false;
         int docena = 0;
         double apuesta = 0;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -200,7 +196,7 @@ public class EntSalida {
         boolean color = false;
         String colorElegido = "";
         double apuesta = 0;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -229,7 +225,7 @@ public class EntSalida {
             color = false;
         }
 
-        return servicio.apostarColor(color, apuesta, tab, usuarioLogado);
+        return servicio.apostarColor(color, apuesta, tab,usuarioLogado);
 
     }
 
@@ -240,7 +236,7 @@ public class EntSalida {
         boolean mayor = false;
         String mayorElegido = "";
         double apuesta = 0;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -268,7 +264,7 @@ public class EntSalida {
             mayor = false;
         }
         sc.close();
-        return servicio.apostarMayor(mayor, apuesta, tab, usuarioLogado);
+        return servicio.apostarMayor(mayor, apuesta, tab,usuarioLogado);
 
     }
 
@@ -279,7 +275,7 @@ public class EntSalida {
         boolean par = false;
         String parElegido = "";
         double apuesta = 0;
-        while (!b) {
+        while (!b){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -314,7 +310,7 @@ public class EntSalida {
         Scanner sc = new Scanner(System.in);
         boolean a = false;
         double apuesta = 0;
-        while (!a) {
+        while (!a){
             try {
                 System.out.println("¿Cuánto quieres apostar?");
                 apuesta = sc.nextInt();
@@ -324,7 +320,7 @@ public class EntSalida {
                 sc.nextLine();
             }
         }
-        return servicio.apostarHuerfanos(true, apuesta, tab, usuarioLogado);
+        return servicio.apostarHuerfanos(true, apuesta, tab,usuarioLogado);
     }
 
     public void cobrarGanancias() {
@@ -346,7 +342,7 @@ public class EntSalida {
     //Metodos de Menu
 
     public void menuApuestas(Tablero tab) {
-
+        System.out.println(usuarioLogado.getCartera());
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
@@ -359,10 +355,8 @@ public class EntSalida {
             int opc2 = 0;
             tab.pintarTablero(apuesta);
             try {
-                System.out.println("Tu nueva cartera es: " + usuarioLogado.getCartera());
                 System.out.println(Constantes.MENU_APUESTAS);
                 opc2 = sc.nextInt();
-
             } catch (InputMismatchException e) {
                 log.error("Caracter incorrecto");
                 sc.nextLine();
@@ -391,7 +385,6 @@ public class EntSalida {
                     apuesta.setCasillasApostadas(apostarHuerfano(tab));
                     break;
                 case 8:
-
                     //Metodos sobre la tirada en si. Añade al historico de tiradas la nueva, la mete en el fichero y la muestra por pantalla
                     listaTiradas.add(tirada);
                     Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
@@ -403,26 +396,24 @@ public class EntSalida {
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
                         System.out.println("Has ganado " + casillaGanadora.getValor());
                         usuarioLogado.setCartera(usuarioLogado.getCartera() + casillaGanadora.getValor());
-                        System.out.println("Tu nueva cartera es: " + usuarioLogado.getCartera());
+                        System.out.println("Tu saldo es: " + usuarioLogado.getCartera());
                     } else {
                         System.out.println("Has perdido");
-                        System.out.println("Tu nueva cartera es: " + usuarioLogado.getCartera());
                     }
                     apuesta.resetApuesta();
                     resultado = resultadoTirada();
                     tirada = new Tirada(resultado);
-                    tab.rellenarTablero();
+
                     break;
                 case 9:
 
                     break;
                 case 10:
-                    //List<Usuario> listaUsuarios = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
                     System.out.println("¿Quieres salir del programa? (si/no)");
                     String salir = sc.next();
                     if (salir.equalsIgnoreCase("si")) {
                         menu = true;
-                        Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, servicio.);
+
                     } else if (salir.equalsIgnoreCase("no")) {
                         menu = false;
                     } else {
@@ -435,34 +426,34 @@ public class EntSalida {
     }
 
     public void menuInicioSesion(Tablero tab) {
-        Scanner sc = new Scanner(System.in);
-        boolean menu = false;
+            Scanner sc = new Scanner(System.in);
+            boolean menu = false;
         iniciarSesion();
-        do {
-            int opc = 0;
-            try {
-                System.out.println(Constantes.MENU_USUARIO);
-                opc = sc.nextInt();
-            } catch (InputMismatchException e) {
-                sc.nextLine();
-            }
+            do {
+                int opc = 0;
+                try {
+                    System.out.println(Constantes.MENU_USUARIO);
+                    opc = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    sc.nextLine();
+                }
 
-            switch (opc) {
-                case 1:
-                    menuApuestas(tab);
-                    break;
-                case 2:
-                    System.out.println("¿Quieres salir del programa? (si/no)");
-                    String salir = sc.next();
-                    if (salir.equalsIgnoreCase("si")) {
-                        menu = true;
-                    } else if (salir.equalsIgnoreCase("no")) {
-                        menu = false;
-                    } else {
-                        log.error("Opcion no valida");
-                    }
-                    break;
-            }
-        } while (!menu);
+                switch (opc) {
+                    case 1:
+                        menuApuestas(tab);
+                        break;
+                    case 2:
+                        System.out.println("¿Quieres salir del programa? (si/no)");
+                        String salir = sc.next();
+                        if (salir.equalsIgnoreCase("si")) {
+                            menu = true;
+                        } else if (salir.equalsIgnoreCase("no")) {
+                            menu = false;
+                        } else {
+                            log.error("Opcion no valida");
+                        }
+                        break;
+                }
+            } while (!menu);
     }
 }
