@@ -43,10 +43,10 @@ public class Usuario {
         return a;
     }
 
-    public boolean inicioSesion(Usuario usuario) {
+    public boolean inicioSesion(String id, String contraseña) {
         boolean a = true;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
-        List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(usuario.id)).filter(u -> u.contraseña.equals(usuario.contraseña)).toList();
+        List<Usuario> comprobacion = lista.stream().filter(u -> u.id.equalsIgnoreCase(id)).filter(u -> u.contraseña.equals(contraseña)).toList();
         if (!comprobacion.isEmpty()) {
             a =  true;
         }

@@ -93,7 +93,7 @@ class ApuestaImplementacionTest {
         @Test
         void IniciarSesion(){
             Usuario usuario = new Usuario("01","Juan","1234");
-            boolean resultado = usuario.inicioSesion(usuario);
+            boolean resultado = usuario.inicioSesion("01","1234");
             assertTrue(resultado);
 
         }

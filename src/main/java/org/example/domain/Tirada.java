@@ -28,7 +28,7 @@ public class Tirada {
 
     public String toStringFicheroTirada(){
         StringBuilder sb = new StringBuilder();
-        sb.append(numero).append("-");
+        sb.append(numero);
         return sb.toString();
     }
 }

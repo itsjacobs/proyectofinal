@@ -11,13 +11,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ficheros {
-    public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista){
+    public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista) {
         PrintWriter escribir = null;
         boolean a = false;
-        try{
-            escribir = new PrintWriter(new FileWriter(fichero,true));
-        }
-        catch(FileNotFoundException e){
+        try {
+            escribir = new PrintWriter(fichero);
+        } catch (FileNotFoundException e) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -28,12 +27,13 @@ public class Ficheros {
         escribir.close();
         return a;
     }
-    public static List<Usuario> leerFicheroUsuario(String fichero){
+
+    public static List<Usuario> leerFicheroUsuario(String fichero) {
         List<Usuario> lista = new ArrayList<>();
         String Linea = null;
-        try{
+        try {
             Scanner sc = new Scanner(new File(fichero));
-            while(sc.hasNextLine()){
+            while (sc.hasNextLine()) {
                 Linea = sc.nextLine();
                 String[] partes = Linea.split("-");
                 String id = partes[0];
@@ -42,26 +42,44 @@ public class Ficheros {
                 Usuario usuario = new Usuario(id, nombre, contraseña);
                 lista.add(usuario);
             }
-        }
-        catch (FileNotFoundException e){
-
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al leer el fichero: " + e.getMessage());
         }
         return lista;
     }
-    public static boolean escribirFicheroTirada(String fichero, List<Tirada> lista){
+
+    public static boolean escribirFicheroTirada(String fichero, List<Tirada> lista) {
         PrintWriter escribir = null;
         boolean a = false;
-        try{
-            escribir = new PrintWriter(new FileWriter(fichero,true));
-        }catch(FileNotFoundException e){
+        try {
+            escribir = new PrintWriter(new FileWriter(fichero, true));
+        } catch (FileNotFoundException e) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for(int i = 0; i< lista.size(); i++){
+        for (int i = 0; i < lista.size(); i++) {
             escribir.println(lista.get(i).toStringFicheroTirada());
             a = true;
         }
         escribir.close();
         return a;
     }
+
+    public static List<Tirada> leerFicheroTirada(String fichero) {
+        List<Tirada> lista = new ArrayList<>();
+        String Linea = null;
+        try {
+            Scanner sc = new Scanner(new File(fichero));
+            while (sc.hasNextLine()) {
+                Linea = sc.nextLine();
+                String[] partes = Linea.split("-");
+                int numero = Integer.parseInt(partes[0]);
+                Tirada tirada = new Tirada(numero);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
 }
+

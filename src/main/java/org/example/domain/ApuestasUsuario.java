@@ -21,6 +21,9 @@ public class ApuestasUsuario implements Comparable<Double> {
         fecha = LocalDate.now();
     }
 
+
+
+
     public String toStringFicheroApuestaUsuario(){
         StringBuilder sb = new StringBuilder();
         sb.append(id).append("-").append(ganancia).append("-").append(fecha).append("-").append(usuario.getId()).append("\n");

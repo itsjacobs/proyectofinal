@@ -67,7 +67,7 @@ public class EntSalida {
                     contraseña = sc.next();
                     if (servicio.iniciarSesion(id, contraseña)) {
                         usuarioLogado = servicio.dameUsuario(id);
-                        System.out.println("Bienvenido " + usuarioLogado.getNombre() + " has iniciado sesión correctamente");
+                        System.out.println("Bienvenido has iniciado sesión correctamente");
                         a = true;
                     } else {
                         log.error("La contraseña o el DNI/NIE son incorrectos");
@@ -84,6 +84,7 @@ public class EntSalida {
                     if (servicio.registrarse(id, nombre, contraseña)) {
                         System.out.println("Te has registrado correctamente");
                         Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
+
                     } else {
                         System.out.println("El usuario ya existe");
                         log.error("El usuario ya existe");
@@ -342,11 +343,13 @@ public class EntSalida {
     //Metodos de Menu
 
     public void menuApuestas(Tablero tab) {
-        System.out.println(usuarioLogado.getCartera());
+        //System.out.println(usuarioLogado.getCartera());
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
         ArrayList<Tirada> listaTiradas = new ArrayList<>();
+        List<Tirada> listaTiradas1 = Ficheros.leerFicheroTirada(Constantes.TIRADA_FILE);
+        System.out.println(listaTiradas1);
         boolean menu = false;
         tab.rellenarTablero();
         ApuestaImplementacion apuesta = new ApuestaImplementacion();

@@ -165,6 +165,8 @@ public class ApuestaImplementacion implements daoApuesta {
         return 0;
     }
 
+
+
     public void resetApuesta() {
         casillasApostadas.clear();
     }
@@ -173,9 +175,9 @@ public class ApuestaImplementacion implements daoApuesta {
 
 
     @Override
-    public boolean iniciarSesion(String id, String contraseña) {
-        Usuario usuario = new Usuario(id,contraseña);
-        return usuario.inicioSesion(usuario);
+    public boolean iniciarSesion(String id, String contrasena) {
+        Usuario usuario = new Usuario(id,contrasena);
+        return usuario.inicioSesion(id, contrasena);
     }
 
     @Override
@@ -204,9 +206,6 @@ public class ApuestaImplementacion implements daoApuesta {
        Tirada tirada = new Tirada();
        return tirada.tirar();
     }
-
-
-
 
     public String toStringFicheroApuesta(){
         StringBuilder sb = new StringBuilder();

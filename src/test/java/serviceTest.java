@@ -28,6 +28,7 @@ public class serviceTest {
     @Test
     @Order(1)
     void testIniciarSesion() {
+        Usuario usuario = new Usuario("id123", "Juan", "pass123");
         when(daoApuesta.iniciarSesion("Manolo", "1234")).thenReturn(true);
         boolean result = gestion.iniciarSesion("Manolo", "1234");
         assertTrue(result);
