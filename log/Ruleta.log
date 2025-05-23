@@ -17,3 +17,5 @@
 2025-05-21 18:50:31.720 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-21 18:51:46.565 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-21 18:54:10.577 ERROR [main] org.example.ui.EntSalida - Caracter incorrecto
+2025-05-23 08:49:47.291 ERROR [main] org.example.ui.EntSalida - Opcion invalida, por favor elija una opcion valida
+

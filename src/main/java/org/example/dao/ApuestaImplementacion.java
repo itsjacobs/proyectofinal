@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import lombok.Data;
+import org.example.commons.ARuleta;
 import org.example.commons.Constantes;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;

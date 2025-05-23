@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Data
-public class ApuestasUsuario {
+public class ApuestasUsuario implements Comparable<Double> {
     private String id;
     private double ganancia;
     private LocalDate fecha;
@@ -21,7 +21,14 @@ public class ApuestasUsuario {
         fecha = LocalDate.now();
     }
 
+    public String toStringFicheroApuestaUsuario(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(id).append("-").append(ganancia).append("-").append(fecha).append("-").append(usuario.getId()).append("\n");
+        return sb.toString();
+    }
 
-
-
+    @Override
+    public int compareTo(Double o) {
+        return Double.compare(this.ganancia, o);
+    }
 }

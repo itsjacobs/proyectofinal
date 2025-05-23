@@ -54,7 +54,7 @@ public class Usuario {
     }
     public String toStringFicheroUsuario() {
         StringBuilder SB = new StringBuilder();
-        SB.append(id).append("-").append(nombre).append("-").append(contraseña).append("-").append(cartera).append("-");
+        SB.append(id).append("-").append(nombre).append("-").append(contraseña).append("-").append(cartera).append("\n");
         return SB.toString();
     }
 }

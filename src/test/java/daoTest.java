@@ -1,3 +1,5 @@
+import org.example.commons.ARuleta;
+import org.example.commons.Comprobaciones;
 import org.example.dao.ApuestaImplementacion;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
@@ -80,7 +82,7 @@ class ApuestaImplementacionTest {
         assertThat(resultado).contains("5");
     }
     @Nested
-    class cuandoElUsuarioNoExiste {
+    class prueasUsuario {
         @Test
         void registrarse(){
             Usuario usuario = new Usuario("01","Juan","1234");
@@ -88,10 +90,6 @@ class ApuestaImplementacionTest {
             assertTrue(resultado);
 
         }
-
-    }
-    @Nested
-    class cuandoElUsuarioExiste{
         @Test
         void IniciarSesion(){
             Usuario usuario = new Usuario("01","Juan","1234");
@@ -109,7 +107,14 @@ class ApuestaImplementacionTest {
         List<Casilla> sinDuplicados = apuesta.borrarDuplicados(apuesta.getCasillasApostadas());
         assertThat(sinDuplicados).hasSizeLessThan(apuesta.getCasillasApostadas().size());
     }
-
+    @Test
+    @Order(10)
+    void lanzaExcepcion() {
+        ARuleta e = assertThrows(ARuleta.class, () -> {
+            Comprobaciones.comprobarRuleta(37);
+        });
+        assertEquals("El número tiene que estar entre 0 y 36", e.getMessage());
+    }
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void testApostarDocenasParametrizadas(int docena) {
