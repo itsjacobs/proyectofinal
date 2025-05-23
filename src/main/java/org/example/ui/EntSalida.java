@@ -54,39 +54,41 @@ public class EntSalida {
                     opc = sc.nextInt();
                     b = true;
                 } catch (InputMismatchException e) {
-                    log.error("Caracter incorrecto");
+                    log.error(Constantes.CARACTER);
                     sc.nextLine();
                 }
             } while (!b);
 
             switch (opc) {
                 case 1:
-                    System.out.println("Ingresa el DNI/NIE:");
+                    System.out.println(Constantes.DNI);
                     id = sc.next();
-                    System.out.println("Ingresa la contraseña:");
+                    System.out.println(Constantes.CONTRASEñA);
                     contraseña = sc.next();
                     if (servicio.iniciarSesion(id, contraseña)) {
                         usuarioLogado = servicio.dameUsuario(id);
                         System.out.println("Bienvenido " + usuarioLogado.getNombre() + " has iniciado sesión correctamente");
                         a = true;
                     } else {
-                        log.error("La contraseña o el DNI/NIE son incorrectos");
+                        log.error(Constantes.INICIOINCORRECTO);
                     }
                     break;
                 case 2:
-                    System.out.println("Ingresa el DNI/NIE:");
+                    System.out.println(Constantes.DNI);
                     sc.nextLine();
                     id = sc.nextLine();
-                    System.out.println("Ingresa tu nombre");
+                    System.out.println(Constantes.NOMBRE);
                     nombre = sc.nextLine();
-                    System.out.println("Ingresa una contraseña");
+                    System.out.println(Constantes.CONTRASEñA);
                     contraseña = sc.nextLine();
-                    if (servicio.registrarse(id, nombre, contraseña)) {
-                        System.out.println("Te has registrado correctamente");
-                        Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
+                    System.out.println(Constantes.CARTERA);
+                    double cartera = sc.nextDouble();
+                    if (servicio.registrarse(id, nombre, contraseña,cartera)) {
+                        System.out.println(Constantes.REGISTRO);
+
                     } else {
-                        System.out.println("El usuario ya existe");
-                        log.error("El usuario ya existe");
+                        System.out.println(Constantes.EXISTE);
+                        log.error(Constantes.EXISTE);
                     }
                     break;
                 default:
@@ -106,16 +108,16 @@ public class EntSalida {
         boolean b = false;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.INTRODUCIDO);
                 sc.nextLine();
             }
         }
         do {
-            System.out.println("¿Qué número quieres apostar?");
+            System.out.println(Constantes.NUMERO);
             numero = sc.nextInt();
             try {
                 Comprobaciones.comprobarRuleta(numero);
@@ -136,17 +138,17 @@ public class EntSalida {
         int fila = 0;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         sc.nextLine();
         do {
-            System.out.println("Que fila quieres apostar?");
+            System.out.println(Constantes.FILA);
             fila = sc.nextInt();
 
             try {
@@ -167,17 +169,17 @@ public class EntSalida {
         double apuesta = 0;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         sc.nextLine();
         do {
-            System.out.println("Que docena quieres apostar?");
+            System.out.println(Constantes.DOCENA);
             docena = sc.nextInt();
             try {
                 Comprobaciones.comprobarNumero(docena);
@@ -198,17 +200,17 @@ public class EntSalida {
         double apuesta = 0;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         sc.nextLine();
         do {
-            System.out.println("Que color quieres apostar?");
+            System.out.println(Constantes.COLOR);
             colorElegido = sc.nextLine();
             try {
                 Comprobaciones.comprobarColor(colorElegido);
@@ -238,17 +240,17 @@ public class EntSalida {
         double apuesta = 0;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         sc.nextLine();
         do {
-            System.out.println("Quieres apostar a mayor o menor?");
+            System.out.println(Constantes.MAYOR);
             mayorElegido = sc.nextLine();
             try {
                 Comprobaciones.comprobarMayor(mayorElegido);
@@ -277,17 +279,17 @@ public class EntSalida {
         double apuesta = 0;
         while (!b){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 b = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         sc.nextLine();
         do {
-            System.out.println("¿Quieres apostar a par o impar?");
+            System.out.println(Constantes.PAR);
             parElegido = sc.nextLine();
             try {
                 Comprobaciones.comprobarPar(parElegido);
@@ -312,23 +314,15 @@ public class EntSalida {
         double apuesta = 0;
         while (!a){
             try {
-                System.out.println("¿Cuánto quieres apostar?");
+                System.out.println(Constantes.APUESTA);
                 apuesta = sc.nextInt();
                 a = true;
             } catch (InputMismatchException e) {
-                log.info("Lo introducido no es un número");
+                log.info(Constantes.NONUMERO);
                 sc.nextLine();
             }
         }
         return servicio.apostarHuerfanos(true, apuesta, tab,usuarioLogado);
-    }
-
-    public void cobrarGanancias() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Cuanto quieres cobrar?");
-        double cantidad = sc.nextDouble();
-        sc.nextLine();
-        servicio.cobrarGanancias();
     }
 
 
@@ -342,7 +336,6 @@ public class EntSalida {
     //Metodos de Menu
 
     public void menuApuestas(Tablero tab) {
-        System.out.println(usuarioLogado.getCartera());
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
@@ -355,10 +348,11 @@ public class EntSalida {
             int opc2 = 0;
             tab.pintarTablero(apuesta);
             try {
+                System.out.println("Tu saldo es: " + usuarioLogado.getCartera());
                 System.out.println(Constantes.MENU_APUESTAS);
                 opc2 = sc.nextInt();
             } catch (InputMismatchException e) {
-                log.error("Caracter incorrecto");
+                log.error(Constantes.CARACTER);
                 sc.nextLine();
             }
 
@@ -388,17 +382,16 @@ public class EntSalida {
                     //Metodos sobre la tirada en si. Añade al historico de tiradas la nueva, la mete en el fichero y la muestra por pantalla
                     listaTiradas.add(tirada);
                     Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
-                    System.out.println("La casilla ganadora es: " + resultado);
+                    System.out.println(Constantes.GANADORA + resultado);
 
                     //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
                     int finalResultado = resultado;
                     Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
-                        System.out.println("Has ganado " + casillaGanadora.getValor());
+                        System.out.println(Constantes.GANADORACARTERA + casillaGanadora.getValor());
                         usuarioLogado.setCartera(usuarioLogado.getCartera() + casillaGanadora.getValor());
-                        System.out.println("Tu saldo es: " + usuarioLogado.getCartera());
                     } else {
-                        System.out.println("Has perdido");
+                        System.out.println(Constantes.PERDEDORA);
                     }
                     apuesta.resetApuesta();
                     resultado = resultadoTirada();
@@ -409,15 +402,17 @@ public class EntSalida {
 
                     break;
                 case 10:
-                    System.out.println("¿Quieres salir del programa? (si/no)");
+                    List<Usuario> listaUsuarios = servicio.listaUsuarios();
+                    System.out.println(Constantes.SALIR);
                     String salir = sc.next();
                     if (salir.equalsIgnoreCase("si")) {
                         menu = true;
+                        Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
 
                     } else if (salir.equalsIgnoreCase("no")) {
                         menu = false;
                     } else {
-                        log.error("Opcion no valida");
+                        log.error(Constantes.MENSAJE_OPCION_INVALIDA);
                     }
                     break;
             }
@@ -443,14 +438,14 @@ public class EntSalida {
                         menuApuestas(tab);
                         break;
                     case 2:
-                        System.out.println("¿Quieres salir del programa? (si/no)");
+                        System.out.println(Constantes.SALIR);
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {
                             menu = true;
                         } else if (salir.equalsIgnoreCase("no")) {
                             menu = false;
                         } else {
-                            log.error("Opcion no valida");
+                            log.error(Constantes.MENSAJE_OPCION_INVALIDA);
                         }
                         break;
                 }

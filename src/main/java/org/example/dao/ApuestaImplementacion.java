@@ -170,18 +170,31 @@ public class ApuestaImplementacion implements daoApuesta {
 
     //Metodos Usuario
 
-
+    @Override
+    public List<Usuario> listaUsuarios() {
+        return usuarios;
+    }
     @Override
     public boolean iniciarSesion(String id, String contraseña) {
-        Usuario usuario = new Usuario(id,contraseña);
-        return usuario.inicioSesion(usuario);
+        Usuario usuario = new Usuario(id, contraseña);
+        boolean a = false;
+        List<Usuario> comprobacion = usuarios.stream().filter(u -> u.getId().equalsIgnoreCase(usuario.getId())).filter(u -> u.getContraseña().equals(usuario.getContraseña())).toList();
+        if (!comprobacion.isEmpty()) {
+            a = true;
+            usuario.inicioSesion(usuario);
+        }
+        return a;
     }
 
     @Override
-    public boolean registrarse(String id, String nombre, String contrasena) {
-        Usuario usuario = new Usuario(id, nombre, contrasena);
-        return usuario.registrarse(usuario);
-
+    public boolean registrarse(String id, String nombre, String contrasena, double cartera) {
+        boolean a = false;
+        Usuario usuario = new Usuario(id, nombre, contrasena,cartera);
+        List<Usuario> comprobacion = usuarios.stream().filter(u -> u.getId().equalsIgnoreCase(usuario.getId())).toList();
+        if (comprobacion.isEmpty()) {
+            a = usuarios.add(usuario);
+        }
+        return a;
     }
     public Usuario dameUsuario(String id){
         for (Usuario usuario: usuarios){

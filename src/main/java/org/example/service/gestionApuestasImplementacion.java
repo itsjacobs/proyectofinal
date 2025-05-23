@@ -69,6 +69,8 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
 
+
+
     @Override
     public void recopilacionApuesta() {
 
@@ -82,6 +84,10 @@ public class gestionApuestasImplementacion implements gestionApuestas {
 
     //Métodos de Usuario
 
+    @Override
+    public List<Usuario> listaUsuarios() {
+        return daoApuesta.listaUsuarios();
+    }
 
     @Override
     public boolean iniciarSesion(String id, String contraseña) {
@@ -99,11 +105,7 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
 
-    //devuelve la lista de usuarios del dao
-    @Override
-    public List<Usuario> listaUsuarios() {
-        return daoApuesta.listaUsuarios();
-    }
+
 
     //Métodos de Tirada
 

@@ -12,3 +12,10 @@
 
 2025-05-21 09:09:18.592 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
 2025-05-21 09:09:28.464 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:05:16.669 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:05:20.963 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
+2025-05-23 15:05:23.253 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:05:23.852 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:33:21.827 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:34:23.769 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 15:34:33.048 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos

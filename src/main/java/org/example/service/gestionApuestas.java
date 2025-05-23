@@ -15,15 +15,12 @@ public interface gestionApuestas {
     public List<Casilla> apostarPar(boolean par, double apuesta,Tablero tab, Usuario usuario);
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta,Tablero tab, Usuario usuario);
     public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
+    List<Usuario> listaUsuarios();
     public void recopilacionApuesta();
     public double cobrarGanancias();
     public boolean iniciarSesion(String id, String contrasena);
     public boolean registrarse(String id, String contrasena, String nombre,double cartera);
 
-    //devuelve la lista de usuarios del dao
-    List<Usuario> listaUsuarios();
-
     public int resultadoTirada();
     public Usuario dameUsuario(String id);
-    public List<Usuario> listaUsuario();
 }
