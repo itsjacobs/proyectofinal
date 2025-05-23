@@ -89,8 +89,8 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
     @Override
-    public boolean registrarse(String id, String nombre, String contraseña) {
-        return daoApuesta.registrarse(id, nombre, contraseña);
+    public boolean registrarse(String id, String nombre, String contraseña,double cartera) {
+        return daoApuesta.registrarse(id, nombre, contraseña,cartera);
     }
 
     @Override
@@ -99,6 +99,11 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
 
+    //devuelve la lista de usuarios del dao
+    @Override
+    public List<Usuario> listaUsuarios() {
+        return daoApuesta.listaUsuarios();
+    }
 
     //Métodos de Tirada
 

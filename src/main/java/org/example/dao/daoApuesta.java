@@ -17,10 +17,12 @@ public interface daoApuesta {
     public List<Casilla> apostarPar(boolean par, double apuesta,Tablero tab, Usuario usuario);
     public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab, Usuario usuario);
     public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
+    public List<Usuario> listaUsuarios();
     public Usuario dameUsuario(String id);
     public double cobrarGanancias();
     public boolean iniciarSesion(String nombre, String contrasena);
-    public boolean registrarse(String id, String nombre, String contrasena);
+    public boolean registrarse(String id, String nombre, String contrasena,double cartera);
     public int resultadoTirada();
+
 
 }

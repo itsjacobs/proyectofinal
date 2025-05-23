@@ -18,7 +18,12 @@ public interface gestionApuestas {
     public void recopilacionApuesta();
     public double cobrarGanancias();
     public boolean iniciarSesion(String id, String contrasena);
-    public boolean registrarse(String id, String contrasena, String nombre);
+    public boolean registrarse(String id, String contrasena, String nombre,double cartera);
+
+    //devuelve la lista de usuarios del dao
+    List<Usuario> listaUsuarios();
+
     public int resultadoTirada();
     public Usuario dameUsuario(String id);
+    public List<Usuario> listaUsuario();
 }
