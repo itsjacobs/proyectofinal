@@ -265,7 +265,6 @@ public class EntSalida {
         } else if (mayorElegido.equalsIgnoreCase("menor")) {
             mayor = false;
         }
-        sc.close();
         return servicio.apostarMayor(mayor, apuesta, tab,usuarioLogado);
 
     }
@@ -396,7 +395,7 @@ public class EntSalida {
                     apuesta.resetApuesta();
                     resultado = resultadoTirada();
                     tirada = new Tirada(resultado);
-
+                    tab.rellenarTablero();
                     break;
                 case 9:
 
