@@ -19,6 +19,9 @@
 2025-05-23 15:33:21.827 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-23 15:34:23.769 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-23 15:34:33.048 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 16:11:01.751 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 16:11:09.951 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-23 16:33:02.716 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
 2025-05-23 15:58:52.008 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-24 01:11:16.342 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-24 01:11:22.906 ERROR [main] org.example.ui.EntSalida - Caracter incorrecto
@@ -27,3 +30,4 @@
 2025-05-24 01:11:31.028 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-24 01:13:58.316 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
 2025-05-24 01:19:37.931 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-24 12:37:22.553 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
