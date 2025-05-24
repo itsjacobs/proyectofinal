@@ -25,7 +25,7 @@ public class ApuestasUsuario implements Comparable<Double> {
 
     public String toStringFicheroApuestaUsuario(){
         StringBuilder sb = new StringBuilder();
-        sb.append(id).append("-").append(ganancia).append("-").append(fecha).append("-").append(usuario.getId()).append("\n");
+        sb.append(id).append("-").append(ganancia).append("-").append(fecha).append("-").append(usuario.getId());
         return sb.toString();
     }
 

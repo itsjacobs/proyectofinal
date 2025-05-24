@@ -1,15 +1,21 @@
 package org.example.dao;
 
-import lombok.Data;
+import org.example.commons.ACartera;
+import org.example.commons.Comprobaciones;
 import org.example.commons.Constantes;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+import lombok.Data;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 @Data
 public class ApuestaImplementacion implements daoApuesta {
@@ -20,20 +26,23 @@ public class ApuestaImplementacion implements daoApuesta {
     public ApuestaImplementacion() {
         Random rnd = new Random();
         this.casillasApostadas = new ArrayList<>();
-        this.id = String.valueOf(rnd.nextInt(0,10));
+        this.id = String.valueOf(rnd.nextInt(0, 10));
         this.usuarios = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);
-    }
-
-
-    public void setCasillasApostadasManual(List<Casilla> casillasApostadas) {
-        this.casillasApostadas = casillasApostadas;
     }
 
     //Metodos Apuestas
 
 
     @Override
-    public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab, Usuario usuario) {
+
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
+
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -43,14 +52,21 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-        if (usuario != null){
+        if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
+
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarFila(int fila, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -60,14 +76,20 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-        if (usuario != null){
+        if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarDocena(int docena, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.queDocena(tab.getTablero()[i][j]) == docena) {
@@ -82,7 +104,13 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarColor(boolean color, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 Casilla casilla = tab.getTablero()[i][j];
@@ -93,14 +121,20 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-        if (usuario != null){
+        if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarMayor(boolean mayor, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esMayor(tab.getTablero()[i][j]) == mayor) {
@@ -115,7 +149,13 @@ public class ApuestaImplementacion implements daoApuesta {
     }
 
     @Override
-    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarPar(boolean par, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esPar(tab.getTablero()[i][j]) == par) {
@@ -125,14 +165,20 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-        if (usuario != null){
+        if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
     }
 
     @Override
-    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab,Usuario usuario) {
+    public List<Casilla> apostarHuerfanos(boolean huerfanos, double apuesta, Tablero tab, Usuario usuario) {
+        try {
+            Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
+        } catch (ACartera e) {
+            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            return new ArrayList<>();
+        }
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 3; j++) {
                 if (tab.getTablero()[i][j] != null && tab.esHuerfano(tab.getTablero()[i][j]) == huerfanos) {
@@ -142,7 +188,7 @@ public class ApuestaImplementacion implements daoApuesta {
                 }
             }
         }
-        if (usuario != null){
+        if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
@@ -156,8 +202,8 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public double cobrarGanancias() {
-        for (Casilla casilla : casillasApostadas){
-            if (casilla.getValor() > 0){
+        for (Casilla casilla : casillasApostadas) {
+            if (casilla.getValor() > 0) {
                 return casilla.getValor();
             }
         }
@@ -174,6 +220,7 @@ public class ApuestaImplementacion implements daoApuesta {
     public List<Usuario> listaUsuarios() {
         return usuarios;
     }
+
     @Override
     public boolean iniciarSesion(String id, String contraseña) {
         Usuario usuario = new Usuario(id, contraseña);
@@ -189,20 +236,33 @@ public class ApuestaImplementacion implements daoApuesta {
     @Override
     public boolean registrarse(String id, String nombre, String contrasena, double cartera) {
         boolean a = false;
-        Usuario usuario = new Usuario(id, nombre, contrasena,cartera);
+        Usuario usuario = new Usuario(id, nombre, contrasena, cartera);
         List<Usuario> comprobacion = usuarios.stream().filter(u -> u.getId().equalsIgnoreCase(usuario.getId())).toList();
         if (comprobacion.isEmpty()) {
             a = usuarios.add(usuario);
         }
         return a;
     }
-    public Usuario dameUsuario(String id){
-        for (Usuario usuario: usuarios){
-            if (usuario.getId().equalsIgnoreCase(id)){
+
+    @Override
+    public Usuario dameUsuario(String id) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equalsIgnoreCase(id)) {
                 return usuario;
             }
         }
         return null;
+    }
+
+    @Override
+    public double ingresarDinero(String id, double dinero) {
+        Usuario usuario = dameUsuario(id);
+        if (usuario != null) {
+            usuario.setCartera(usuario.getCartera() + dinero);
+            return usuario.getCartera();
+        } else {
+            throw new IllegalArgumentException("Usuario no encontrado");
+        }
     }
 
 
@@ -211,19 +271,9 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public int resultadoTirada() {
-       Tirada tirada = new Tirada();
-       return tirada.tirar();
+        Tirada tirada = new Tirada();
+        return tirada.tirar();
     }
 
 
-
-
-    public String toStringFicheroApuesta(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Apuesta: ").append(id).append("\n");
-        for (Casilla casilla: casillasApostadas){
-            sb.append(casilla.toStringFicheroCasilla()).append("\n");
-        }
-        return sb.toString();
-    }
 }

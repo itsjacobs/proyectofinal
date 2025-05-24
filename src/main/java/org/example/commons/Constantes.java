@@ -6,7 +6,8 @@ public class Constantes {
     public static final  int[] NEGROS = {2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
     public static final int[] ROJOS = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
     public static final String USUARIO_FILE = "usuario.txt";
-    public static final String APUESTA_FILE = "apuesta.txt";
+    public static final String APUESTASUSUARIO_FILE = "apuestasUsuario.txt";
+    public static final String USUARIOJSON = "usuarios.json";
     public static final String TIRADA_FILE = "tirada.txt";
     public static final String MENU_IS = "---------------Bienvenido al menu de Inicio de sesion---------------\n" +
             "1.Iniciar sesión\n" +
@@ -23,7 +24,7 @@ public class Constantes {
             "6.Apostar a docena\n" +
             "7.Apostar a huerfanos\n" +
             "8.Terminar apuesta\n" +
-            "9.Cobrar Ganancias\n" +
+            "9.Ingresar dinero\n" +
             "10.Salir\n";
     public static final String MENSAJE_OPCION_INVALIDA = "Opcion invalida, por favor elija una opcion valida\n";
 
@@ -54,6 +55,8 @@ public class Constantes {
     public static final String GANADORA = "La bola ha caído en el número: ";
     public static final String GANADORACARTERA = "Has ganado:";
     public static final String PERDEDORA = "Has perdido!!!";
+    public static final String INGRESO = "¿Cuánto dinero quieres ingresar?";
+    public static final String INGRESOERROR = "El ingreso debe ser mayor que 0";
     public static final String SALIR = "¿Quieres salir del programa? (si/no)";
 
 }

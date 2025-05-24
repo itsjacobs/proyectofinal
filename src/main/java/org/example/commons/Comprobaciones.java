@@ -26,4 +26,10 @@ public class Comprobaciones {
             throw new APar("La opcion elegida tiene que ser par o impar");
         }
     }
+
+    public static void comprobarCartera(double cartera, double apuesta) throws ACartera {
+        if (cartera < apuesta) {
+            throw new ACartera("No tienes suficiente dinero en la cartera para realizar esta apuesta");
+        }
+    }
 }

@@ -31,3 +31,9 @@
 2025-05-24 01:13:58.316 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
 2025-05-24 01:19:37.931 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
 2025-05-24 12:37:22.553 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-24 18:50:56.096 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
+2025-05-24 18:51:19.471 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
+2025-05-24 18:51:22.519 INFO  [main] org.example.ui.EntSalida - Lo introducido no es un número
+2025-05-24 19:26:37.775 ERROR [main] org.example.ui.EntSalida - Opcion invalida, por favor elija una opcion valida
+
+2025-05-24 19:28:56.443 ERROR [main] org.example.ui.EntSalida - El color TOJOno es ni rojo, ni negro

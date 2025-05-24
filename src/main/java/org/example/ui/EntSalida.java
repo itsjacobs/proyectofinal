@@ -358,10 +358,10 @@ public class EntSalida {
 
             switch (opc2) {
                 case 1:
-                    apuesta.setCasillasApostadasManual(apostarNumero(tab));
+                    apuesta.setCasillasApostadas(apostarNumero(tab));
                     break;
                 case 2:
-                    apuesta.setCasillasApostadasManual(apostarColor(tab));
+                    apuesta.setCasillasApostadas(apostarColor(tab));
                     break;
                 case 3:
                     apuesta.setCasillasApostadas(apostarPar(tab));
@@ -380,6 +380,8 @@ public class EntSalida {
                     break;
                 case 8:
                     //Metodos sobre la tirada en si. Añade al historico de tiradas la nueva, la mete en el fichero y la muestra por pantalla
+                    Ficheros.archivoJSON(servicio.listaUsuarios());
+                    Ficheros.escribirFicheroBinario(Constantes.APUESTASUSUARIO_FILE,servicio.listaUsuarios());
                     listaTiradas.add(tirada);
                     Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
                     System.out.println(Constantes.GANADORA + resultado);
@@ -388,7 +390,7 @@ public class EntSalida {
                     int finalResultado = resultado;
                     Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
                     if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
-                        System.out.println(Constantes.GANADORACARTERA + casillaGanadora.getValor());
+                        System.out.println(Constantes.GANADORACARTERA + casillaGanadora.getValor() + "€");
                         usuarioLogado.setCartera(usuarioLogado.getCartera() + casillaGanadora.getValor());
                     } else {
                         System.out.println(Constantes.PERDEDORA);
@@ -396,10 +398,17 @@ public class EntSalida {
                     apuesta.resetApuesta();
                     resultado = resultadoTirada();
                     tirada = new Tirada(resultado);
-
+                    tab.rellenarTablero();
                     break;
                 case 9:
-
+                    System.out.println(Constantes.INGRESO);
+                    double ingreso = sc.nextDouble();
+                    if (ingreso > 0) {
+                        servicio.ingresarDinero(usuarioLogado.getId(), ingreso);
+                        System.out.println("Has ingresado " + ingreso + "€ ");
+                    } else {
+                        log.error(Constantes.INGRESOERROR);
+                    }
                     break;
                 case 10:
                     List<Usuario> listaUsuarios = servicio.listaUsuarios();
@@ -408,7 +417,6 @@ public class EntSalida {
                     if (salir.equalsIgnoreCase("si")) {
                         menu = true;
                         Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
-
                     } else if (salir.equalsIgnoreCase("no")) {
                         menu = false;
                     } else {

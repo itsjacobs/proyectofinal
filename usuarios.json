@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "nombre": "1",
+    "contraseña": "1",
+    "cartera": 1050500.0
+  },
+  {
+    "id": "47295473K",
+    "nombre": "Jacob R.",
+    "contraseña": "1234",
+    "cartera": 1500.0
+  },
+  {
+    "id": "NO",
+    "nombre": "Alvaro S.",
+    "contraseña": "1234",
+    "cartera": 1500.0
+  },
+  {
+    "id": "02760168F",
+    "nombre": "Ivan M.",
+    "contraseña": "1234",
+    "cartera": 120000.0
+  }
+]

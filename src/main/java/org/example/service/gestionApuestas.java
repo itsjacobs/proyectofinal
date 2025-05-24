@@ -20,7 +20,7 @@ public interface gestionApuestas {
     public double cobrarGanancias();
     public boolean iniciarSesion(String id, String contrasena);
     public boolean registrarse(String id, String contrasena, String nombre,double cartera);
-
+    public double ingresarDinero(String id, double cantidad);
     public int resultadoTirada();
     public Usuario dameUsuario(String id);
 }

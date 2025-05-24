@@ -1,6 +1,9 @@
 package org.example.dao;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.example.commons.Constantes;
 import org.example.domain.ApuestasUsuario;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
@@ -81,6 +84,37 @@ public class Ficheros {
             throw new RuntimeException(e);
         }
         return lista;
+    }
+    public static void escribirFicheroBinario(String fichero, List<Usuario> lista) {
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
+            os.writeObject(lista);
+            os.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static List<ApuestasUsuario> leerFicheroBinario(String fichero) {
+        List<ApuestasUsuario> lista = null;
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
+            lista = (List<ApuestasUsuario>) os.readObject();
+            os.close();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    public static void archivoJSON(List<Usuario> usuarios) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(usuarios);
+
+        try (FileWriter writer = new FileWriter(Constantes.USUARIOJSON)) {
+            writer.write(json);
+            System.out.println("Archivo JSON creado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo JSON: " + e.getMessage());
+        }
     }
 }
 

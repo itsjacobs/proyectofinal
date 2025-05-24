@@ -104,6 +104,10 @@ public class gestionApuestasImplementacion implements gestionApuestas {
         return daoApuesta.dameUsuario(id);
     }
 
+    @Override
+    public double ingresarDinero(String id, double dinero) {
+        return daoApuesta.ingresarDinero(id, dinero);
+    }
 
 
 
