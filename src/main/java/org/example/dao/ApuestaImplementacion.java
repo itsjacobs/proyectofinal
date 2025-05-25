@@ -3,25 +3,20 @@ package org.example.dao;
 import org.example.commons.ACartera;
 import org.example.commons.Comprobaciones;
 import org.example.commons.Constantes;
-import org.example.domain.Casilla;
-import org.example.domain.Tablero;
-import org.example.domain.Tirada;
-import org.example.domain.Usuario;
+import org.example.domain.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 import lombok.Data;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 
 @Data
 public class ApuestaImplementacion implements daoApuesta {
     private String id;
     private List<Casilla> casillasApostadas;
     private List<Usuario> usuarios;
+    private List<ApuestasUsuario> apuestasUsuario;
+    private String apuesta;
+    private StringBuilder sb = new StringBuilder();
 
     public ApuestaImplementacion() {
         Random rnd = new Random();
@@ -35,7 +30,6 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public List<Casilla> apostarNumero(int numeros, double apuesta, Tablero tab, Usuario usuario) {
-
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
@@ -49,9 +43,11 @@ public class ApuestaImplementacion implements daoApuesta {
                 if (casilla != null && casilla.getNumero() == numeros) {
                     casilla.setValor(casilla.getValor() + (36 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
         }
+        sb.append(numeros).append(",");
         if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
@@ -73,9 +69,11 @@ public class ApuestaImplementacion implements daoApuesta {
                 if (tab.getTablero()[i][j] != null && tab.queFila(tab.getTablero()[i][j]) == fila) {
                     casilla.setValor(casilla.getValor() + (3 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
         }
+        sb.append(fila).append(",");
         if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
@@ -96,9 +94,11 @@ public class ApuestaImplementacion implements daoApuesta {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (3 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
         }
+        sb.append(docena).append(",");
         usuario.setCartera(usuario.getCartera() - apuesta);
         return casillasApostadas;
     }
@@ -118,9 +118,16 @@ public class ApuestaImplementacion implements daoApuesta {
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
 
+
                 }
             }
         }
+        if (color) {
+            sb.append("rojo").append(",");
+        } else {
+            sb.append("negro").append(",");
+        }
+
         if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
@@ -141,8 +148,14 @@ public class ApuestaImplementacion implements daoApuesta {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
+        }
+        if (mayor) {
+            sb.append("mayor").append(",");
+        } else {
+            sb.append("menor").append(",");
         }
         usuario.setCartera(usuario.getCartera() - apuesta);
         return casillasApostadas;
@@ -162,8 +175,14 @@ public class ApuestaImplementacion implements daoApuesta {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (2 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
+        }
+        if (par) {
+            sb.append("par").append(",");
+        } else {
+            sb.append("impar").append(",");
         }
         if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
@@ -185,13 +204,21 @@ public class ApuestaImplementacion implements daoApuesta {
                     Casilla casilla = tab.getTablero()[i][j];
                     casilla.setValor(casilla.getValor() + (10 * apuesta));
                     casillasApostadas.add(casilla);
+
                 }
             }
         }
+
         if (usuario != null) {
             usuario.setCartera(usuario.getCartera() - apuesta);
         }
         return casillasApostadas;
+    }
+
+    @Override
+    public String getApuesta() {
+        apuesta = sb.toString();
+        return apuesta;
     }
 
     public List<Casilla> borrarDuplicados(List<Casilla> lista) {
@@ -265,6 +292,34 @@ public class ApuestaImplementacion implements daoApuesta {
         }
     }
 
+    @Override
+    public void terminarApuestas(Usuario usuario, Tablero tab) {
+        int resultado = resultadoTirada();
+        Tirada tirada = new Tirada(resultado);
+        ArrayList<Tirada> listaTiradas = new ArrayList<>();
+        apuestasUsuario = new ArrayList<>();
+        listaTiradas.add(tirada);
+        Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
+        System.out.println(Constantes.GANADORA + resultado);
+
+        //Comprobamos si la casilla ganadora es una de las apostadas. Si es as, mostramos el mensaje de que ha ganado y la cantidad ganada
+        int finalResultado = resultado;
+        Casilla casillaGanadora = getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
+        if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
+            System.out.println(Constantes.GANADORACARTERA + casillaGanadora.getValor() + "€");
+            usuario.setCartera(usuario.getCartera() + casillaGanadora.getValor());
+            List<ApuestasUsuario> apuestasUsuario = Ficheros.leerFicheroApuestasUsuario(Constantes.APUESTASUSUARIO_FILE);
+            apuestasUsuario.add(new ApuestasUsuario(usuario.getNombre(), casillaGanadora.getValor(), getApuesta()));
+            Ficheros.escribirFicheroApuestasUsuario(Constantes.APUESTASUSUARIO_FILE, apuestasUsuario);
+
+        } else {
+            System.out.println(Constantes.PERDEDORA);
+            sb.setLength(0);
+        }
+        resetApuesta();
+        resultado = resultadoTirada();
+        tab.rellenarTablero();
+    }
 
     //Métodos Tirada
 
@@ -275,5 +330,15 @@ public class ApuestaImplementacion implements daoApuesta {
         return tirada.tirar();
     }
 
-
+    //Métodos ApuestaUsuario
+    @Override
+    public List<ApuestasUsuario> ordenarApuestas() {
+        apuestasUsuario = Ficheros.leerFicheroApuestasUsuario(Constantes.APUESTASUSUARIO_FILE);
+        Comparator<ApuestasUsuario> com = new Comparator<ApuestasUsuario>() {
+            public int compare(ApuestasUsuario i, ApuestasUsuario j) {
+                return Double.compare(j.getGanancia(), i.getGanancia());
+            }
+        };
+        return apuestasUsuario.stream().sorted(com).toList();
+    }
 }

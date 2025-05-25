@@ -1,9 +1,7 @@
 package org.example.ui;
 
-import org.example.dao.ApuestaImplementacion;
 import org.example.domain.Tablero;
 import org.example.service.gestionApuestasImplementacion;
-
 
 public class Main {
     public static void main(String[] args) {

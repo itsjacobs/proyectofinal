@@ -4,7 +4,6 @@ import lombok.Data;
 import org.example.commons.Constantes;
 import org.example.dao.ApuestaImplementacion;
 
-import java.util.List;
 @Data
 public class Tablero {
     private Casilla[][] Tablero = new Casilla[12][3];

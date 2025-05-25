@@ -3,7 +3,6 @@ package org.example.domain;
 import lombok.Data;
 import org.example.commons.Constantes;
 import org.example.dao.Ficheros;
-
 import java.util.List;
 
 @Data
@@ -23,9 +22,13 @@ public class Usuario {
         this.id = id;
         this.nombre ="";
         this.contraseña = contraseña;
-         }
-
-
+    }
+    public Usuario(String nombre) {
+        this.id = "";
+        this.nombre = nombre;
+        this.contraseña = "";
+        this.cartera = 0.0;
+    }
     public boolean inicioSesion(Usuario usuario) {
         boolean a = false;
         List<Usuario> lista = Ficheros.leerFicheroUsuario(Constantes.USUARIO_FILE);

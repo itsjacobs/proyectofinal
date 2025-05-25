@@ -4,18 +4,13 @@ import lombok.extern.log4j.Log4j2;
 import org.example.commons.*;
 import org.example.dao.ApuestaImplementacion;
 import org.example.dao.Ficheros;
-import org.example.domain.Casilla;
-import org.example.domain.Tablero;
-import org.example.domain.Tirada;
-import org.example.domain.Usuario;
+import org.example.domain.*;
 import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-
 import lombok.Data;
 
 @Data
@@ -339,7 +334,7 @@ public class EntSalida {
         Scanner sc = new Scanner(System.in);
         int resultado = resultadoTirada();
         Tirada tirada = new Tirada(resultado);
-        ArrayList<Tirada> listaTiradas = new ArrayList<>();
+
         boolean menu = false;
         tab.rellenarTablero();
         ApuestaImplementacion apuesta = new ApuestaImplementacion();
@@ -348,7 +343,7 @@ public class EntSalida {
             int opc2 = 0;
             tab.pintarTablero(apuesta);
             try {
-                System.out.println("Tu saldo es: " + usuarioLogado.getCartera());
+                System.out.println("Tu saldo es: " + usuarioLogado.getCartera() + "€");
                 System.out.println(Constantes.MENU_APUESTAS);
                 opc2 = sc.nextInt();
             } catch (InputMismatchException e) {
@@ -379,26 +374,8 @@ public class EntSalida {
                     apuesta.setCasillasApostadas(apostarHuerfano(tab));
                     break;
                 case 8:
-                    //Metodos sobre la tirada en si. Añade al historico de tiradas la nueva, la mete en el fichero y la muestra por pantalla
-                    Ficheros.archivoJSON(servicio.listaUsuarios());
-                    Ficheros.escribirFicheroBinario(Constantes.APUESTASUSUARIO_FILE,servicio.listaUsuarios());
-                    listaTiradas.add(tirada);
-                    Ficheros.escribirFicheroTirada(Constantes.TIRADA_FILE, listaTiradas);
-                    System.out.println(Constantes.GANADORA + resultado);
+                    servicio.terminarApuestas(usuarioLogado, tab);
 
-                    //Comprobamos si la casilla ganadora es una de las apostadas. Si es asi, mostramos el mensaje de que ha ganado y la cantidad ganada
-                    int finalResultado = resultado;
-                    Casilla casillaGanadora = apuesta.getCasillasApostadas().stream().filter(casilla -> casilla.getNumero() == finalResultado).findFirst().orElse(null);
-                    if (casillaGanadora != null && casillaGanadora.getValor() > 0) {
-                        System.out.println(Constantes.GANADORACARTERA + casillaGanadora.getValor() + "€");
-                        usuarioLogado.setCartera(usuarioLogado.getCartera() + casillaGanadora.getValor());
-                    } else {
-                        System.out.println(Constantes.PERDEDORA);
-                    }
-                    apuesta.resetApuesta();
-                    resultado = resultadoTirada();
-                    tirada = new Tirada(resultado);
-                    tab.rellenarTablero();
                     break;
                 case 9:
                     System.out.println(Constantes.INGRESO);
@@ -412,11 +389,14 @@ public class EntSalida {
                     break;
                 case 10:
                     List<Usuario> listaUsuarios = servicio.listaUsuarios();
+                    List<ApuestasUsuario> apuestasUsuario = servicio.ordenarApuestas();
                     System.out.println(Constantes.SALIR);
                     String salir = sc.next();
                     if (salir.equalsIgnoreCase("si")) {
                         menu = true;
+                        Ficheros.archivoJSON(servicio.listaUsuarios());
                         Ficheros.escribirFicheroUsuario(Constantes.USUARIO_FILE, listaUsuarios);
+                        Ficheros.escribirFicheroBinario(Constantes.BINARIO_FILE, listaUsuarios);
                     } else if (salir.equalsIgnoreCase("no")) {
                         menu = false;
                     } else {
@@ -431,7 +411,7 @@ public class EntSalida {
     public void menuInicioSesion(Tablero tab) {
             Scanner sc = new Scanner(System.in);
             boolean menu = false;
-        iniciarSesion();
+            iniciarSesion();
             do {
                 int opc = 0;
                 try {
@@ -446,6 +426,10 @@ public class EntSalida {
                         menuApuestas(tab);
                         break;
                     case 2:
+                        List <ApuestasUsuario> lista= servicio.ordenarApuestas();
+                        System.out.println(lista.toString());
+                        break;
+                    case 3:
                         System.out.println(Constantes.SALIR);
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {

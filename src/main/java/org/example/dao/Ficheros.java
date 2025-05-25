@@ -1,18 +1,19 @@
 package org.example.dao;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.extern.log4j.Log4j2;
 import org.example.commons.Constantes;
 import org.example.domain.ApuestasUsuario;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
-
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Log4j2
 public class Ficheros {
     public static boolean escribirFicheroUsuario(String fichero, List<Usuario> lista) {
         PrintWriter escribir = null;
@@ -47,7 +48,7 @@ public class Ficheros {
                 lista.add(usuario);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error al leer el fichero: " + e.getMessage());
+            log.error("Error al leer el fichero: {}", e.getMessage());
         }
         return lista;
     }
@@ -85,23 +86,59 @@ public class Ficheros {
         }
         return lista;
     }
+    public static boolean escribirFicheroApuestasUsuario(String fichero, List<ApuestasUsuario> lista) {
+        PrintWriter escribir = null;
+        boolean a = false;
+        try {
+            escribir = new PrintWriter(new FileWriter(fichero, true));
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < lista.size(); i++) {
+            escribir.println(lista.get(i).toStringFicheroApuestaUsuario());
+            a = true;
+        }
+        escribir.close();
+        return a;
+    }
+    public static List<ApuestasUsuario> leerFicheroApuestasUsuario(String fichero) {
+        List<ApuestasUsuario> lista = new ArrayList<>();
+        String Linea = null;
+        try {
+            Scanner sc = new Scanner(new File(fichero));
+            while (sc.hasNextLine()) {
+                Linea = sc.nextLine();
+                String[] partes = Linea.split(";");
+                String nombre = partes[0];
+                String Apuesta = partes[1];
+                double ganancia = Double.parseDouble(partes[2]);
+                LocalDate fecha = LocalDate.parse(partes[3]);
+                ApuestasUsuario apuesta = new ApuestasUsuario(nombre, Apuesta,ganancia,fecha);
+                lista.add(apuesta);
+            }
+        } catch (FileNotFoundException e) {
+            log.error("Error al leer el fichero: {}", e.getMessage());
+        }
+        return lista;
+    }
+
     public static void escribirFicheroBinario(String fichero, List<Usuario> lista) {
         try {
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
             os.writeObject(lista);
             os.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
-    public static List<ApuestasUsuario> leerFicheroBinario(String fichero) {
-        List<ApuestasUsuario> lista = null;
+    public static List<Usuario> leerFicheroBinario(String fichero) {
+        List<Usuario> lista = null;
         try {
             ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
-            lista = (List<ApuestasUsuario>) os.readObject();
+            lista = (List<Usuario>) os.readObject();
             os.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            log.error("Error al leer el fichero: {}", e.getMessage());
         }
         return lista;
     }

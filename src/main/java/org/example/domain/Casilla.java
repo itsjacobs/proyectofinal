@@ -2,7 +2,6 @@ package org.example.domain;
 
 import lombok.Data;
 import org.example.commons.Constantes;
-
 import java.util.Objects;
 
 @Data

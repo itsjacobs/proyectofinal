@@ -3,11 +3,12 @@ package org.example.service;
 import lombok.Data;
 import org.example.dao.ApuestaImplementacion;
 import org.example.dao.daoApuesta;
+import org.example.domain.ApuestasUsuario;
 import org.example.domain.Casilla;
 import org.example.domain.Tablero;
 import org.example.domain.Usuario;
-
 import java.util.List;
+
 @Data
 public class gestionApuestasImplementacion implements gestionApuestas {
     private daoApuesta daoApuesta;
@@ -64,22 +65,18 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     }
 
     @Override
+    public void terminarApuestas(Usuario usuarioLogado, Tablero tab) {
+        daoApuesta.terminarApuestas(usuarioLogado, tab);
+    }
+
+    @Override
     public List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas) {
         return daoApuesta.borrarDuplicados(casillasApostadas);
     }
 
-
-
-
     @Override
-    public void recopilacionApuesta() {
-
-    }
-
-
-    @Override
-    public double cobrarGanancias(){
-        return daoApuesta.cobrarGanancias();
+    public String getApuesta() {
+        return daoApuesta.getApuesta();
     }
 
     //Métodos de Usuario
@@ -119,6 +116,13 @@ public class gestionApuestasImplementacion implements gestionApuestas {
         return daoApuesta.resultadoTirada();
     }
 
+
+    //Métodos ApuestasUsuario
+
+    @Override
+    public List<ApuestasUsuario> ordenarApuestas(){
+        return daoApuesta.ordenarApuestas();
+    }
 
 
 }
