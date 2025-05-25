@@ -10,5 +10,47 @@
     "nombre": "Ethan B.",
     "contraseña": "1234",
     "cartera": 10000.0
+  },
+  {
+    "id": "12345678A",
+    "nombre": "Carrero B.",
+    "contraseña": "1234",
+    "cartera": 7000.0
+  },
+  {
+    "id": "12345678B",
+    "nombre": "Paquita S.",
+    "contraseña": "1234",
+    "cartera": 500.0
+  },
+  {
+    "id": "12345678c",
+    "nombre": "Sheldon C.",
+    "contraseña": "1234",
+    "cartera": 30000.0
+  },
+  {
+    "id": "12345678D",
+    "nombre": "ECHENIQUE",
+    "contraseña": "1234",
+    "cartera": 10.0
+  },
+  {
+    "id": "12345678E",
+    "nombre": "Uriol J.",
+    "contraseña": "1234",
+    "cartera": 1000000.0
+  },
+  {
+    "id": "12345678F",
+    "nombre": "Krusty el Payaso",
+    "contraseña": "1234",
+    "cartera": 300.0
+  },
+  {
+    "id": "12345678G",
+    "nombre": "Gema F.",
+    "contraseña": "1234",
+    "cartera": 500000.0
   }
 ]

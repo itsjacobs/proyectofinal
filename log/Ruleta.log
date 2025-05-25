@@ -73,3 +73,4 @@
 2025-05-25 15:21:34.192 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
 2025-05-25 15:21:43.775 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
 2025-05-25 15:21:51.372 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: apuestasUsuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 17:50:09.397 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
