@@ -64,3 +64,12 @@
 2025-05-25 15:08:28.317 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: apuestasUsuario.txt (El sistema no puede encontrar el archivo especificado)
 2025-05-25 15:09:42.991 ERROR [main] org.example.ui.EntSalida - El color 8no es ni rojo, ni negro
 2025-05-25 15:12:20.715 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: apuestasUsuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 15:19:20.698 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: txt\usuario.txt (El sistema no puede encontrar la ruta especificada)
+2025-05-25 15:19:47.567 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: txt\usuario.txt (El sistema no puede encontrar la ruta especificada)
+2025-05-25 15:19:48.857 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: txt\usuario.txt (El sistema no puede encontrar la ruta especificada)
+2025-05-25 15:20:56.700 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 15:21:01.002 ERROR [main] org.example.ui.EntSalida - La contraseña o el DNI/NIE son incorrectos
+2025-05-25 15:21:14.054 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 15:21:34.192 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 15:21:43.775 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: usuario.txt (El sistema no puede encontrar el archivo especificado)
+2025-05-25 15:21:51.372 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: apuestasUsuario.txt (El sistema no puede encontrar el archivo especificado)
