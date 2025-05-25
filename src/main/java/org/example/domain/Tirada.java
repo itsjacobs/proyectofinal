@@ -19,12 +19,6 @@ public class Tirada {
         return numero;
     }
 
-
-    public double calcularGanancia(Casilla casilla){
-        double ganancia = casilla.getValor();
-        return ganancia;
-    }
-
     public String toStringFicheroTirada(){
         StringBuilder sb = new StringBuilder();
         sb.append(numero);

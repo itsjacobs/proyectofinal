@@ -14,7 +14,6 @@ public interface daoApuesta {
     List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
     List<Usuario> listaUsuarios();
     String getApuesta();
-    double cobrarGanancias();
     boolean iniciarSesion(String nombre, String contrasena);
     boolean registrarse(String id, String nombre, String contrasena,double cartera);
     double ingresarDinero(String id, double cantidad);

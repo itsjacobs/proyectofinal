@@ -227,16 +227,6 @@ public class ApuestaImplementacion implements daoApuesta {
         return listaSinDuplicados;
     }
 
-    @Override
-    public double cobrarGanancias() {
-        for (Casilla casilla : casillasApostadas) {
-            if (casilla.getValor() > 0) {
-                return casilla.getValor();
-            }
-        }
-        return 0;
-    }
-
     public void resetApuesta() {
         casillasApostadas.clear();
     }

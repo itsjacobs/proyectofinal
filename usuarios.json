@@ -4,5 +4,11 @@
     "nombre": "Jacob R.",
     "contraseña": "1234",
     "cartera": 10100.0
+  },
+  {
+    "id": "54147683W",
+    "nombre": "Ethan B.",
+    "contraseña": "1234",
+    "cartera": 10000.0
   }
 ]
