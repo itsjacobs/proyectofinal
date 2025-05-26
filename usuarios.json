@@ -51,6 +51,12 @@
     "id": "12345678G",
     "nombre": "Gema F.",
     "contraseña": "1234",
-    "cartera": 500000.0
+    "cartera": 5.0E7
+  },
+  {
+    "id": "1",
+    "nombre": "1",
+    "contraseña": "1",
+    "cartera": 1.0
   }
 ]

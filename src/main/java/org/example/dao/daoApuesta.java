@@ -18,6 +18,7 @@ public interface daoApuesta {
     boolean registrarse(String id, String nombre, String contrasena,double cartera);
     double ingresarDinero(String id, double cantidad);
     void terminarApuestas(Usuario usuarioLogado, Tablero tab);
+    void mostrarUsuariosDesdeFicheroBinario();
     int resultadoTirada();
     Usuario dameUsuario(String id);
     List<ApuestasUsuario> ordenarApuestas();

@@ -3,10 +3,12 @@ package org.example.domain;
 import lombok.Data;
 import org.example.commons.Constantes;
 import org.example.dao.Ficheros;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class Usuario {
+public class Usuario implements Serializable {
     private String id;
     private String nombre;
     private String contraseña;

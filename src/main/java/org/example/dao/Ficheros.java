@@ -129,7 +129,19 @@ public class Ficheros {
             os.writeObject(lista);
             os.close();
         } catch (IOException e) {
+            log.error("Error al leer el fichero: {}", e.getMessage());
         }
+    }
+    public static List<Usuario> leerFicheroBinario(String fichero) {
+        List<Usuario> lista = null;
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
+            lista = (List<Usuario>) os.readObject();
+            os.close();
+        } catch (IOException | ClassNotFoundException e) {
+            log.error("Error al leer el fichero: {}", e.getMessage());
+        }
+        return lista;
     }
     public static void archivoJSON(List<Usuario> usuarios) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

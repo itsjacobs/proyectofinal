@@ -430,6 +430,9 @@ public class EntSalida {
                         System.out.println(lista.toString());
                         break;
                     case 3:
+                        servicio.mostrarUsuariosDesdeFicheroBinario();
+                        break;
+                    case 4:
                         System.out.println(Constantes.SALIR);
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {
