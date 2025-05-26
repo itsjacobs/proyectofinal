@@ -10,13 +10,13 @@ public class Constantes {
     public static final String TIRADA_FILE = "tirada.txt";
     public static final String MENU_IS = "---------------Bienvenido al menu de Inicio de sesion---------------\n" +
             "1.Iniciar sesión\n" +
-            "2.Registrarse\n"+
-            "3.Salir";
+            "2.Registrarse\n";
     public static final String MENU_USUARIO = "---------------Bienvenido al menu de Usuario---------------\n" +
             "1.Apostar\n" +
             "2.Ranking\n" +
             "3.Cargar Usuarios(Binario)\n"+
-            "4.Salir\n";
+            "4.Cargar Usuarios(JSON)\n" +
+            "5.Salir\n";
     public static final String MENU_APUESTAS = "---------------Bienvenido al menu de Apuestas---------------\n" +
             "1.Apostar a numero\n" +
             "2.Apostar a color\n" +

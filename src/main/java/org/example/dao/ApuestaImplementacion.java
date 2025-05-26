@@ -1,10 +1,10 @@
 package org.example.dao;
 
+
 import org.example.commons.ACartera;
 import org.example.commons.Comprobaciones;
 import org.example.commons.Constantes;
 import org.example.domain.*;
-
 import java.util.*;
 
 import lombok.Data;
@@ -341,5 +341,22 @@ public class ApuestaImplementacion implements daoApuesta {
             }
         };
         return apuestasUsuario.stream().sorted(com).toList();
+    }
+    @Override
+    public void mostrarUsuariosJson() {
+        List<Usuario> usuarios = Ficheros.leerUsuariosJson();
+
+        if (usuarios.isEmpty()) {
+            System.out.println("No se encontraron usuarios en el archivo JSON.");
+            return;
+        }
+        System.out.println("Usuarios encontrados:");
+        for (Usuario u : usuarios) {
+            System.out.println("ID: " + u.getId());
+            System.out.println("Nombre: " + u.getNombre());
+            System.out.println("Contraseña: " + u.getContraseña());
+            System.out.println("Cartera: " + u.getCartera());
+            System.out.println("------------------------");
+        }
     }
 }

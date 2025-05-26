@@ -2,12 +2,14 @@ package org.example.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import lombok.extern.log4j.Log4j2;
 import org.example.commons.Constantes;
 import org.example.domain.ApuestasUsuario;
 import org.example.domain.Tirada;
 import org.example.domain.Usuario;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,6 +154,17 @@ public class Ficheros {
             System.out.println("Archivo JSON creado exitosamente.");
         } catch (IOException e) {
             System.err.println("Error al escribir el archivo JSON: " + e.getMessage());
+        }
+    }
+    public static List<Usuario> leerUsuariosJson() {
+        Gson gson = new Gson();
+        Type tipoListaUsuarios = new TypeToken<List<Usuario>>() {}.getType();
+
+        try (Reader reader = new FileReader(Constantes.USUARIOJSON)) {
+            return gson.fromJson(reader, tipoListaUsuarios);
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+            return List.of();
         }
     }
 }

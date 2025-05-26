@@ -19,7 +19,10 @@ public interface daoApuesta {
     double ingresarDinero(String id, double cantidad);
     void terminarApuestas(Usuario usuarioLogado, Tablero tab);
     void mostrarUsuariosDesdeFicheroBinario();
+    void mostrarUsuariosJson();
     int resultadoTirada();
     Usuario dameUsuario(String id);
     List<ApuestasUsuario> ordenarApuestas();
+
+
 }

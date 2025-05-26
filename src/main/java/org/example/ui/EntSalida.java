@@ -88,10 +88,7 @@ public class EntSalida {
                 default:
                     log.error(Constantes.MENSAJE_OPCION_INVALIDA);
             }
-            if (opc ==3){
-                System.out.println("Saliendo...");
-                a =true;
-            }
+
         }
 
     }
@@ -436,11 +433,13 @@ public class EntSalida {
                         servicio.mostrarUsuariosDesdeFicheroBinario();
                         break;
                     case 4:
+                        servicio.mostrarUsuariosJson();
+                        break;
+                    case 5:
                         System.out.println(Constantes.SALIR);
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {
                             menu = true;
-                            iniciarSesion();
                         } else if (salir.equalsIgnoreCase("no")) {
                             menu = false;
                         } else {

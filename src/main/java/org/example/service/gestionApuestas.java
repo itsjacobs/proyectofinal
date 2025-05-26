@@ -19,6 +19,7 @@ public interface gestionApuestas {
     List<Casilla> borrarDuplicados(List<Casilla> casillasApostadas);
     List<Usuario> listaUsuarios();
     void mostrarUsuariosDesdeFicheroBinario();
+    void mostrarUsuariosJson();
     boolean iniciarSesion(String id, String contrasena);
     boolean registrarse(String id, String contrasena, String nombre,double cartera);
     double ingresarDinero(String id, double cantidad);

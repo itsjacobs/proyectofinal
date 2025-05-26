@@ -92,6 +92,9 @@ public class gestionApuestasImplementacion implements gestionApuestas {
     public void mostrarUsuariosDesdeFicheroBinario() {
         daoApuesta.mostrarUsuariosDesdeFicheroBinario();
     }
+    public void mostrarUsuariosJson(){
+        daoApuesta.mostrarUsuariosJson();
+    }
 
     @Override
     public boolean iniciarSesion(String id, String contraseña) {
