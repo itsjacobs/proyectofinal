@@ -82,3 +82,5 @@
 2025-05-26 10:30:08.323 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: writing aborted; java.io.NotSerializableException: org.example.domain.Usuario
 2025-05-26 10:32:25.075 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: org.example.domain.Usuario
 2025-05-26 10:32:26.805 ERROR [main] org.example.dao.Ficheros - Error al leer el fichero: writing aborted; java.io.NotSerializableException: org.example.domain.Usuario
+2025-05-26 11:10:45.382 ERROR [main] org.example.ui.EntSalida - Opcion invalida, por favor elija una opcion valida
+

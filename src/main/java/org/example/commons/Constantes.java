@@ -10,7 +10,8 @@ public class Constantes {
     public static final String TIRADA_FILE = "tirada.txt";
     public static final String MENU_IS = "---------------Bienvenido al menu de Inicio de sesion---------------\n" +
             "1.Iniciar sesión\n" +
-            "2.Registrarse\n";
+            "2.Registrarse\n"+
+            "3.Salir";
     public static final String MENU_USUARIO = "---------------Bienvenido al menu de Usuario---------------\n" +
             "1.Apostar\n" +
             "2.Ranking\n" +

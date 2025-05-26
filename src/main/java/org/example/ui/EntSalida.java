@@ -37,7 +37,6 @@ public class EntSalida {
         String id = "";
         String contraseña = "";
         String nombre = "";
-
         List<Usuario> listaUsuarios = new ArrayList<>();
         boolean a = false;
         boolean b = false;
@@ -88,6 +87,10 @@ public class EntSalida {
                     break;
                 default:
                     log.error(Constantes.MENSAJE_OPCION_INVALIDA);
+            }
+            if (opc ==3){
+                System.out.println("Saliendo...");
+                a =true;
             }
         }
 
@@ -437,6 +440,7 @@ public class EntSalida {
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {
                             menu = true;
+                            iniciarSesion();
                         } else if (salir.equalsIgnoreCase("no")) {
                             menu = false;
                         } else {

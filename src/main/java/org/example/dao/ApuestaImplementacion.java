@@ -241,6 +241,7 @@ public class ApuestaImplementacion implements daoApuesta {
     @Override
     public void mostrarUsuariosDesdeFicheroBinario() {
         List<Usuario> usuarios = Ficheros.leerFicheroBinario(Constantes.BINARIO_FILE);
+        System.out.println("----------------------------Si añades un usuario aparecera aquí----------------------------");
         if (usuarios != null && !usuarios.isEmpty()) {
             usuarios.forEach(System.out::println);
         } else {
