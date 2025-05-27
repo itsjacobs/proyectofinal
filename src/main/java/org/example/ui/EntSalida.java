@@ -7,10 +7,11 @@ import org.example.dao.Ficheros;
 import org.example.domain.*;
 import org.example.service.gestionApuestas;
 import org.example.service.gestionApuestasImplementacion;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+
+import java.io.InputStream;
+import java.util.*;
+import java.util.regex.Pattern;
+
 import lombok.Data;
 
 @Data
@@ -68,13 +69,30 @@ public class EntSalida {
                     }
                     break;
                 case 2:
+                    boolean c = false;
                     System.out.println(Constantes.DNI);
                     sc.nextLine();
                     id = sc.nextLine();
                     System.out.println(Constantes.NOMBRE);
                     nombre = sc.nextLine();
-                    System.out.println(Constantes.CONTRASEñA);
-                    contraseña = sc.nextLine();
+                    do{
+                        System.out.println(Constantes.CONTRASEñA);
+                        contraseña = sc.nextLine();
+                        try (InputStream input = EntSalida.class.getClassLoader().getResourceAsStream("config.properties")) {
+                            Properties prop = new Properties();
+                            prop.load(input);
+                            String pattern = prop.getProperty("password.pattern");
+                            if (Pattern.matches(pattern, contraseña)) {
+                                c = true;
+                            } else {
+                                System.out.println(Constantes.CONTRASEÑA_ERROR);
+                            }
+                        } catch (Exception e) {
+                            log.error("Error cargando config.properties: " + e.getMessage());
+                            sc.nextLine();
+                        }
+                    }while (!c);
+
                     System.out.println(Constantes.CARTERA);
                     double cartera = sc.nextDouble();
                     if (servicio.registrarse(id, nombre, contraseña,cartera)) {
@@ -84,6 +102,14 @@ public class EntSalida {
                         System.out.println(Constantes.EXISTE);
                         log.error(Constantes.EXISTE);
                     }
+                    break;
+                case 3:
+                    servicio.mostrarUsuariosDesdeFicheroBinario();
+                    System.out.println(Constantes.TEXTOBINARIO);
+                    break;
+                case 4:
+                    servicio.mostrarUsuariosJson();
+                    System.out.println(Constantes.TEXTOJSON);
                     break;
                 default:
                     log.error(Constantes.MENSAJE_OPCION_INVALIDA);
@@ -430,12 +456,6 @@ public class EntSalida {
                         System.out.println(lista.toString());
                         break;
                     case 3:
-                        servicio.mostrarUsuariosDesdeFicheroBinario();
-                        break;
-                    case 4:
-                        servicio.mostrarUsuariosJson();
-                        break;
-                    case 5:
                         System.out.println(Constantes.SALIR);
                         String salir = sc.next();
                         if (salir.equalsIgnoreCase("si")) {

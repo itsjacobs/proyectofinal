@@ -33,7 +33,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
 
@@ -60,7 +60,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -85,7 +85,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -108,7 +108,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -139,7 +139,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -166,7 +166,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -195,7 +195,7 @@ public class ApuestaImplementacion implements daoApuesta {
         try {
             Comprobaciones.comprobarCartera(usuario.getCartera(), apuesta);
         } catch (ACartera e) {
-            System.out.println("No tienes suficiente dinero en la cartera para realizar esta apuesta.");
+            e.getMessage();
             return new ArrayList<>();
         }
         for (int i = 0; i < 12; i++) {
@@ -240,13 +240,7 @@ public class ApuestaImplementacion implements daoApuesta {
 
     @Override
     public void mostrarUsuariosDesdeFicheroBinario() {
-        List<Usuario> usuarios = Ficheros.leerFicheroBinario(Constantes.BINARIO_FILE);
-        System.out.println("----------------------------Si añades un usuario aparecera aquí----------------------------");
-        if (usuarios != null && !usuarios.isEmpty()) {
-            usuarios.forEach(System.out::println);
-        } else {
-            System.out.println("No se encontraron usuarios en el fichero binario.");
-        }
+        usuarios = Ficheros.leerFicheroBinario(Constantes.BINARIO_FILE);
     }
 
     @Override
@@ -318,7 +312,6 @@ public class ApuestaImplementacion implements daoApuesta {
             sb.setLength(0);
         }
         resetApuesta();
-        resultado = resultadoTirada();
         tab.rellenarTablero();
     }
 
@@ -344,19 +337,6 @@ public class ApuestaImplementacion implements daoApuesta {
     }
     @Override
     public void mostrarUsuariosJson() {
-        List<Usuario> usuarios = Ficheros.leerUsuariosJson();
-
-        if (usuarios.isEmpty()) {
-            System.out.println("No se encontraron usuarios en el archivo JSON.");
-            return;
-        }
-        System.out.println("Usuarios encontrados:");
-        for (Usuario u : usuarios) {
-            System.out.println("ID: " + u.getId());
-            System.out.println("Nombre: " + u.getNombre());
-            System.out.println("Contraseña: " + u.getContraseña());
-            System.out.println("Cartera: " + u.getCartera());
-            System.out.println("------------------------");
+        usuarios = Ficheros.leerUsuariosJson();
         }
     }
-}

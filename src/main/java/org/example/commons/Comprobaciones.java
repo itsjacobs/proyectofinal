@@ -1,5 +1,7 @@
 package org.example.commons;
 
+import java.io.InputStream;
+
 public class Comprobaciones {
     public static void comprobarColor(String color) throws AColor {
         if (!color.equalsIgnoreCase("rojo") && !color.equalsIgnoreCase("negro")) {
@@ -32,4 +34,5 @@ public class Comprobaciones {
             throw new ACartera("No tienes suficiente dinero en la cartera para realizar esta apuesta");
         }
     }
+
 }

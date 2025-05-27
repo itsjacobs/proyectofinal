@@ -88,3 +88,6 @@
 
 2025-05-26 13:11:15.786 ERROR [main] org.example.ui.EntSalida - Opcion invalida, por favor elija una opcion valida
 
+2025-05-27 17:41:40.181 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
+2025-05-27 17:49:52.712 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
+2025-05-27 17:54:17.601 ERROR [main] org.example.ui.EntSalida - El usuario ya existe
